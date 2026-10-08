@@ -1,8 +1,8 @@
-.vscode/
-
+# Ignore backups from nested git repos
 EKOAST.git.bak/
-
-EKOAST/
-
-sellers for ekoast/
-
+.vscode.git.bak/
+sellers.for.ekoast.git.bak/
+# Keep project folders
+!EKOAST/
+!.vscode/
+!"sellers for ekoast/"
