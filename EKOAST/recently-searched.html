@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recently Searched</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="account-page">
+    <header class="account-header">
+      <div
+        class="header-content"
+        style="
+          display: flex;
+          align-items: center;
+          padding: 0 16px;
+          height: 100%;
+        "
+      >
+        <a
+          href="account.html"
+          style="color: var(--color-text); font-size: 20px; margin-right: 16px"
+        >
+          <i class="fas fa-arrow-left"></i>
+        </a>
+        <h1 style="font-size: 18px; font-weight: 600">Recently Searched</h1>
+      </div>
+    </header>
+
+    <main class="account-container animate-fade-in" style="padding-top: 70px">
+      <section class="recently-searched-list">
+        <div class="empty-state" style="text-align: center; padding: 60px 24px">
+          <i
+            class="fas fa-search"
+            style="font-size: 64px; color: #eee; margin-bottom: 24px"
+          ></i>
+          <h2 style="font-size: 18px; margin-bottom: 8px">
+            No recent searches
+          </h2>
+          <p class="muted" style="font-size: 14px">
+            Your recent search queries will show up here.
+          </p>
+          <a
+            href="index.html"
+            class="btn btn-small"
+            style="margin-top: 24px; display: inline-block"
+            >SEARCH NOW</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="index.html" class="nav-item">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+      <a href="catalogue.html" class="nav-item">
+        <i class="fas fa-list-ul"></i>
+        <span>Catalogue</span>
+      </a>
+      <a href="cart.html" class="nav-item">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Cart</span>
+      </a>
+      <a href="wishlist.html" class="nav-item">
+        <i class="far fa-heart"></i>
+        <span>Wishlist</span>
+      </a>
+      <a href="account.html" class="nav-item active">
+        <i class="fas fa-user"></i>
+        <span>Account</span>
+      </a>
+    </nav>
+
+      <script type="module" src="auth-state.js"></script>
+
+    <div class="creator-credit" style="font-size: 10px; color: #718096; text-align: center; padding: 10px; background: #f4f7f6;">this was made by opedemowo olaoluwa victor</div>
+</body>
+</html>
+
+
+
+
+

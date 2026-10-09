@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Arrivals — </title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <nav class="nav-links mobile-hidden">
+          <a href="index.html">Shop</a>
+          <a href="-autos.html">Autos</a>
+          <a href="-real-estate.html">Real Estate</a>
+          <a href="-stay.html">Stay</a>
+          <a href="new-arrivals.html" class="active">New Arrivals</a>
+          <a href="catalogue.html">Catalogue</a>
+        </nav>
+
+        <a href="index.html" class="logo">
+          <!-- Logo removed -->
+        </a>
+
+        <div class="nav-icons">
+          <div class="search-container" id="searchContainer">
+            <select
+              id="searchCategorySelect"
+              class="search-category-select"
+              title="Product Category"
+            >
+              <option value="all">All Catalogue</option>
+              <optgroup label="Catalogue">
+                <option value="electronics">Electronics & Gadgets</option>
+                <option value="home-appliances">Home Appliances</option>
+                <option value="car-electronics">Car Electronics</option>
+                <option value="furniture">Furniture</option>
+                <option value="power">Power Solutions</option>
+                <option value="it">IT Equipment</option>
+                <option value="lighting">Lighting Solutions</option>
+                <option value="spare-parts">Spare Parts</option>
+              </optgroup>
+            </select>
+            <i class="fas fa-search" id="searchIcon"></i>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search..."
+            />
+            <i class="fas fa-times-circle search-clear" id="clearSearch"></i>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container" style="padding: 60px 0">
+      <h1 class="section-title">New Arrivals</h1>
+      <p class="muted" style="text-align: center; margin-bottom: 40px">
+        Explore our latest additions across all Catalogue.
+      </p>
+
+      <div id="products" class="grid">
+        <p>Loading the latest updates...</p>
+      </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="index.html" class="nav-item">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+      <a href="catalogue.html" class="nav-item">
+        <i class="fas fa-th-large"></i>
+        <span>Catalogue</span>
+      </a>
+      <a href="cart.html" class="nav-item">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Cart</span>
+      </a>
+      <a href="account.html" class="nav-item">
+        <i class="fas fa-user"></i>
+        <span>Account</span>
+      </a>
+      <a href="chat.html" class="nav-item">
+        <i class="fas fa-comments"></i>
+        <span>Chat</span>
+      </a>
+    </nav>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-bottom">
+          &copy; 2024. All rights reserved. <br />
+          <span class="footer-bottom-tagline"
+            >✨ Smart choices. Quality products. Trusted service.</span
+          >
+        <div class="creator-credit" style="font-size: 10px; color: #718096; margin-top: 5px;">this was made by opedemowo olaoluwa victor</div> <br />
+          <span class="footer-bottom-tagline"
+            >✨ Smart choices. Quality products. Trusted service.</span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script type="module">
+      import {
+        auth,
+        db,
+        collection,
+        getDocs,
+        query,
+        orderBy,
+        limit,
+        onAuthStateChanged,
+      } from "./firebase-config.js";
+
+      const productsEl = document.getElementById("products");
+      const cartCountEl = document.getElementById("cartCount");
+
+      onAuthStateChanged(auth, async (user) => {
+        updateCartCount(user);
+      });
+
+      async function loadNewArrivals() {
+        if (!productsEl) return;
+        try {
+          productsEl.innerHTML = "<p>Loading the latest updates...</p>";
+          const q = query(
+            collection(db, "products"),
+            orderBy("createdAt", "desc"),
+            limit(20),
+          );
+          const snap = await getDocs(q);
+          renderProducts(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
+        } catch (err) {
+          productsEl.innerHTML = `<p class="error">Failed to load new arrivals. Please try again later.</p>`;
+          console.error("Error loading new arrivals:", err);
+        }
+      }
+
+      function renderProducts(list) {
+        productsEl.innerHTML = "";
+        if (list.length === 0) {
+          productsEl.innerHTML = "<p>No new arrivals yet. Stay tuned!</p>";
+          return;
+        }
+        list.forEach((p) => {
+          const div = document.createElement("div");
+          div.className = "product-card";
+          div.innerHTML = `
+                    <a href="product.html?id=${p.id}">
+                        <div class="product-image">
+                            <img src="${p.image || "https://via.placeholder.com/400?text="}" 
+                                 alt="${p.name}"
+                                 onerror="this.onerror=null;this.src='https://via.placeholder.com/400?text=No+Image';">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">${p.name}</h3>
+                            <p class="product-price">₦${Number(p.price || 0).toLocaleString()}</p>
+                        </div>
+                    </a>
+                `;
+          productsEl.appendChild(div);
+        });
+      }
+
+      async function updateCartCount(user) {
+        if (!cartCountEl) return;
+        let count = 0;
+        if (user) {
+          const snap = await getDocs(collection(db, "users", user.uid, "cart"));
+          count = snap.docs.reduce((n, d) => n + (d.data().qty || 0), 0);
+        } else {
+          const guestCart = JSON.parse(
+            localStorage.getItem("guest_cart") || "[]",
+          );
+          count = guestCart.reduce((n, i) => n + (i.qty || 0), 0);
+        }
+        cartCountEl.textContent = count;
+        cartCountEl.style.display = count > 0 ? "flex" : "none";
+      }
+
+      loadNewArrivals();
+    </script>
+    <script type="module" src="index.js"></script>
+    <script type="module" src="auth-state.js"></script>
+  </body>
+</html>
+
+
+

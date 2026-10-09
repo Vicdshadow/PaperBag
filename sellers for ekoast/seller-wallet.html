@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seller Wallet — </title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary: #ff6600;
+        --bg: #f4f7f6;
+        --text: #1f2937;
+        --card-bg: #ffffff;
+        --success: #10b981;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        margin: 0;
+      }
+      .wallet-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+      .balance-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+      .balance-card {
+        background: var(--card-bg);
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+      .balance-label {
+        font-size: 14px;
+        color: #6b7280;
+        margin-bottom: 10px;
+        display: block;
+      }
+      .balance-amount {
+        font-size: 32px;
+        font-weight: 800;
+        color: var(--text);
+      }
+      .pending-amount {
+        color: #f59e0b;
+      }
+      .available-amount {
+        color: var(--success);
+      }
+      .bank-details-card {
+        background: var(--card-bg);
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        font-size: 14px;
+      }
+      .form-input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        font-size: 15px;
+      }
+      .btn-payout {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 10px;
+        font-weight: 700;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;
+        transition: 0.2s;
+      }
+      .btn-payout:hover {
+        opacity: 0.9;
+      }
+      .btn-payout:disabled {
+        background: #d1d5db;
+        cursor: not-allowed;
+      }
+      .history-list {
+        background: var(--card-bg);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+      .history-header {
+        padding: 20px;
+        background: #fafafa;
+        border-bottom: 1px solid #eee;
+        font-weight: 700;
+      }
+      .history-item {
+        padding: 20px;
+        border-bottom: 1px solid #f0f0f0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .history-item:last-child {
+        border-bottom: none;
+      }
+      .history-info div {
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+      .history-status {
+        font-size: 12px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      .status-pending {
+        background: #fef3c7;
+        color: #92400e;
+      }
+      .status-completed {
+        background: #d1fae5;
+        color: #065f46;
+      }
+      .back-link {
+        text-decoration: none;
+        color: var(--primary);
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .hidden {
+        display: none;
+      }
+      .loading-overlay {
+        position: fixed;
+        inset: 0;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        z-index: 9999;
+        color: var(--primary);
+        font-weight: 600;
+      }
+      .spinner {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 3px solid #fed7aa;
+        border-top-color: var(--primary);
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading" class="loading-overlay">
+      <div class="spinner"></div>
+      <div>Loading Wallet...</div>
+    </div>
+
+    <div class="wallet-container hidden" id="wallet-content">
+      <div class="header">
+        <a href="index.html" class="back-link">
+          <i class="fas fa-arrow-left"></i> Seller Portal
+        </a>
+        <h1 style="margin: 0; font-size: 24px">My Wallet</h1>
+      </div>
+
+      <div class="balance-cards">
+        <div class="balance-card">
+          <span class="balance-label">Pending Escrow</span>
+          <div class="balance-amount pending-amount" id="pendingEscrow">₦0</div>
+          <p style="font-size: 12px; color: #6b7280; margin-top: 10px">
+            Earnings from ongoing orders. Paid once confirmed.
+          </p>
+        </div>
+        <div class="balance-card">
+          <span class="balance-label">Available for Payout</span>
+          <div class="balance-amount available-amount" id="availableBalance">
+            ₦0
+          </div>
+          <p style="font-size: 12px; color: #6b7280; margin-top: 10px">
+            Cleared earnings ready for your bank account.
+          </p>
+        </div>
+      </div>
+
+      <div class="bank-details-card">
+        <h2 style="font-size: 18px; margin-bottom: 20px">Payout Destination</h2>
+        <form id="payoutForm">
+          <div class="form-group">
+            <label class="form-label">Bank Name</label>
+            <input
+              type="text"
+              id="bankName"
+              class="form-input"
+              placeholder="e.g. Zenith Bank"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Account Number</label>
+            <input
+              type="text"
+              id="accountNumber"
+              class="form-input"
+              placeholder="10 digits"
+              pattern="\d{10}"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Account Name</label>
+            <input
+              type="text"
+              id="accountName"
+              class="form-input"
+              placeholder="Exact name on account"
+              required
+            />
+          </div>
+
+          <div
+            id="payoutInfo"
+            style="margin-bottom: 20px; font-size: 13px; color: #6b7280"
+          >
+            Minimum payout: ₦1,000. Payouts are processed within 24 hours.
+          </div>
+
+          <button
+            type="submit"
+            id="requestPayoutBtn"
+            class="btn-payout"
+            disabled
+          >
+            Request Payout
+          </button>
+        </form>
+        <div
+          id="payoutStatus"
+          style="margin-top: 15px; text-align: center; font-size: 14px"
+        ></div>
+      </div>
+
+      <div class="history-list">
+        <div class="history-header">Recent Payouts</div>
+        <div id="payoutHistory">
+          <!-- Injected via JS -->
+          <div class="muted" style="padding: 30px; text-align: center">
+            No payout history yet.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="seller-wallet.js"></script>
+  </body>
+</html>
+
+

@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Account</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="account-page">
+    <!-- Top Search Header -->
+    <header class="account-header">
+      <div class="search-container" id="searchContainer">
+        <i class="fas fa-search" id="searchIcon" style="cursor: pointer"></i>
+        <input type="text" id="searchInput" placeholder="Search..." />
+        <i class="fas fa-times-circle search-clear" id="clearSearch"></i>
+      </div>
+    </header>
+
+    <main class="account-container animate-fade-in">
+      <!-- Profile Section -->
+      <section class="profile-section">
+        <div id="guestContent" class="guest-actions hidden">
+          <h2 class="hero-title" style="font-size: 24px; margin-bottom: 8px">
+            Welcome
+          </h2>
+          <p class="muted" style="margin-bottom: 24px; font-size: 14px">
+            Login to manage your orders, wishlist and profile.
+          </p>
+          <div style="display: flex; gap: 12px">
+            <a href="login.html" class="btn btn-small" style="flex: 1">LOGIN</a>
+            <a
+              href="signup.html"
+              class="btn btn-small btn-outline"
+              style="flex: 1"
+              >SIGN UP</a
+            >
+          </div>
+        </div>
+        <style>
+          .profile-pic-wrapper {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+          }
+          .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--color-accent);
+            background: #eee;
+          }
+          .edit-pic-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--color-accent);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+            border: 2px solid white;
+          }
+          #profileUpload {
+            display: none;
+          }
+          .upload-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+          }
+        </style>
+        <div
+          id="userContent"
+          class="welcome-text hidden"
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+          "
+        >
+          <div class="profile-pic-wrapper">
+            <img
+              src="assets/images/user-placeholder.png"
+              alt="Profile"
+              id="profileImage"
+              class="profile-pic"
+            />
+            <label for="profileUpload" class="edit-pic-btn">
+              <i class="fas fa-camera"></i>
+            </label>
+            <div id="uploadOverlay" class="upload-overlay">
+              <i class="fas fa-spinner fa-spin"></i>
+            </div>
+            <input type="file" id="profileUpload" accept="image/*" />
+          </div>
+          <h2 id="userName" style="font-size: 24px; font-weight: 600">
+            Welcome!
+          </h2>
+          <p id="userEmail" class="muted">Loading account details...</p>
+        </div>
+      </section>
+
+      <!-- Credit Balance -->
+      <section class="balance-section">
+        <div
+          class="balance-card glass"
+          style="
+            background: var(--color-secondary);
+            color: #fff;
+            border-radius: 8px;
+          "
+        >
+          <i class="fas fa-wallet" style="color: var(--color-accent)"></i>
+          <span>Store credit balance: <strong>? 0</strong></span>
+        </div>
+      </section>
+
+      <!-- Action Buttons -->
+      <section class="action-buttons">
+        <button class="btn-chat">
+          <i class="fas fa-comment-dots"></i> Live Chat
+        </button>
+        <button class="btn-whatsapp">
+          <a
+            href="https://wa.me/2348137948779"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fab fa-whatsapp"></i> WhatsApp
+          </a>
+        </button>
+      </section>
+
+      <!-- Help & Support -->
+      <div class="section-label">Need Assistance?</div>
+      <section class="menu-list">
+        <a href="support.html" class="menu-item">
+          <div class="menu-label">
+            <i class="fas fa-info-circle"></i>
+            <span>Help & Support</span>
+          </div>
+          <i class="fas fa-chevron-right"></i>
+        </a>
+      </section>
+
+      <!-- My  Account -->
+      <div class="section-label">My Account</div></div>
+      <section class="menu-list">
+        <a href="orders.html" class="menu-item">
+          <div class="menu-label">
+            <i class="fas fa-box"></i>
+            <span>Orders</span>
+          </div>
+          <i class="fas fa-chevron-right"></i>
+        </a>
+        <a href="inbox.html" class="menu-item">
+          <div class="menu-label">
+            <i class="fas fa-envelope"></i>
+            <span>Inbox</span>
+          </div>
+          <i class="fas fa-chevron-right"></i>
+        </a>
+        <a href="reviews.html" class="menu-item">
+          <div class="menu-label">
+            <i class="fas fa-star"></i>
+            <span>Ratings & Reviews</span>
+          </div>
+          <i class="fas fa-chevron-right"></i>
+        </a>
+        <a href="vouchers.html" class="menu-item">
+          <div class="menu-label">
+            <i class="fas fa-ticket-alt"></i>
+            <span>Vouchers</span>
+          </div>
+          <i class="fas fa-chevron-right"></i>
+        </a>
+        <a href="wishlist.html" class="menu-item">
+          <div class="menu-label">
+            <i class="fas fa-heart"></i>
+            <span>Wishlist</span>
+          </div>
+          <i class="fas fa-chevron-right"></i>
+        </a>
+        <a href="follow-seller.html" class="menu-item">
+          <div class="menu-label">
+            <i class="fas fa-store"></i>
+            <span>Follow Seller</span>
+          </div>
+          <i class="fas fa-chevron-right"></i>
+        </a>
+        <a href="recently-viewed.html" class="menu-item">
+          <div class="menu-label">
+            <i class="fas fa-history"></i>
+            <span>Recently Viewed</span>
+          </div>
+          <i class="fas fa-chevron-right"></i>
+        </a>
+        <a href="recently-searched.html" class="menu-item">
+          <div class="menu-label">
+            <i class="fas fa-search"></i>
+            <span>Recently Searched</span>
+          </div>
+          <i class="fas fa-chevron-right"></i>
+        </a>
+      </section>
+
+      <!-- My Settings -->
+      <div class="section-label">My Settings</div>
+      <section class="menu-list">
+        <a href="payment-settings.html" class="menu-item">
+          <div class="menu-label">
+            <span>Payment Settings</span>
+          </div>
+          <i class="fas fa-chevron-right"></i>
+        </a>
+        <a href="address-book.html" class="menu-item">
+          <div class="menu-label">
+            <span>Address Book</span>
+          </div>
+          <i class="fas fa-chevron-right"></i>
+        </a>
+        <a href="account-management.html" class="menu-item">
+          <div class="menu-label">
+            <span>Account Management</span>
+          </div>
+          <i class="fas fa-chevron-right"></i>
+        </a>
+        <a href="close-account.html" class="menu-item">
+          <div class="menu-label">
+            <span>Close Account</span>
+          </div>
+          <i class="fas fa-chevron-right"></i>
+        </a>
+        <a href="notifications.html" class="menu-item">
+          <div class="menu-label">
+            <span>Notification Preferences</span>
+          </div>
+          <i class="fas fa-chevron-right"></i>
+        </a>
+      </section>
+
+      <section class="logout-section">
+        <button id="logoutBtn" class="logout-link">Logout</button>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4>CLIENT SERVICES</h4>
+            <ul>
+              <li>
+                <a
+                  href="https://wa.me/2348137948779"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Contact Us on WhatsApp +234 8137948779</a
+                >
+              </li>
+              <li>
+                <a href="mailto:047@gmail.com"
+                  >email us at 047@gmail.com</a
+                >
+              </li>
+              <li><a href="support.html#shipping">Shipping & Returns</a></li>
+              <li><a href="support.html#faq">FAQ</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>THE HOUSE</h4>
+            <ul>
+              <li><a href="careers.html">Careers</a></li>
+              <li><a href="legal.html">Legal</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>NEWSLETTER</h4>
+            <p class="footer-newsletter-text">
+              Subscribe for exclusive updates.
+            </p>
+            <div class="footer-email-container">
+              <input
+                type="email"
+                id="newsletterEmail"
+                placeholder="Email Address"
+                class="footer-email-input"
+              />
+              <button class="btn footer-btn-ok" id="newsletterSubmit">
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          &copy; 2024. All rights reserved. <br />
+          <span class="footer-bottom-tagline"
+            >Smart choices. Quality products. Trusted service.</span
+          >
+        <div class="creator-credit" style="font-size: 10px; color: #718096; margin-top: 5px;">this was made by opedemowo olaoluwa victor</div> <br />
+          <span class="footer-bottom-tagline"
+            >Smart choices. Quality products. Trusted service.</span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="index.html" class="nav-item">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+      <a href="catalogue.html" class="nav-item">
+        <i class="fas fa-th-large"></i>
+        <span>Catalogue</span>
+      </a>
+      <a href="cart.html" class="nav-item">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Cart</span>
+      </a>
+      <a href="account.html" class="nav-item active">
+        <i class="fas fa-user"></i>
+        <span>Account</span>
+      </a>
+      <a href="chat.html" class="nav-item">
+        <i class="fas fa-comments"></i>
+        <span>Chat</span>
+      </a>
+    </nav>
+
+    <script type="module" src="index.js"></script>
+    <script type="module" src="account.js"></script>
+    <script type="module" src="auth-state.js"></script>
+  </body>
+</html>
+
+
+

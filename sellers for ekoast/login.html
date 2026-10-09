@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seller Login — </title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap");
+      :root {
+        --bg-1: #f8f3ea;
+        --bg-2: #e8dcc8;
+        --ink: #2f2a24;
+        --ink-soft: #6e6355;
+        --panel-dark-1: #1f1b17;
+        --panel-dark-2: #32281f;
+        --gold: #b9925a;
+        --gold-deep: #8f6f3f;
+        --line: #d9ccb9;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Manrope", -apple-system, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        background:
+          radial-gradient(circle at 8% 14%, rgba(185, 146, 90, 0.35), transparent 40%),
+          radial-gradient(circle at 88% 88%, rgba(50, 40, 31, 0.16), transparent 38%),
+          linear-gradient(135deg, var(--bg-1), var(--bg-2));
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1rem;
+        color: var(--ink);
+      }
+
+      .page-wrap {
+        display: flex;
+        width: 100%;
+        max-width: 960px;
+        background: rgba(255, 255, 255, 0.74);
+        border-radius: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.65);
+        overflow: hidden;
+        box-shadow:
+          0 30px 60px rgba(29, 24, 19, 0.18),
+          0 1px 0 rgba(255, 255, 255, 0.7) inset;
+        min-height: 560px;
+        backdrop-filter: blur(12px);
+        animation: floatIn 0.6s ease-out;
+      }
+
+      .panel-left {
+        flex: 1;
+        background:
+          linear-gradient(160deg, rgba(185, 146, 90, 0.08), transparent 42%),
+          linear-gradient(155deg, var(--panel-dark-1), var(--panel-dark-2));
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2.8rem 2.1rem;
+        color: #efe6d8;
+        text-align: center;
+        position: relative;
+      }
+      .panel-left::after {
+        content: "";
+        position: absolute;
+        inset: 22px;
+        border: 1px solid rgba(185, 146, 90, 0.26);
+        border-radius: 1rem;
+        pointer-events: none;
+      }
+      .panel-left .big-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+      }
+      .panel-left h1 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        margin-bottom: 0.3rem;
+      }
+      .panel-left h1 span {
+        color: #dcc296;
+      }
+      .panel-left p {
+        font-size: 0.88rem;
+        opacity: 0.9;
+        line-height: 1.75;
+        max-width: 250px;
+      }
+      .panel-left .badge {
+        margin-top: 1.2rem;
+        background: rgba(185, 146, 90, 0.16);
+        border: 1px solid rgba(185, 146, 90, 0.5);
+        border-radius: 20px;
+        padding: 0.44rem 1rem;
+        font-size: 0.74rem;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+        color: #e8d6b5;
+      }
+
+      .store-svg {
+        width: 100%;
+        max-width: 200px;
+        margin-bottom: 1.2rem;
+        opacity: 0.9;
+      }
+
+      .panel-right {
+        flex: 1.1;
+        padding: 3rem 2.6rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .panel-right .top {
+        margin-bottom: 1.8rem;
+      }
+      .panel-right h2 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #221d17;
+        margin-bottom: 0.2rem;
+      }
+      .panel-right .sub {
+        font-size: 0.82rem;
+        color: var(--ink-soft);
+      }
+
+      .form-group {
+        margin-bottom: 1rem;
+      }
+      label {
+        display: block;
+        color: #4a4035;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+      }
+      .input-wrap {
+        position: relative;
+      }
+      .input-icon {
+        position: absolute;
+        left: 13px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9f8f76;
+        font-size: 0.88rem;
+        pointer-events: none;
+      }
+      input[type="email"],
+      input[type="password"],
+      input[type="text"] {
+        width: 100%;
+        padding: 0.72rem 0.9rem 0.72rem 2.5rem;
+        background: #fffdfa;
+        border: 1.5px solid #d8cbbb;
+        border-radius: 0.6rem;
+        color: #2f2922;
+        font-family: inherit;
+        font-size: 0.93rem;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+        outline: none;
+      }
+      input::placeholder {
+        color: #a59681;
+      }
+      input:focus {
+        border-color: #b9925a;
+        box-shadow: 0 0 0 3px rgba(185, 146, 90, 0.16);
+      }
+      .toggle-password {
+        position: absolute;
+        right: 11px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: #99876d;
+        cursor: pointer;
+        font-size: 0.88rem;
+        transition: color 0.2s;
+      }
+      .toggle-password:hover {
+        color: var(--gold-deep);
+      }
+
+      .forgot-link {
+        text-align: right;
+        margin-top: -0.4rem;
+        margin-bottom: 1rem;
+      }
+      .forgot-link a {
+        color: var(--gold-deep);
+        font-size: 0.8rem;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      .forgot-link a:hover {
+        text-decoration: underline;
+      }
+
+      .btn-primary {
+        width: 100%;
+        padding: 0.82rem;
+        background: linear-gradient(135deg, #b9925a, #8f6f3f);
+        color: #fffdf8;
+        border: none;
+        border-radius: 0.6rem;
+        font-size: 1rem;
+        font-weight: 700;
+        font-family: inherit;
+        cursor: pointer;
+        transition:
+          opacity 0.2s,
+          transform 0.1s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        box-shadow: 0 8px 24px rgba(143, 111, 63, 0.34);
+        margin-bottom: 1rem;
+      }
+      .btn-primary:hover {
+        filter: brightness(1.03);
+      }
+      .btn-primary:active {
+        transform: scale(0.99);
+      }
+      .btn-primary:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+      .divider::before,
+      .divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--line);
+      }
+      .divider span {
+        color: #8d7a61;
+        font-size: 0.8rem;
+        background: transparent;
+        padding: 0 0.5rem;
+        white-space: nowrap;
+      }
+
+      .social-login {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .btn-social {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        padding: 0.75rem;
+        border: 1.5px solid #d9cdbd;
+        border-radius: 0.6rem;
+        background: #fffcf8;
+        color: #3f352a;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .btn-social:hover {
+        background: #fff;
+        border-color: #bfa179;
+        transform: translateY(-1px);
+      }
+
+      .btn-social img {
+        width: 18px;
+        height: 18px;
+      }
+
+      .btn-social i {
+        font-size: 1.1rem;
+      }
+
+      .btn-apple {
+        background: #1d1712;
+        color: #fff;
+        border-color: #1d1712;
+      }
+
+      .btn-apple:hover {
+        background: #2b221b;
+        border-color: #2b221b;
+        color: #fff;
+      }
+
+      .alert {
+        padding: 0.7rem 0.9rem;
+        border-radius: 0.6rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+        display: none;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+      .alert.show {
+        display: flex;
+      }
+      .alert-error {
+        background: #fff2ef;
+        border: 1px solid #f4c2b8;
+        color: #b94a36;
+      }
+      .alert-success {
+        background: #eff8f1;
+        border: 1px solid #b8e4c4;
+        color: #1b7a3a;
+      }
+      .alert-info {
+        background: #f1f4fb;
+        border: 1px solid #c8d2eb;
+        color: #3b537c;
+      }
+
+      .bottom-link {
+        text-align: center;
+        color: #6f6458;
+        font-size: 0.85rem;
+      }
+      .bottom-link a {
+        color: var(--gold-deep);
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .bottom-link a:hover {
+        text-decoration: underline;
+      }
+
+      /* Forgot password view */
+      #forgot-view {
+        display: none;
+      }
+      .back-btn {
+        background: none;
+        border: none;
+        color: #6f6254;
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-family: inherit;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin-bottom: 1.25rem;
+        padding: 0;
+        transition: color 0.2s;
+      }
+      .back-btn:hover {
+        color: var(--gold-deep);
+      }
+
+      @media (max-width: 620px) {
+        .page-wrap {
+          flex-direction: column;
+          max-width: 440px;
+          border-radius: 1.15rem;
+        }
+        .panel-left {
+          padding: 1.8rem 1.4rem 1.3rem;
+        }
+        .store-svg {
+          max-width: 140px;
+        }
+        .panel-left h1 {
+          font-size: 2.1rem;
+        }
+        .panel-right {
+          padding: 2rem 1.5rem;
+        }
+      }
+
+      @keyframes floatIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px) scale(0.985);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page-wrap">
+      <!-- Left brand panel -->
+      <div class="panel-left">
+        <svg
+          class="store-svg"
+          viewBox="0 0 200 150"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <!-- Ground -->
+          <ellipse
+            cx="100"
+            cy="138"
+            rx="85"
+            ry="8"
+            fill="rgba(255,255,255,0.15)"
+          />
+          <!-- Building -->
+          <rect
+            x="30"
+            y="55"
+            width="140"
+            height="80"
+            rx="3"
+            fill="rgba(255,255,255,0.25)"
+          />
+          <!-- Awning -->
+          <rect
+            x="25"
+            y="44"
+            width="150"
+            height="16"
+            rx="2"
+            fill="rgba(255,255,255,0.4)"
+          />
+          <rect
+            x="37"
+            y="44"
+            width="14"
+            height="16"
+            fill="rgba(255,255,255,0.2)"
+          />
+          <rect
+            x="63"
+            y="44"
+            width="14"
+            height="16"
+            fill="rgba(255,255,255,0.2)"
+          />
+          <rect
+            x="89"
+            y="44"
+            width="14"
+            height="16"
+            fill="rgba(255,255,255,0.2)"
+          />
+          <rect
+            x="115"
+            y="44"
+            width="14"
+            height="16"
+            fill="rgba(255,255,255,0.2)"
+          />
+          <rect
+            x="141"
+            y="44"
+            width="14"
+            height="16"
+            fill="rgba(255,255,255,0.2)"
+          />
+          <!-- Door -->
+          <rect
+            x="84"
+            y="95"
+            width="32"
+            height="40"
+            rx="2"
+            fill="rgba(255,255,255,0.35)"
+          />
+          <!-- Door knob -->
+          <circle cx="111" cy="118" r="2" fill="rgba(255,255,255,0.7)" />
+          <!-- Star -->
+          <circle cx="100" cy="113" r="8" fill="rgba(255,255,255,0.5)" />
+          <text
+            x="100"
+            y="117"
+            font-size="9"
+            fill="#ff6600"
+            text-anchor="middle"
+          >
+            ★
+          </text>
+          <!-- Windows -->
+          <rect
+            x="36"
+            y="66"
+            width="38"
+            height="28"
+            rx="2"
+            fill="rgba(255,255,255,0.35)"
+          />
+          <rect
+            x="126"
+            y="66"
+            width="38"
+            height="28"
+            rx="2"
+            fill="rgba(255,255,255,0.35)"
+          />
+          <!-- Plant left -->
+          <rect
+            x="18"
+            y="114"
+            width="14"
+            height="10"
+            rx="2"
+            fill="rgba(255,255,255,0.3)"
+          />
+          <circle cx="22" cy="108" r="5" fill="rgba(255,255,255,0.4)" />
+          <circle cx="28" cy="105" r="6" fill="rgba(255,255,255,0.5)" />
+          <!-- Plant right -->
+          <rect
+            x="168"
+            y="114"
+            width="14"
+            height="10"
+            rx="2"
+            fill="rgba(255,255,255,0.3)"
+          />
+          <circle cx="172" cy="108" r="5" fill="rgba(255,255,255,0.4)" />
+          <circle cx="178" cy="105" r="6" fill="rgba(255,255,255,0.5)" />
+        </svg>
+        <h1>Eko<span>ast</span></h1>
+        <p>
+          Nigeria's trusted seller marketplace. Join thousands of sellers
+          already earning.
+        </p>
+        <div class="badge">Premier Seller Suite</div>
+      </div>
+
+      <!-- Right form panel -->
+      <div class="panel-right">
+        <!-- LOGIN VIEW -->
+        <div id="login-view">
+          <div class="top">
+            <h2>Welcome Back</h2>
+            <p class="sub">Sign in to your seller account</p>
+          </div>
+
+          <div id="login-alert" class="alert alert-error">
+            <i
+              class="fas fa-exclamation-circle"
+              style="flex-shrink: 0; margin-top: 1px"
+            ></i>
+            <span id="login-alert-msg"></span>
+          </div>
+
+          <form id="login-form">
+            <div class="form-group">
+              <label for="login-email">Email Address</label>
+              <div class="input-wrap">
+                <i class="fas fa-envelope input-icon"></i>
+                <input
+                  type="email"
+                  id="login-email"
+                  placeholder="you@example.com"
+                  required
+                  autocomplete="email"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <div class="input-wrap">
+                <i class="fas fa-lock input-icon"></i>
+                <input
+                  type="password"
+                  id="login-password"
+                  placeholder="••••••••"
+                  required
+                  autocomplete="current-password"
+                />
+                <button
+                  type="button"
+                  class="toggle-password"
+                  id="toggle-login-pw"
+                >
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="forgot-link">
+              <a href="#" id="forgot-link">Forgot password?</a>
+            </div>
+
+            <button type="submit" id="login-btn" class="btn-primary">
+              <i class="fas fa-sign-in-alt"></i> Log In to Seller Center
+            </button>
+
+            <div class="divider">
+              <span>or continue with</span>
+            </div>
+
+            <div class="social-login">
+              <button
+                type="button"
+                id="google-login-btn"
+                class="btn-social btn-google"
+              >
+                <img
+                  src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                  alt="Google"
+                />
+                Google
+              </button>
+              <button
+                type="button"
+                id="apple-login-btn"
+                class="btn-social btn-apple"
+              >
+                <i class="fab fa-apple"></i>
+                Apple
+              </button>
+            </div>
+          </form>
+
+          <div class="bottom-link">
+            New seller? <a href="signup.html">Create Account</a>
+          </div>
+        </div>
+
+        <!-- FORGOT PASSWORD VIEW -->
+        <div id="forgot-view">
+          <button class="back-btn" id="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Login
+          </button>
+          <div class="top">
+            <h2>Reset Password</h2>
+            <p class="sub">We'll send a reset link to your email</p>
+          </div>
+
+          <div id="reset-alert" class="alert">
+            <i
+              class="fas fa-info-circle"
+              style="flex-shrink: 0; margin-top: 1px"
+            ></i>
+            <span id="reset-alert-msg"></span>
+          </div>
+
+          <form id="reset-form">
+            <div class="form-group">
+              <label for="reset-email">Email Address</label>
+              <div class="input-wrap">
+                <i class="fas fa-envelope input-icon"></i>
+                <input
+                  type="email"
+                  id="reset-email"
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
+            </div>
+            <button type="submit" id="reset-btn" class="btn-primary">
+              <i class="fas fa-paper-plane"></i> Send Reset Link
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./login.js"></script>
+  </body>
+</html>
+
+

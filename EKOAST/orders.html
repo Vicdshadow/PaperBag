@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>My Orders</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --jumia-orange: #f68b1e;
+        --jumia-bg: #f5f5f5;
+        --jumia-text: #4a4a4a;
+      }
+      body {
+        background-color: var(--jumia-bg);
+        color: var(--jumia-text);
+        font-family: "Roboto", sans-serif;
+        margin: 0;
+        padding-bottom: 60px;
+      }
+      .jumia-header {
+        background: #fff;
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+      .search-bar {
+        flex: 1;
+        background: #f0f0f0;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        gap: 8px;
+      }
+      .search-bar input {
+        border: none;
+        background: transparent;
+        width: 100%;
+        outline: none;
+        font-size: 14px;
+      }
+      .page-title {
+        background: #fff;
+        padding: 16px;
+        font-size: 20px;
+        font-weight: 500;
+        margin: 0;
+      }
+      .tabs {
+        background: #fff;
+        display: flex;
+        border-bottom: 2px solid #eee;
+        position: sticky;
+        top: 54px;
+        z-index: 90;
+      }
+      .tab {
+        flex: 1;
+        text-align: center;
+        padding: 12px 4px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #9b9b9b;
+        cursor: pointer;
+        text-transform: uppercase;
+        position: relative;
+      }
+      .tab.active {
+        color: var(--jumia-orange);
+      }
+      .tab.active::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--jumia-orange);
+      }
+      .orders-list {
+        padding: 8px 0;
+      }
+      .order-card {
+        background: #fff;
+        padding: 16px;
+        margin-bottom: 8px;
+        display: flex;
+        gap: 16px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+      .order-img {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        background: #f9f9f9;
+        border-radius: 4px;
+      }
+      .order-info {
+        flex: 1;
+      }
+      .order-name {
+        font-size: 14px;
+        margin-bottom: 4px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .order-ref {
+        font-size: 12px;
+        color: #9b9b9b;
+        margin-bottom: 6px;
+      }
+      .status-pill {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 2px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+      .status-ongoing {
+        background: #eef5ff;
+        color: #3182ce;
+      }
+      .status-delivered {
+        background: #e6fffa;
+        color: #38a169;
+      }
+      .status-canceled {
+        background: #eee;
+        color: #666;
+      }
+      .order-date {
+        font-size: 12px;
+        color: #4a4a4a;
+      }
+      .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: #9b9b9b;
+      }
+      .empty-state i {
+        font-size: 48px;
+        margin-bottom: 16px;
+        color: #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="jumia-header">
+      <a href="account.html" style="color: inherit"
+        ><i class="fas fa-arrow-left"></i
+      ></a>
+      <div class="search-bar">
+        <i class="fas fa-search" style="color: #9b9b9b"></i>
+        <input type="text" placeholder="Search..." id="orderSearch" />
+      </div>
+      <a href="cart.html" style="color: inherit"
+        ><i class="fas fa-shopping-cart"></i
+      ></a>
+    </header>
+
+    <h2 class="page-title">Orders</h2>
+
+    <nav class="tabs">
+      <div class="tab active" id="tabOngoing">Ongoing/Delivered</div>
+      <div class="tab" id="tabCanceled">Canceled/Returned</div>
+    </nav>
+
+    <main class="orders-list" id="ordersContainer">
+      <!-- Orders populated by JS -->
+      <div class="empty-state">
+        <i class="fas fa-box-open"></i>
+        <p>Fetching your orders...</p>
+      </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="index.html" class="nav-item">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+      <a href="catalogue.html" class="nav-item">
+        <i class="fas fa-list-ul"></i>
+        <span>Catalogue</span>
+      </a>
+      <a href="cart.html" class="nav-item">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Cart</span>
+      </a>
+      <a href="wishlist.html" class="nav-item">
+        <i class="far fa-heart"></i>
+        <span>Wishlist</span>
+      </a>
+      <a href="account.html" class="nav-item active">
+        <i class="fas fa-user"></i>
+        <span>Account</span>
+      </a>
+    </nav>
+
+    <script type="module" src="orders.js"></script>
+    <script type="module" src="auth-state.js"></script>
+
+    <div class="creator-credit" style="font-size: 10px; color: #718096; text-align: center; padding: 10px; background: #f4f7f6;">this was made by opedemowo olaoluwa victor</div>
+</body>
+</html>
+
+
+
+

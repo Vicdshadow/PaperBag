@@ -1,0 +1,82 @@
+[
+  {
+    "id": "p1",
+    "name": "Redmi Note 13",
+    "price": 295000,
+    "description": "AMOLED display, long battery life, and smooth daily performance.",
+    "category": "electronics",
+    "subCategory": "Smartphones & Feature Phones",
+    "image": "assets/images/redmi 1.jpg",
+    "stock": 14
+  },
+  {
+    "id": "p2",
+    "name": "Google Pixel 8",
+    "price": 685000,
+    "description": "Advanced AI camera phone with premium build quality.",
+    "category": "electronics",
+    "subCategory": "Smartphones & Feature Phones",
+    "image": "assets/images/google pixel.jpg",
+    "stock": 8
+  },
+  {
+    "id": "p3",
+    "name": "Bluetooth Speaker Pro",
+    "price": 49000,
+    "description": "Portable high-volume speaker with rich bass.",
+    "category": "electronics",
+    "subCategory": "Bluetooth Speakers",
+    "image": "assets/images/bluetooth_speaker.jpg",
+    "stock": 23
+  },
+  {
+    "id": "p4",
+    "name": "Inverter Battery Set",
+    "price": 340000,
+    "description": "Reliable backup power solution for home and office.",
+    "category": "power",
+    "subCategory": "Inverters",
+    "image": "assets/images/inverter.jpg",
+    "stock": 6
+  },
+  {
+    "id": "p5",
+    "name": "Office Ergonomic Chair",
+    "price": 145000,
+    "description": "Comfort-focused chair with lumbar support for long work hours.",
+    "category": "furniture",
+    "subCategory": "Office Chairs & Desks",
+    "image": "assets/images/tables and chairs.jpg",
+    "stock": 12
+  },
+  {
+    "id": "p6",
+    "name": "Dash Cam HD",
+    "price": 78000,
+    "description": "Wide-angle car dash cam with night recording support.",
+    "category": "car-electronics",
+    "subCategory": "Dash Cams",
+    "image": "assets/images/dash_cam.jpg",
+    "stock": 18
+  },
+  {
+    "id": "p7",
+    "name": "Premium Oil Perfume",
+    "price": 36000,
+    "description": "Long-lasting fragrance blend for everyday wear.",
+    "category": "perfume",
+    "subCategory": "Oil Based Perfumes",
+    "image": "assets/images/oil based perfumes.jpg",
+    "stock": 31
+  },
+  {
+    "id": "p8",
+    "name": "Mountain Bike",
+    "price": 255000,
+    "description": "Durable frame bicycle suitable for city and trail rides.",
+    "category": "bicycles",
+    "subCategory": "Bicycles & Cycling Gear",
+    "image": "assets/images/mountain bike.jpg",
+    "stock": 5
+  }
+]

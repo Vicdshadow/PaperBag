@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Sub-Admins Admin</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --admin-sidebar-w: 240px;
+        --admin-accent: #ff6600;
+        --admin-dark: #001f3f;
+        --admin-bg: #f4f7f6;
+      }
+      body {
+        background: var(--admin-bg);
+        font-family: "Inter", sans-serif;
+        margin: 0;
+      }
+      .admin-layout {
+        display: flex;
+        min-height: 100vh;
+      }
+      .admin-sidebar {
+        width: var(--admin-sidebar-w);
+        background: var(--admin-dark);
+        color: white;
+        padding: 30px 20px;
+        position: fixed;
+        height: 100vh;
+        z-index: 1000;
+        transition: 0.3s;
+        display: flex;
+        flex-direction: column;
+      }
+      .sidebar-nav {
+        flex: 1;
+        overflow-y: auto;
+        margin-right: -10px;
+        padding-right: 10px;
+      }
+      .sidebar-nav::-webkit-scrollbar {
+        width: 4px;
+      }
+      .sidebar-nav::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+      }
+      .admin-main {
+        flex: 1;
+        margin-left: var(--admin-sidebar-w);
+        padding: 40px;
+      }
+      .sidebar-logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 40px;
+      }
+      .sidebar-logo img {
+        height: 32px;
+        filter: brightness(0) invert(1);
+      }
+      .sidebar-logo span {
+        font-family: "Playfair Display", serif;
+        font-size: 22px;
+        font-weight: 700;
+      }
+      .sidebar-nav button {
+        width: 100%;
+        text-align: left;
+        padding: 12px 15px;
+        background: none;
+        border: none;
+        color: #a0aec0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        font-size: 14px;
+        transition: 0.3s;
+      }
+      .sidebar-nav button:hover,
+      .sidebar-nav button.active {
+        background: rgba(255, 255, 255, 0.08);
+        color: white;
+      }
+      .sidebar-nav button.active {
+        border-left: 3px solid var(--admin-accent);
+        color: var(--admin-accent);
+        background: rgba(255, 102, 0, 0.1);
+      }
+      .section-card {
+        background: white;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 30px;
+      }
+      .admin-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .admin-table th {
+        text-align: left;
+        padding: 12px;
+        border-bottom: 2px solid #eee;
+        color: #718096;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+      .admin-table td {
+        padding: 15px 12px;
+        border-bottom: 1px solid #eee;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+      .btn {
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .btn-primary {
+        background: var(--admin-accent);
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="admin-layout">
+      <aside class="admin-sidebar">
+        <div class="sidebar-logo">
+          <img src="logo.png" alt="E" />
+          <span></span>
+        </div>
+        <nav class="sidebar-nav">
+          <button class="tab-btn" onclick="window.location.href = 'admin.html'">
+            <i class="fas fa-chart-line"></i> <span>Overview</span>
+          </button>
+          <button
+            class="tab-btn"
+            onclick="window.location.href = 'admin-sales.html'"
+          >
+            <i class="fas fa-exchange-alt"></i> <span>Sales Queue</span>
+          </button>
+          <button
+            class="tab-btn"
+            onclick="window.location.href = 'admin-users.html'"
+          >
+            <i class="fas fa-users-cog"></i> <span>User Management</span>
+          </button>
+          <button
+            class="tab-btn"
+            onclick="window.location.href = 'admin-inventory.html'"
+          >
+            <i class="fas fa-boxes"></i> <span>Inventory</span>
+          </button>
+          <button
+            class="tab-btn"
+            onclick="window.location.href = 'admin-upload.html'"
+          >
+            <i class="fas fa-upload"></i> <span>Upload Product</span>
+          </button>
+          <button
+            class="tab-btn"
+            onclick="window.location.href = 'admin-reviews.html'"
+          >
+            <i class="fas fa-star-half-alt"></i> <span>Reviews & Reports</span>
+          </button>
+          <button
+            class="tab-btn"
+            onclick="window.location.href = 'admin-chats.html'"
+          >
+            <i class="fas fa-comments"></i> <span>Chat Management</span>
+          </button>
+          <button
+            class="tab-btn active"
+            onclick="window.location.href = 'admin-subadmins.html'"
+          >
+            <i class="fas fa-user-shield"></i> <span>Sub-Admins</span>
+          </button>
+          <button
+            class="tab-btn"
+            onclick="window.location.href = 'admin-vouchers.html'"
+          >
+            <i class="fas fa-ticket-alt"></i> <span>Vouchers</span>
+          </button>
+          <button
+            class="tab-btn"
+            onclick="window.location.href = 'admin-super.html'"
+          >
+            <i class="fas fa-bolt" style="color: #fc8181"></i>
+            <span style="color: #fc8181; font-weight: 600">Super Admin</span>
+          </button>
+          <button
+            class="tab-btn"
+            onclick="window.location.href = 'admin-shipping.html'"
+          >
+            <i class="fas fa-truck-loading"></i> <span>Shipping Settings</span>
+          </button>
+        </nav>
+        <div style="margin-top: auto; padding-top: 20px">
+          <button
+            id="logoutBtn"
+            class="btn btn-mini btn-outline"
+            style="
+              width: 100%;
+              border-color: rgba(255, 255, 255, 0.2);
+              color: white;
+              background: transparent;
+            "
+          >
+            <i class="fas fa-sign-out-alt"></i> Sign Out
+          </button>
+        </div>
+      </aside>
+
+      <main class="admin-main">
+        <h1>Manage Sub-Admins</h1>
+
+        <div class="section-card">
+          <h2>Create New Sub-Admin</h2>
+          <form id="createSubAdminForm">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input
+                type="text"
+                id="subAdminName"
+                required
+                placeholder="e.g. John Support"
+              />
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input
+                type="email"
+                id="subAdminEmail"
+                required
+                placeholder="e.g. john@.com"
+              />
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                id="subAdminPassword"
+                required
+                minlength="6"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Create Sub-Admin Account
+            </button>
+          </form>
+        </div>
+
+        <div class="section-card">
+          <h2>Existing Sub-Admins</h2>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Joined</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="subAdminList">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="admin-subadmins.js"></script>
+    <script type="module" src="auth-state.js"></script>
+
+    <div class="creator-credit" style="font-size: 10px; color: #718096; text-align: center; padding: 10px; background: #f4f7f6;">this was made by opedemowo olaoluwa victor</div>
+</body>
+</html>
+
+
+

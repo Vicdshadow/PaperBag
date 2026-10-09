@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Settings</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="account-page">
+    <header class="account-header">
+      <div
+        class="header-content"
+        style="
+          display: flex;
+          align-items: center;
+          padding: 0 16px;
+          height: 100%;
+        "
+      >
+        <a
+          href="account.html"
+          style="color: var(--color-text); font-size: 20px; margin-right: 16px"
+        >
+          <i class="fas fa-arrow-left"></i>
+        </a>
+        <h1 style="font-size: 18px; font-weight: 600">Payment Settings</h1>
+      </div>
+    </header>
+
+    <main class="account-container animate-fade-in" style="padding-top: 70px">
+      <div class="section-label">Default Payment Method</div>
+      <section class="menu-list">
+        <div class="menu-item" style="cursor: default">
+          <div class="menu-label">
+            <i class="fas fa-wallet"></i>
+            <span> Store Credit</span>
+          </div>
+          <span style="color: var(--color-primary); font-weight: 600"
+            >Active</span
+          >
+        </div>
+      </section>
+
+      <div class="section-label">Other Payment Methods</div>
+      <section class="menu-list">
+        <a href="#" class="menu-item">
+          <div class="menu-label">
+            <i class="fas fa-credit-card"></i>
+            <span>Cards</span>
+          </div>
+          <i class="fas fa-plus"></i>
+        </a>
+        <a href="#" class="menu-item">
+          <div class="menu-label">
+            <i class="fas fa-university"></i>
+            <span>Bank Account</span>
+          </div>
+          <i class="fas fa-plus"></i>
+        </a>
+      </section>
+
+      <section class="info-section" style="padding: 16px; text-align: center">
+        <p class="muted" style="font-size: 13px">
+          Your payment information is stored securely. We do not share your full
+          card details with anyone.
+        </p>
+      </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="index.html" class="nav-item">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+      <a href="catalogue.html" class="nav-item">
+        <i class="fas fa-list-ul"></i>
+        <span>Catalogue</span>
+      </a>
+      <a href="cart.html" class="nav-item">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Cart</span>
+      </a>
+      <a href="wishlist.html" class="nav-item">
+        <i class="far fa-heart"></i>
+        <span>Wishlist</span>
+      </a>
+      <a href="account.html" class="nav-item active">
+        <i class="fas fa-user"></i>
+        <span>Account</span>
+      </a>
+    </nav>
+
+      <script type="module" src="auth-state.js"></script>
+
+    <div class="creator-credit" style="font-size: 10px; color: #718096; text-align: center; padding: 10px; background: #f4f7f6;">this was made by opedemowo olaoluwa victor</div>
+</body>
+</html>
+
+
+
+
+

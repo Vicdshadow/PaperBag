@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Super Admin Controls</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --admin-sidebar-w: 240px;
+        --admin-accent: #ff6600;
+        --admin-dark: #001f3f;
+        --admin-bg: #f4f7f6;
+      }
+      body {
+        background: var(--admin-bg);
+        font-family: "Inter", sans-serif;
+        margin: 0;
+      }
+      .admin-layout {
+        display: flex;
+        min-height: 100vh;
+      }
+      .admin-sidebar {
+        width: var(--admin-sidebar-w);
+        background: var(--admin-dark);
+        color: white;
+        padding: 30px 20px;
+        position: fixed;
+        height: 100vh;
+        z-index: 1000;
+        transition: 0.3s;
+        display: flex;
+        flex-direction: column;
+      }
+      .sidebar-nav {
+        flex: 1;
+        overflow-y: auto;
+        margin-right: -10px;
+        padding-right: 10px;
+      }
+      .sidebar-nav::-webkit-scrollbar {
+        width: 4px;
+      }
+      .sidebar-nav::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+      }
+      .admin-main {
+        flex: 1;
+        margin-left: var(--admin-sidebar-w);
+        padding: 40px;
+      }
+
+      .sidebar-logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 40px;
+        padding: 0 10px;
+      }
+      .sidebar-logo img {
+        height: 32px;
+        width: auto;
+        filter: brightness(0) invert(1);
+      }
+      .sidebar-logo span {
+        font-family: "Playfair Display", serif;
+        font-size: 22px;
+        font-weight: 700;
+        color: white;
+      }
+
+      .sidebar-nav button {
+        width: 100%;
+        text-align: left;
+        padding: 12px 15px;
+        background: none;
+        border: none;
+        color: #a0aec0;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.3s;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .sidebar-nav button i {
+        width: 20px;
+        text-align: center;
+        font-size: 16px;
+      }
+      .sidebar-nav button:hover,
+      .sidebar-nav button.active {
+        background: rgba(255, 255, 255, 0.08);
+        color: white;
+      }
+      .sidebar-nav button.active {
+        border-left: 3px solid var(--admin-accent);
+        border-radius: 0 8px 8px 0;
+        background: rgba(255, 102, 0, 0.1);
+        color: var(--admin-accent);
+      }
+
+      .admin-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+      }
+      .admin-header h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 28px;
+        color: var(--admin-dark);
+        margin: 0;
+      }
+
+      .section-card {
+        background: white;
+        padding: 32px;
+        border-radius: 16px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        margin-bottom: 24px;
+      }
+      .section-card h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 20px;
+        margin-bottom: 24px;
+        color: var(--admin-dark);
+        border-left: 4px solid #e53e3e; /* Red for super admin */
+        padding-left: 15px;
+      }
+
+      .admin-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 8px;
+      }
+      .admin-table th {
+        text-align: left;
+        padding: 12px 16px;
+        font-size: 12px;
+        color: #a0aec0;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: 600;
+      }
+      .admin-table tbody tr {
+        background: white;
+        transition: 0.2s;
+      }
+      .admin-table tbody tr:hover {
+        background: #f8fafc;
+      }
+      .admin-table td {
+        padding: 16px;
+        border-bottom: 1px solid #f1f5f9;
+        font-size: 14px;
+        color: #4a5568;
+      }
+
+      .btn-mini {
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.3s;
+        border: none;
+      }
+      .btn-primary {
+        background: var(--admin-accent);
+        color: white;
+      }
+      .btn-outline {
+        background: transparent;
+        border: 1.5px solid #e2e8f0;
+        color: #4a5568;
+      }
+      .btn-outline:hover {
+        background: #f8fafc;
+        border-color: #cbd5e0;
+      }
+
+      /* Password Screen Overlay */
+      #passwordOverlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 31, 63, 0.95);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+      }
+      .password-box {
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        text-align: center;
+        width: 100%;
+        max-width: 400px;
+        box-shadow:
+          0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+      .password-box h2 {
+        color: #e53e3e;
+        margin-bottom: 20px;
+        font-family: "Playfair Display", serif;
+      }
+      .password-box input {
+        width: 100%;
+        padding: 15px;
+        font-size: 16px;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        text-align: center;
+        letter-spacing: 5px;
+      }
+      .password-box input:focus {
+        outline: none;
+        border-color: #e53e3e;
+      }
+      .password-box button {
+        width: 100%;
+        padding: 15px;
+        background: #e53e3e;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      /* Status Overrides */
+      .status-pill {
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+      .status-suspended {
+        background: #fee2e2;
+        color: #c53030;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Password Overlay -->
+    <div id="passwordOverlay">
+      <div class="password-box">
+        <h2><i class="fas fa-exclamation-triangle"></i> Super Admin Access</h2>
+        <p class="muted" style="margin-bottom: 20px">
+          Enter the Master PIN to access advanced site controls.
+        </p>
+        <form id="pinForm">
+          <input
+            type="password"
+            id="adminPin"
+            placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+            required
+          />
+          <button type="submit">Unlock Controls</button>
+        </form>
+        <a
+          href="admin.html"
+          style="
+            display: block;
+            margin-top: 20px;
+            color: #718096;
+            font-size: 14px;
+            text-decoration: none;
+          "
+          >Return to Dashboard</a
+        >
+      </div>
+    </div>
+
+    <div class="admin-layout" id="mainContent" style="display: none">
+      <aside class="admin-sidebar">
+        <div class="sidebar-logo">
+          <img src="logo.png" alt="E" />
+          <span></span>
+        </div>
+
+        <nav class="sidebar-nav">
+          <button class="tab-btn" onclick="window.location.href = 'admin.html'">
+            <i class="fas fa-chart-line"></i> <span>Overview</span>
+          </button>
+          <button
+            class="tab-btn"
+            onclick="window.location.href = 'admin-sales.html'"
+          >
+            <i class="fas fa-exchange-alt"></i> <span>Sales Queue</span>
+          </button>
+          <button
+            class="tab-btn"
+            onclick="window.location.href = 'admin-users.html'"
+          >
+            <i class="fas fa-users-cog"></i> <span>User Management</span>
+          </button>
+          <!-- Adding Super Admin explicitly here for context -->
+          <button
+            class="tab-btn active"
+            style="
+              color: white;
+              background: rgba(229, 62, 62, 0.2);
+              border-left: 3px solid #e53e3e;
+            "
+            onclick="window.location.href = 'admin-super.html'"
+          >
+            <i class="fas fa-bolt" style="color: #fc8181"></i>
+            <span style="color: #fc8181; font-weight: 600"
+              >Super Admin Controls</span
+            >
+          </button>
+          <button
+            class="tab-btn"
+            onclick="window.location.href = 'admin-inventory.html'"
+          >
+            <i class="fas fa-boxes"></i> <span>Inventory</span>
+          </button>
+          <button
+            class="tab-btn"
+            onclick="window.location.href = 'admin-upload.html'"
+          >
+            <i class="fas fa-upload"></i> <span>Upload Product</span>
+          </button>
+          <button
+            class="tab-btn"
+            onclick="window.location.href = 'admin-reviews.html'"
+          >
+            <i class="fas fa-star-half-alt"></i> <span>Reviews & Reports</span>
+          </button>
+          <button
+            class="tab-btn"
+            onclick="window.location.href = 'admin-chats.html'"
+          >
+            <i class="fas fa-comments"></i> <span>Chat Management</span>
+          </button>
+          <button
+            class="tab-btn"
+            onclick="window.location.href = 'admin-vouchers.html'"
+          >
+            <i class="fas fa-ticket-alt"></i> <span>Vouchers</span>
+          </button>
+          <button
+            class="tab-btn"
+            onclick="window.location.href = 'admin-super.html'"
+          >
+            <i class="fas fa-bolt" style="color: #fc8181"></i>
+            <span style="color: #fc8181; font-weight: 600">Super Admin</span>
+          </button>
+          <button
+            class="tab-btn"
+            onclick="window.location.href = 'admin-subadmins.html'"
+          >
+            <i class="fas fa-user-shield"></i> <span>Sub-Admins</span>
+          </button>
+          <button
+            class="tab-btn"
+            onclick="window.location.href = 'admin-shipping.html'"
+          >
+            <i class="fas fa-truck-loading"></i> <span>Shipping Settings</span>
+          </button>
+        </nav>
+
+        <div style="margin-top: auto; padding-top: 20px">
+          <button
+            id="logoutBtn"
+            class="btn-mini btn-outline"
+            style="
+              width: 100%;
+              border-color: rgba(255, 255, 255, 0.2);
+              color: white;
+            "
+          >
+            <i class="fas fa-sign-out-alt"></i> Sign Out
+          </button>
+        </div>
+      </aside>
+
+      <main class="admin-main">
+        <header class="admin-header">
+          <div>
+            <h1>
+              Super Admin Controls
+              <span
+                style="
+                  font-size: 14px;
+                  background: #e53e3e;
+                  color: white;
+                  padding: 4px 8px;
+                  border-radius: 4px;
+                  vertical-align: middle;
+                  margin-left: 10px;
+                "
+                ><i class="fas fa-lock-open"></i> UNLOCKED</span
+              >
+            </h1>
+            <p
+              id="adminEmail"
+              class="muted"
+              style="font-size: 13px; margin-top: 5px"
+            ></p>
+          </div>
+        </header>
+
+        <div class="stats-grid">
+          <div class="stat-card" style="border-top: 4px solid #e53e3e">
+            <h3>Total Suspended Accounts</h3>
+            <div id="suspendedCount" class="value" style="color: #c53030">
+              0
+            </div>
+          </div>
+          <div class="stat-card">
+            <h3>Warning</h3>
+            <div style="font-size: 12px; color: #4a5568; margin-top: 10px">
+              Actions here are irreversible. Ensure you verify user identities
+              before deleting accounts.
+            </div>
+          </div>
+        </div>
+
+        <section id="usersSection" class="tab-content">
+          <div class="section-card">
+            <h2>Danger Zone: User Authority</h2>
+            <div class="table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>User</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>
+                      Super Actions
+                      <i
+                        class="fas fa-exclamation-circle"
+                        style="color: #e53e3e"
+                      ></i>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="adminSuperUserList">
+                  <tr>
+                    <td colspan="4">Loading data...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="admin.js"></script>
+    <script type="module" src="auth-state.js"></script>
+    <script>
+      document.getElementById("pinForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const pin = document.getElementById("adminPin").value;
+        // Expected PIN requested by user review decision. Using standard for proof of concept.
+        if (pin === "-admin-123") {
+          document.getElementById("passwordOverlay").style.display = "none";
+          document.getElementById("mainContent").style.display = "flex";
+          // Trigger the Firebase listeners on mount for the protected section
+          if (window.initSuperAdminData) {
+            window.initSuperAdminData();
+          }
+        } else {
+          alert("Incorrect PIN. Access Denied.");
+        }
+      });
+    </script>
+
+    <div class="creator-credit" style="font-size: 10px; color: #718096; text-align: center; padding: 10px; background: #f4f7f6;">this was made by opedemowo olaoluwa victor</div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,1055 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Products — Seller Center</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background: #f0f0f0;
+        color: #1f2937;
+        min-height: 100vh;
+        padding-bottom: 72px;
+      }
+      .topbar {
+        background: #fff;
+        border-bottom: 1px solid #e5e7eb;
+        padding: 0.75rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+      .topbar-left {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .topbar-logo {
+        width: 32px;
+        height: 32px;
+        background: #ff6600;
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 0.9rem;
+      }
+      .topbar-title {
+        font-weight: 700;
+        font-size: 1rem;
+      }
+      .btn-add {
+        background: #ff6600;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 0.9rem;
+        font-size: 0.83rem;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-family: inherit;
+        transition: opacity 0.15s;
+      }
+      .btn-add:hover {
+        opacity: 0.9;
+      }
+      .page {
+        padding: 1rem;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      /* Search & filter row */
+      .filter-bar {
+        background: #fff;
+        border-radius: 10px;
+        padding: 0.85rem;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+        margin-bottom: 0.85rem;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 160px;
+      }
+      .search-wrap i {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #ff6600;
+        font-size: 0.82rem;
+      }
+      .search-wrap input {
+        width: 100%;
+        padding: 0.5rem 2rem 0.5rem 0.7rem;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 0.83rem;
+        outline: none;
+      }
+      .search-wrap input:focus {
+        border-color: #ff6600;
+      }
+      .cat-select {
+        padding: 0.5rem 0.75rem;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 0.83rem;
+        outline: none;
+        cursor: pointer;
+      }
+      /* Stats bar */
+      .stats-bar {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.6rem;
+        margin-bottom: 0.85rem;
+      }
+      .stat-mini {
+        background: #fff;
+        border-radius: 10px;
+        padding: 0.75rem;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+        text-align: center;
+      }
+      .stat-mini .val {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: #ff6600;
+      }
+      .stat-mini .lbl {
+        font-size: 0.72rem;
+        color: #6b7280;
+        margin-top: 0.15rem;
+      }
+      /* Product grid */
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 0.75rem;
+      }
+      .product-card {
+        background: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .product-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      }
+      .product-card img {
+        width: 100%;
+        height: 130px;
+        object-fit: cover;
+      }
+      .product-body {
+        padding: 0.75rem;
+      }
+      .product-title {
+        font-weight: 600;
+        font-size: 0.85rem;
+        margin-bottom: 0.2rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .product-price {
+        color: #ff6600;
+        font-weight: 700;
+        font-size: 0.95rem;
+        margin-bottom: 0.2rem;
+      }
+      .product-cat {
+        font-size: 0.72rem;
+        color: #6b7280;
+        margin-bottom: 0.5rem;
+      }
+      .product-status {
+        font-size: 0.72rem;
+        padding: 0.15rem 0.5rem;
+        border-radius: 10px;
+        font-weight: 600;
+        display: inline-block;
+        margin-bottom: 0.5rem;
+      }
+      .status-active {
+        background: #d1fae5;
+        color: #059669;
+      }
+      .status-inactive {
+        background: #fee2e2;
+        color: #dc2626;
+      }
+      .product-actions {
+        display: flex;
+        gap: 0.4rem;
+      }
+      .btn-sm {
+        flex: 1;
+        padding: 0.38rem;
+        border-radius: 6px;
+        font-size: 0.76rem;
+        font-weight: 600;
+        cursor: pointer;
+        border: 1.5px solid #e5e7eb;
+        font-family: inherit;
+        transition: all 0.15s;
+      }
+      .btn-edit {
+        background: #f9fafb;
+        color: #374151;
+      }
+      .btn-edit:hover {
+        background: #e5e7eb;
+      }
+      .btn-delete {
+        background: #fee2e2;
+        color: #dc2626;
+        border-color: #fecaca;
+      }
+      .btn-delete:hover {
+        background: #dc2626;
+        color: #fff;
+        border-color: #dc2626;
+      }
+      /* Empty state */
+      .empty-state {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+        padding: 3rem 1rem;
+        text-align: center;
+      }
+      .empty-state i {
+        font-size: 2.5rem;
+        color: #d1d5db;
+        display: block;
+        margin-bottom: 0.75rem;
+      }
+      .empty-state p {
+        color: #9ca3af;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+      /* Upload modal */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        z-index: 200;
+        padding: 0;
+      }
+      @media (min-width: 540px) {
+        .modal-overlay {
+          align-items: center;
+          padding: 1rem;
+        }
+      }
+      .modal-overlay.hidden {
+        display: none;
+      }
+      .modal-box {
+        background: #fff;
+        border-radius: 16px 16px 0 0;
+        padding: 1.5rem;
+        width: 100%;
+        max-width: 500px;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+      }
+      @media (min-width: 540px) {
+        .modal-box {
+          border-radius: 12px;
+        }
+      }
+      .modal-close {
+        position: absolute;
+        right: 14px;
+        top: 12px;
+        border: none;
+        background: none;
+        font-size: 1.4rem;
+        color: #6b7280;
+        cursor: pointer;
+      }
+      .modal-box h3 {
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        font-weight: 700;
+      }
+      .form-group {
+        margin-bottom: 0.85rem;
+      }
+      .form-group label {
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 0.35rem;
+      }
+      .form-group label span {
+        color: #ff6600;
+      }
+      .form-input {
+        width: 100%;
+        padding: 0.62rem 0.85rem;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 0.88rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .form-input:focus {
+        border-color: #ff6600;
+        box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.1);
+      }
+      textarea.form-input {
+        resize: vertical;
+        min-height: 80px;
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+      }
+      .img-drop {
+        border: 2px dashed #e5e7eb;
+        border-radius: 8px;
+        padding: 1.2rem;
+        text-align: center;
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+      }
+      .img-drop:hover,
+      .img-drop.drag {
+        border-color: #ff6600;
+        background: #fff7ed;
+      }
+      .img-drop i {
+        font-size: 1.8rem;
+        color: #9ca3af;
+        margin-bottom: 0.4rem;
+      }
+      .img-drop p {
+        font-size: 0.78rem;
+        color: #9ca3af;
+      }
+      #img-preview {
+        max-width: 100px;
+        max-height: 100px;
+        object-fit: cover;
+        border-radius: 6px;
+        margin-top: 0.4rem;
+        display: none;
+      }
+      .btn-primary {
+        width: 100%;
+        padding: 0.75rem;
+        border-radius: 8px;
+        border: none;
+        background: #ff6600;
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.95rem;
+        cursor: pointer;
+        font-family: inherit;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        transition: opacity 0.15s;
+      }
+      .btn-primary:hover {
+        opacity: 0.9;
+      }
+      .btn-primary:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      #upload-status {
+        margin-top: 0.6rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-align: center;
+      }
+      /* Edit modal */
+      #edit-modal .modal-box {
+        border-radius: 16px 16px 0 0;
+      }
+      @media (min-width: 540px) {
+        #edit-modal .modal-box {
+          border-radius: 12px;
+        }
+      }
+      #loading {
+        position: fixed;
+        inset: 0;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        z-index: 9999;
+        color: #ff6600;
+        font-weight: 600;
+      }
+      .spinner {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 3px solid #fed7aa;
+        border-top-color: #ff6600;
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .hidden {
+        display: none !important;
+      }
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #e5e7eb;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        z-index: 100;
+      }
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        padding: 0.6rem 0 0.75rem;
+        font-size: 0.68rem;
+        color: #6b7280;
+        text-decoration: none;
+        transition: color 0.15s;
+        border: none;
+        background: none;
+        font-family: inherit;
+        cursor: pointer;
+      }
+      .nav-item i {
+        font-size: 1.2rem;
+      }
+      .nav-item.active {
+        color: #ff6600;
+      }
+      .nav-vc {
+        width: 26px;
+        height: 26px;
+        background: #ff6600;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 0.6rem;
+        font-weight: 800;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading">
+      <div class="spinner"></div>
+      <span>Loading products…</span>
+    </div>
+
+    <header class="topbar hidden" id="topbar">
+      <a
+        href="index.html"
+        class="topbar-left"
+        style="text-decoration: none; color: inherit"
+      >
+        <div class="topbar-logo"><i class="fas fa-store"></i></div>
+        <span class="topbar-title">Manage Products</span>
+      </a>
+      <button class="btn-add" id="open-upload">
+        <i class="fas fa-plus"></i> Add Product
+      </button>
+    </header>
+
+    <main class="page hidden" id="main">
+      <!-- Stats -->
+      <div class="stats-bar">
+        <div class="stat-mini">
+          <div class="val" id="stat-total">0</div>
+          <div class="lbl">Total</div>
+        </div>
+        <div class="stat-mini">
+          <div class="val" id="stat-active">0</div>
+          <div class="lbl">Active</div>
+        </div>
+        <div class="stat-mini">
+          <div class="val" id="stat-limit">5,000</div>
+          <div class="lbl">Limit</div>
+        </div>
+      </div>
+
+      <!-- Filter bar -->
+      <div class="filter-bar">
+        <div class="search-wrap">
+          <input
+            type="text"
+            id="search-products"
+            placeholder="Search products…"
+          />
+          <i class="fas fa-search"></i>
+        </div>
+        <select class="cat-select" id="cat-filter">
+          <option value="all">All Categories</option>
+          <option>Electronics</option>
+          <option>Home Appliances</option>
+          <option>Furniture</option>
+          <option>Books</option>
+          <option>Power</option>
+          <option>Fashion</option>
+          <option>Perfume</option>
+          <option>Office</option>
+          <option>IT Equipment</option>
+          <option>Lighting</option>
+          <option>Spare Parts</option>
+          <option>Car Electronics</option>
+          <option>Bicycles</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <!-- Products grid -->
+      <div id="products-container" class="products-grid"></div>
+    </main>
+
+    <!-- Upload Modal -->
+    <div class="modal-overlay hidden" id="upload-modal">
+      <div class="modal-box">
+        <button class="modal-close" id="close-upload">&times;</button>
+        <h3>
+          <i
+            class="fas fa-cloud-upload-alt"
+            style="color: #ff6600; margin-right: 6px"
+          ></i
+          >Add New Product
+        </h3>
+        <form id="product-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Product Name <span>*</span></label>
+              <input
+                type="text"
+                id="product-name"
+                class="form-input"
+                required
+                placeholder="e.g. Wireless Earbuds"
+              />
+            </div>
+            <div class="form-group">
+              <label>Price (₦) <span>*</span></label>
+              <input
+                type="number"
+                id="product-price"
+                class="form-input"
+                required
+                min="0"
+                placeholder="e.g. 12500"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Category</label>
+              <select id="product-category" class="form-input">
+                <option>Electronics</option>
+                <option>Home Appliances</option>
+                <option>Furniture</option>
+                <option>Books</option>
+                <option>Power</option>
+                <option>Fashion</option>
+                <option>Perfume</option>
+                <option>Office</option>
+                <option>IT Equipment</option>
+                <option>Lighting</option>
+                <option>Spare Parts</option>
+                <option>Car Electronics</option>
+                <option>Bicycles</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>SKU (optional)</label>
+              <input
+                type="text"
+                id="product-sku"
+                class="form-input"
+                placeholder="e.g. SKU-001"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Description <span>*</span></label>
+            <textarea
+              id="product-desc"
+              class="form-input"
+              required
+              placeholder="Describe your product…"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label>Condition <span>*</span></label>
+            <select id="product-condition" class="form-input" required>
+              <option value="brand_new">Brand New</option>
+              <option value="preowned">Preowned</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Product Image <span>*</span></label>
+            <div class="img-drop" id="img-drop">
+              <i class="fas fa-image"></i>
+              <p>
+                Click or drag &amp; drop<br /><small>PNG, JPG up to 5MB</small>
+              </p>
+              <input
+                type="file"
+                id="product-image"
+                accept="image/*"
+                style="display: none"
+                required
+              />
+              <img id="img-preview" src="" alt="preview" />
+            </div>
+          </div>
+          <button type="submit" id="submit-btn" class="btn-primary">
+            <i class="fas fa-cloud-upload-alt"></i> Upload Product
+          </button>
+          <div id="upload-status"></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal-overlay hidden" id="edit-modal">
+      <div class="modal-box">
+        <button class="modal-close" id="close-edit">&times;</button>
+        <h3>Edit Product</h3>
+        <form id="edit-form">
+          <input type="hidden" id="edit-id" />
+          <div class="form-group">
+            <label>Name</label
+            ><input type="text" id="edit-name" class="form-input" required />
+          </div>
+          <div class="form-group">
+            <label>Price (₦)</label
+            ><input type="number" id="edit-price" class="form-input" required />
+          </div>
+          <div class="form-group">
+            <label>Description</label
+            ><textarea id="edit-desc" class="form-input" required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select id="edit-status" class="form-input">
+              <option value="active">Active</option>
+              <option value="inactive">Inactive (hidden)</option>
+            </select>
+          </div>
+          <button type="submit" id="save-edit-btn" class="btn-primary">
+            <i class="fas fa-save"></i> Save Changes
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav hidden" id="bottom-nav">
+      <a class="nav-item" href="seller-dashboard.html"
+        ><div class="nav-vc">vc</div>
+        Home</a
+      >
+      <a class="nav-item" href="orders.html"
+        ><i class="fas fa-clipboard-list"></i>Orders</a
+      >
+      <a class="nav-item active" href="manage-products.html"
+        ><i class="fas fa-th-large"></i>Manage<br />Products</a
+      >
+      <a class="nav-item" href="account.html"
+        ><i class="fas fa-bars"></i>Menu</a
+      >
+    </nav>
+
+    <script type="module">
+      import {
+        auth,
+        db,
+        storage,
+        onAuthStateChanged,
+        collection,
+        query,
+        where,
+        onSnapshot,
+        addDoc,
+        updateDoc,
+        deleteDoc,
+        doc,
+        serverTimestamp,
+        ref,
+        uploadBytes,
+        getDownloadURL,
+        orderBy,
+      } from "./firebase-config.js";
+
+      let currentUser = null;
+      let currentUserData = {};
+      let allProducts = [];
+
+      onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+          window.location.href = "login.html";
+          return;
+        }
+        currentUser = user;
+        document.getElementById("loading").classList.add("hidden");
+        document.getElementById("topbar").classList.remove("hidden");
+        document.getElementById("main").classList.remove("hidden");
+        document.getElementById("bottom-nav").classList.remove("hidden");
+        setupProductStream(user.uid);
+      });
+
+      // ── Live products ──
+      function setupProductStream(uid) {
+        const q = query(
+          collection(db, "products"),
+          where("sellerId", "==", uid),
+          orderBy("createdAt", "desc"),
+        );
+        onSnapshot(q, (snap) => {
+          allProducts = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+          document.getElementById("stat-total").textContent =
+            allProducts.length;
+          document.getElementById("stat-active").textContent =
+            allProducts.filter((p) => p.status === "active").length;
+          renderProducts(allProducts);
+        });
+      }
+
+      function renderProducts(list) {
+        const container = document.getElementById("products-container");
+        if (list.length === 0) {
+          container.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">
+          <i class="fas fa-box-open"></i><p>No products yet.</p>
+          <button class="btn-primary" style="width:auto;margin:0 auto;" onclick="document.getElementById('upload-modal').classList.remove('hidden')">
+            <i class="fas fa-plus"></i> Add Your First Product
+          </button></div>`;
+          return;
+        }
+        container.innerHTML = list
+          .map(
+            (p) => `
+        <div class="product-card">
+          <img src="${p.imageURL || p.imageUrl || p.image || ""}" alt="${p.name}" onerror="this.src='https://placehold.co/400x300?text=No+Image'"/>
+          <div class="product-body">
+            <div class="product-title" title="${p.name}">${p.name}</div>
+            <div class="product-price">₦${Number(p.price || 0).toLocaleString()}</div>
+            <div class="product-cat">${p.categoryLabel || p.category || ""}${p.category || p.categoryLabel ? " • " : ""}${(p.condition || inferConditionFromDescription(p.description)) === "preowned" ? "Preowned" : "Brand New"}</div>
+            <span class="product-status ${p.status === "active" ? "status-active" : "status-inactive"}">${p.status || "active"}</span>
+            <div class="product-actions">
+              <button class="btn-sm btn-edit" onclick="openEdit('${p.id}','${escapeAttr(p.name)}',${p.price},'${escapeAttr(p.description || "")}','${p.status || "active"}')">
+                <i class="fas fa-edit"></i> Edit
+              </button>
+              <button class="btn-sm btn-delete" onclick="deleteProduct('${p.id}')">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>`,
+          )
+          .join("");
+      }
+
+      function escapeAttr(s) {
+        return (s || "").replace(/'/g, "&#39;").replace(/"/g, "&quot;");
+      }
+
+      function inferConditionFromDescription(description) {
+        const text = (description || "").toLowerCase();
+        const preownedHints = [
+          "preowned",
+          "pre-owned",
+          "used",
+          "second hand",
+          "fairly used",
+          "tokunbo",
+          "refurbished",
+        ];
+        return preownedHints.some((hint) => text.includes(hint))
+          ? "preowned"
+          : "brand_new";
+      }
+
+      const CATEGORY_MAP = {
+        Electronics: "electronics",
+        "Car Electronics": "car-electronics",
+        "Home Appliances": "home-appliances",
+        "Home & Living": "furniture",
+        Furniture: "furniture",
+        Books: "books",
+        Fashion: "fashion",
+        Perfume: "perfume",
+        Beauty: "perfume",
+        Office: "office",
+        "IT Equipment": "it",
+        Computers: "it",
+        Phones: "electronics",
+        Automobiles: "car-electronics",
+        Bicycles: "bicycles",
+        "Sporting Goods": "bicycles",
+        Power: "power",
+        Lighting: "lighting",
+        "Spare Parts": "spare-parts",
+      };
+
+      function normalizeCategory(label) {
+        if (!label) return "other";
+        return (
+          CATEGORY_MAP[label] ||
+          label
+            .toLowerCase()
+            .trim()
+            .replace(/&/g, "and")
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/(^-|-$)/g, "")
+        );
+      }
+
+      // ── Search / filter ──
+      function applyFilters() {
+        const term = document
+          .getElementById("search-products")
+          .value.toLowerCase();
+        const cat = document.getElementById("cat-filter").value;
+        const catKey = cat === "all" ? "all" : normalizeCategory(cat);
+        renderProducts(
+          allProducts.filter((p) => {
+            const matchTerm =
+              !term || (p.name || "").toLowerCase().includes(term);
+            const matchCat =
+              catKey === "all" || (p.category || "") === catKey;
+            return matchTerm && matchCat;
+          }),
+        );
+      }
+      document
+        .getElementById("search-products")
+        .addEventListener("input", applyFilters);
+      document
+        .getElementById("cat-filter")
+        .addEventListener("change", applyFilters);
+
+      // ── Upload modal ──
+      document
+        .getElementById("open-upload")
+        .addEventListener("click", () =>
+          document.getElementById("upload-modal").classList.remove("hidden"),
+        );
+      document
+        .getElementById("close-upload")
+        .addEventListener("click", () =>
+          document.getElementById("upload-modal").classList.add("hidden"),
+        );
+
+      // Image drop zone
+      const imgDrop = document.getElementById("img-drop");
+      const imgInput = document.getElementById("product-image");
+      const imgPreview = document.getElementById("img-preview");
+      imgDrop.addEventListener("click", () => imgInput.click());
+      imgDrop.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        imgDrop.classList.add("drag");
+      });
+      imgDrop.addEventListener("dragleave", () =>
+        imgDrop.classList.remove("drag"),
+      );
+      imgDrop.addEventListener("drop", (e) => {
+        e.preventDefault();
+        imgDrop.classList.remove("drag");
+        if (e.dataTransfer.files[0]) preview(e.dataTransfer.files[0]);
+      });
+      imgInput.addEventListener("change", () => {
+        if (imgInput.files[0]) preview(imgInput.files[0]);
+      });
+      function preview(file) {
+        const r = new FileReader();
+        r.onload = (e) => {
+          imgPreview.src = e.target.result;
+          imgPreview.style.display = "block";
+        };
+        r.readAsDataURL(file);
+      }
+
+      const conditionInput = document.getElementById("product-condition");
+      const descInput = document.getElementById("product-desc");
+      descInput.addEventListener("input", () => {
+        conditionInput.value = inferConditionFromDescription(descInput.value);
+      });
+
+      // Submit product
+      document
+        .getElementById("product-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          if (!currentUser) return;
+          const name = document.getElementById("product-name").value.trim();
+          const price = document.getElementById("product-price").value;
+          const categoryLabel = document.getElementById("product-category").value;
+          const cat = normalizeCategory(categoryLabel);
+          const desc = document.getElementById("product-desc").value.trim();
+          const conditionInput = document.getElementById("product-condition");
+          const condition =
+            conditionInput.value || inferConditionFromDescription(desc);
+          const sku = document.getElementById("product-sku").value.trim();
+          const file = imgInput.files[0];
+          if (!file) {
+            setStatus("Please select an image.", "red");
+            return;
+          }
+          const btn = document.getElementById("submit-btn");
+          try {
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading…';
+            setStatus("", "");
+            const imgRef = ref(
+              storage,
+              `products/${currentUser.uid}/${Date.now()}_${file.name}`,
+            );
+            await uploadBytes(imgRef, file);
+            const imageURL = await getDownloadURL(imgRef);
+            await addDoc(collection(db, "products"), {
+              name,
+              price: Number(price),
+              category: cat,
+              categoryLabel: categoryLabel,
+              description: desc,
+              condition,
+              sku: sku || null,
+              imageURL,
+              sellerId: currentUser.uid,
+              sellerName: currentUser.displayName || "Seller",
+              createdAt: serverTimestamp(),
+              status: "active",
+            });
+            document.getElementById("product-form").reset();
+            imgPreview.style.display = "none";
+            document.getElementById("upload-modal").classList.add("hidden");
+            setStatus("✅ Product uploaded!", "green");
+            setTimeout(() => setStatus("", ""), 3000);
+          } catch (err) {
+            setStatus("❌ " + err.message, "red");
+          } finally {
+            btn.disabled = false;
+            btn.innerHTML =
+              '<i class="fas fa-cloud-upload-alt"></i> Upload Product';
+          }
+        });
+      function setStatus(msg, color) {
+        const el = document.getElementById("upload-status");
+        el.textContent = msg;
+        el.style.color = color;
+      }
+
+      // ── Edit ──
+      window.openEdit = (id, name, price, desc, status) => {
+        document.getElementById("edit-id").value = id;
+        document.getElementById("edit-name").value = name;
+        document.getElementById("edit-price").value = price;
+        document.getElementById("edit-desc").value = desc;
+        document.getElementById("edit-status").value = status;
+        document.getElementById("edit-modal").classList.remove("hidden");
+      };
+      document
+        .getElementById("close-edit")
+        .addEventListener("click", () =>
+          document.getElementById("edit-modal").classList.add("hidden"),
+        );
+      document
+        .getElementById("edit-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const id = document.getElementById("edit-id").value;
+          const btn = document.getElementById("save-edit-btn");
+          try {
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving…';
+            await updateDoc(doc(db, "products", id), {
+              name: document.getElementById("edit-name").value,
+              price: Number(document.getElementById("edit-price").value),
+              description: document.getElementById("edit-desc").value,
+              status: document.getElementById("edit-status").value,
+            });
+            document.getElementById("edit-modal").classList.add("hidden");
+          } catch (err) {
+            alert("Failed: " + err.message);
+          } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
+          }
+        });
+
+      // ── Delete ──
+      window.deleteProduct = async (id) => {
+        if (!confirm("Delete this product? This cannot be undone.")) return;
+        try {
+          await deleteDoc(doc(db, "products", id));
+        } catch (err) {
+          alert("Delete failed: " + err.message);
+        }
+      };
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
