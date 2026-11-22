@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listing Details</title>
+    <link rel="stylesheet" href="style.css" />
+    
+    <style>
+      .detail-header {
+        padding: 40px 0;
+        background: #fff;
+        border-bottom: 1px solid #f8f8fa;
+      }
+      .detail-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 40px;
+        margin-top: 30px;
+      }
+      .detail-image {
+        width: 100%;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+      .detail-info {
+        position: sticky;
+        top: 100px;
+        height: fit-content;
+      }
+      .detail-price {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--color-primary);
+        margin: 15px 0;
+      }
+      .detail-meta-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+      .meta-item {
+        background: #f8f8fa;
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+      }
+      .meta-item i {
+        font-size: 1.2rem;
+        color: #777;
+        margin-bottom: 8px;
+        display: block;
+      }
+      .meta-item label {
+        font-size: 10px;
+        text-transform: uppercase;
+        color: #999;
+        display: block;
+      }
+      .meta-item span {
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .seller-card {
+        border-radius: 12px;
+        padding: 25px;
+        background: #fdfaf8;
+        border: 1px solid #fae7db;
+        margin-top: 30px;
+      }
+      .sticky-contact {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 15px 20px;
+        box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+        display: flex;
+        gap: 10px;
+        z-index: 100;
+        display: none;
+      }
+      @media (max-width: 768px) {
+        .detail-grid {
+          grid-template-columns: 1fr;
+        }
+        .sticky-contact {
+          display: flex;
+        }
+      }
+    </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="assistant.css" />
+    <link rel="stylesheet" href="dark-mode.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="PaperBag &mdash; shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
+  </head>
+  <body>
+    <header class="site-header glass">
+      <div class="container header-inner">
+        
+        <nav class="nav-links">
+          <button onclick="history.back()" class="btn btn-small btn-outline">
+            Back
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main
+      class="container animate-fade-in"
+      style="padding-top: 40px; padding-bottom: 100px"
+    >
+      <div id="listingDetail" style="display: none">
+        <div class="detail-grid">
+          <!-- Media Column -->
+          <div>
+            <img loading="lazy" decoding="async" id="mainImage" src="" alt="Listing" class="detail-image" />
+            <div id="descriptionArea">
+              <h3>Description</h3>
+              <p id="descriptionText" style="line-height: 1.8; color: #55555e"></p>
+            </div>
+          </div>
+
+          <!-- Info Column -->
+          <div class="detail-info">
+            <span
+              id="verticalBadge"
+              class="badge"
+              style="background: #f8f8fa; color: #55555e; font-size: 11px"
+            ></span>
+            <h1
+              id="listingTitle"
+              style="font-size: 2.2rem; margin-top: 10px"
+            ></h1>
+            <div id="listingPrice" class="detail-price"></div>
+
+            <div id="metadataContainer" class="detail-meta-grid">
+              <!-- Dynamic Metadata -->
+            </div>
+
+            <div class="seller-card">
+              <div
+                style="
+                  display: flex;
+                  gap: 15px;
+                  align-items: center;
+                  margin-bottom: 15px;
+                "
+              >
+                <div
+                  style="
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    background: #e6e6ea;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  "
+                >
+                  <i
+                    class="fas fa-user"
+                    style="color: white; font-size: 20px"
+                  ></i>
+                </div>
+                <div>
+                  <div style="font-weight: 600" id="sellerName">
+                     Seller
+                  </div>
+                  <div style="font-size: 12px; color: #888">
+                    Verified Partner
+                  </div>
+                </div>
+              </div>
+              <button
+                id="inquiryBtn"
+                class="btn btn-primary"
+                style="width: 100%; border-radius: 30px; height: 50px"
+              >
+                <i class="fas fa-comment"></i> Interested? Contact Seller
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="loadingState" style="text-align: center; padding: 100px 0">
+        <p>Loading details...</p>
+      </div>
+    </main>
+
+    <div class="sticky-contact">
+      <button
+        id="inquiryBtnMobile"
+        class="btn btn-primary"
+        style="flex: 1; border-radius: 30px"
+      >
+        <i class="fas fa-comment"></i> Enquire Now
+      </button>
+    </div>
+
+    <script type="module">
+      import {
+        db,
+        getDoc,
+        doc,
+        auth,
+        onAuthStateChanged,
+        addDoc,
+        collection,
+        serverTimestamp,
+      } from "./firebase-config.js";
+
+      const params = new URLSearchParams(window.location.search);
+      const listingId = params.get("id");
+
+      let currentListing = null;
+      let currentUser = null;
+
+      onAuthStateChanged(auth, (user) => {
+        currentUser = user;
+      });
+
+      async function loadListing() {
+        if (!listingId) {
+          alert("Listing not found");
+          window.location.href = "index.html";
+          return;
+        }
+
+        try {
+          const docRef = doc(db, "specialized_listings", listingId);
+          const snap = await getDoc(docRef);
+
+          if (!snap.exists()) {
+            document.getElementById("loadingState").innerHTML =
+              "<h2>Listing not found</h2>";
+            return;
+          }
+
+          currentListing = { id: snap.id, ...snap.data() };
+          renderListing(currentListing);
+        } catch (err) {
+          console.error("Error loading listing:", err);
+          document.getElementById("loadingState").innerHTML =
+            "<h2>Failed to load listing details</h2>";
+        }
+      }
+
+      function renderListing(item) {
+        document.getElementById("loadingState").style.display = "none";
+        document.getElementById("listingDetail").style.display = "block";
+
+        document.getElementById("mainImage").src = item.imageUrl;
+        document.getElementById("listingTitle").textContent = item.title;
+        document.getElementById("listingPrice").textContent =
+          `₦${Number(item.price).toLocaleString()}`;
+        document.getElementById("descriptionText").textContent =
+          item.description || "No description provided.";
+        document.getElementById("verticalBadge").textContent =
+          item.vertical.toUpperCase();
+        document.getElementById("sellerName").textContent =
+          item.sellerEmail.split("@")[0];
+
+        const metaContainer = document.getElementById("metadataContainer");
+        metaContainer.innerHTML = "";
+
+        if (item.vertical === "autos") {
+          addMeta(
+            metaContainer,
+            "fas fa-tachometer-alt",
+            "Mileage",
+            item.meta.mileage,
+          );
+          addMeta(metaContainer, "fas fa-calendar", "Year", item.meta.year);
+          addMeta(
+            metaContainer,
+            "fas fa-cog",
+            "Transmission",
+            item.meta.transmission,
+          );
+        } else if (item.vertical === "realestate") {
+          addMeta(metaContainer, "fas fa-bed", "Bedrooms", item.meta.bedrooms);
+          addMeta(
+            metaContainer,
+            "fas fa-bath",
+            "Bathrooms",
+            item.meta.bathrooms,
+          );
+          addMeta(metaContainer, "fas fa-home", "Type", item.meta.type);
+        } else if (item.vertical === "stay") {
+          addMeta(
+            metaContainer,
+            "fas fa-user-friends",
+            "Max Guests",
+            item.meta.maxGuests,
+          );
+          addMeta(metaContainer, "fas fa-clock", "Billing", item.meta.pricePer);
+          addMeta(
+            metaContainer,
+            "fas fa-concierge-bell",
+            "Amenities",
+            item.meta.amenities.join(", "),
+          );
+        }
+      }
+
+      function addMeta(container, icon, label, value) {
+        const div = document.createElement("div");
+        div.className = "meta-item";
+        div.innerHTML = `
+                <i class="${icon}"></i>
+                <label>${label}</label>
+                <span>${value}</span>
+            `;
+        container.appendChild(div);
+      }
+
+      async function handleInquiry() {
+        if (!currentUser) {
+          alert("Please login to contact the seller.");
+          window.location.href =
+            "login.html?redirect=" + encodeURIComponent(window.location.href);
+          return;
+        }
+
+        if (currentUser.uid === currentListing.sellerId) {
+          alert("This is your own listing!");
+          return;
+        }
+
+        const btn = document.getElementById("inquiryBtn");
+        const btnMobile = document.getElementById("inquiryBtnMobile");
+        btn.disabled = true;
+        btn.innerHTML =
+          "<i class='fas fa-spinner fa-spin'></i> Notifying Seller...";
+
+        try {
+          // 1. Create a conversation
+          const conversationRef = await addDoc(
+            collection(db, "conversations"),
+            {
+              participants: [currentUser.uid, currentListing.sellerId],
+              participantEmails: [
+                currentUser.email,
+                currentListing.sellerEmail,
+              ],
+              lastMessage: `Hi, I'm interested in your listing: ${currentListing.title}. Can we discuss?`,
+              updatedAt: serverTimestamp(),
+              listingId: currentListing.id,
+              vertical: currentListing.vertical,
+            },
+          );
+
+          // 2. Add the first message
+          await addDoc(
+            collection(db, "conversations", conversationRef.id, "messages"),
+            {
+              senderId: currentUser.uid,
+              senderEmail: currentUser.email,
+              text: `Hi, I'm interested in your ${currentListing.vertical} listing: "${currentListing.title}". \n\nDirect Link: ${window.location.href}`,
+              timestamp: serverTimestamp(),
+            },
+          );
+
+          alert("✅ Inquiry sent! The seller will be notified in their inbox.");
+          window.location.href = "chat.html?convId=" + conversationRef.id;
+        } catch (err) {
+          console.error("Error creating inquiry:", err);
+          alert("Failed to send inquiry: " + err.message);
+          btn.disabled = false;
+          btn.innerHTML =
+            "<i class='fas fa-comment'></i> Interested? Contact Seller";
+        }
+      }
+
+      document
+        .getElementById("inquiryBtn")
+        .addEventListener("click", handleInquiry);
+      document
+        .getElementById("inquiryBtnMobile")
+        .addEventListener("click", handleInquiry);
+
+      loadListing();
+    </script>
+    <script type="module" src="auth-state.js"></script>
+
+    <div class="creator-credit" style="font-size: 10px; color: #55555e; text-align: center; padding: 10px; background: #ffffff;">this was made by opedemowo olaoluwa victor</div>
+    <script src="compliance.js" defer></script>  <script type="module" src="wishlist.js"></script>
+    <script type="module" src="assistant.js"></script>
+<script src="dark-mode.js" defer></script>
+</body>
+</html>
+
+
+

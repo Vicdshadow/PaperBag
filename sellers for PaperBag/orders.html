@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orders — Seller Center</title>
+    
+    <style>
+*,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background: #e6e6ea;
+        color: #111116;
+        min-height: 100vh;
+        padding-bottom: 72px;
+      }
+      /* ── TOP BAR ── */
+      .topbar {
+        background: #fff;
+        border-bottom: 1px solid #e6e6ea;
+        padding: 0.75rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+      .topbar-left {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .topbar-logo {
+        width: 32px;
+        height: 32px;
+        background: #111116;
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 0.9rem;
+      }
+      .topbar-title {
+        font-weight: 700;
+        font-size: 1rem;
+      }
+      .lang-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.82rem;
+        color: #111116;
+        font-weight: 600;
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      /* ── CONTENT ── */
+      .page {
+        padding: 1rem;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      /* Status tabs */
+      .status-tabs {
+        display: flex;
+        gap: 0.4rem;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.85rem;
+        scrollbar-width: none;
+      }
+      .status-tabs::-webkit-scrollbar {
+        display: none;
+      }
+      .tab-btn {
+        padding: 0.4rem 0.85rem;
+        border-radius: 20px;
+        border: 1.5px solid #e6e6ea;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        background: #fff;
+        white-space: nowrap;
+        transition: all 0.15s;
+        color: #33333b;
+        font-family: inherit;
+      }
+      .tab-btn.active {
+        border-color: #111116;
+        background: #fff7ed;
+        color: #111116;
+      }
+      /* Filter bar */
+      .filter-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 1rem;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+        margin-bottom: 0.85rem;
+      }
+      .filter-row {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 0.65rem;
+      }
+      .filter-row:last-child {
+        margin-bottom: 0;
+      }
+      .badge-orange {
+        background: #111116;
+        color: #fff;
+        border-radius: 6px;
+        padding: 0.3rem 0.75rem;
+        font-size: 0.76rem;
+        font-weight: 700;
+      }
+      .badge-red {
+        background: #ef4444;
+        color: #fff;
+        border-radius: 6px;
+        padding: 0.3rem 0.75rem;
+        font-size: 0.76rem;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 140px;
+      }
+      .search-wrap i {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #111116;
+        font-size: 0.82rem;
+      }
+      .search-wrap input {
+        width: 100%;
+        padding: 0.5rem 2rem 0.5rem 0.7rem;
+        border: 1.5px solid #e6e6ea;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 0.83rem;
+        outline: none;
+      }
+      .search-wrap input:focus {
+        border-color: #111116;
+      }
+      /* Order actions row */
+      .actions-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+      }
+      .action-select {
+        flex: 1;
+        max-width: 200px;
+        padding: 0.5rem 0.75rem;
+        border: 1.5px solid #e6e6ea;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 0.83rem;
+        outline: none;
+      }
+      .btn-arrow {
+        padding: 0.5rem 0.9rem;
+        border: 1.5px solid #e6e6ea;
+        border-radius: 8px;
+        background: #f9fafb;
+        cursor: pointer;
+      }
+      /* Empty / orders table */
+      .empty-card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+        padding: 3rem 1rem;
+        text-align: center;
+      }
+      .empty-card p {
+        color: #72727b;
+        font-size: 0.9rem;
+      }
+      .orders-table-wrap {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+        overflow: auto;
+      }
+      .orders-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.83rem;
+      }
+      .orders-table th {
+        background: #f9fafb;
+        padding: 0.65rem 1rem;
+        text-align: left;
+        font-weight: 600;
+        color: #33333b;
+        border-bottom: 1px solid #e6e6ea;
+        white-space: nowrap;
+      }
+      .orders-table td {
+        padding: 0.65rem 1rem;
+        border-bottom: 1px solid #f1f1f4;
+        color: #33333b;
+      }
+      .orders-table tr:last-child td {
+        border-bottom: none;
+      }
+      .status-badge {
+        padding: 0.2rem 0.6rem;
+        border-radius: 12px;
+        font-size: 0.73rem;
+        font-weight: 600;
+      }
+      .badge-pending {
+        background: #fef3c7;
+        color: #2a2a32;
+      }
+      .badge-shipped {
+        background: #d1fae5;
+        color: #059669;
+      }
+      .badge-cancelled {
+        background: #fee2e2;
+        color: #b42318;
+      }
+      /* Pagination */
+      .pagination-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+      }
+      .page-count {
+        font-size: 0.83rem;
+        color: #55555e;
+      }
+      .page-nav {
+        display: flex;
+        gap: 0.3rem;
+      }
+      .page-nav button {
+        width: 30px;
+        height: 30px;
+        border: 1.5px solid #e6e6ea;
+        border-radius: 6px;
+        background: #fff;
+        cursor: pointer;
+        font-size: 0.82rem;
+      }
+      .page-nav button:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+      .per-page {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.8rem;
+        color: #55555e;
+      }
+      .per-page select {
+        padding: 0.2rem 0.4rem;
+        border: 1px solid #e6e6ea;
+        border-radius: 6px;
+      }
+      /* Export bar */
+      .export-bar {
+        display: flex;
+        gap: 0.65rem;
+        margin-top: 0.85rem;
+      }
+      .btn-export {
+        flex: 1;
+        padding: 0.8rem;
+        border-radius: 8px;
+        border: none;
+        background: #111116;
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.9rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        font-family: inherit;
+        transition: opacity 0.15s;
+      }
+      .btn-export:hover {
+        opacity: 0.9;
+      }
+      .btn-filter {
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        border: 2px solid #111116;
+        background: #fff;
+        color: #111116;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+      /* Loading */
+      #loading {
+        position: fixed;
+        inset: 0;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        z-index: 9999;
+        color: #111116;
+        font-weight: 600;
+      }
+      .spinner {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 3px solid #fed7aa;
+        border-top-color: #111116;
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .hidden {
+        display: none !important;
+      }
+      /* Bottom nav */
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #e6e6ea;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        z-index: 100;
+      }
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        padding: 0.6rem 0 0.75rem;
+        font-size: 0.68rem;
+        color: #55555e;
+        text-decoration: none;
+        transition: color 0.15s;
+        border: none;
+        background: none;
+        font-family: inherit;
+        cursor: pointer;
+      }
+      .nav-item i {
+        font-size: 1.2rem;
+      }
+      .nav-item.active {
+        color: #111116;
+      }
+      .nav-vc {
+        width: 26px;
+        height: 26px;
+        background: #111116;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 0.6rem;
+        font-weight: 800;
+      }
+    </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="assistant.css" />
+    <link rel="stylesheet" href="dark-mode.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="PaperBag &mdash; shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
+  </head>
+  <body>
+    <div id="loading">
+      <div class="spinner"></div>
+      <span>Loading orders…</span>
+    </div>
+
+    <header class="topbar hidden" id="topbar">
+      <a
+        href="index.html"
+        class="topbar-left"
+        style="text-decoration: none; color: inherit"
+      >
+        
+        <span class="topbar-title">Orders</span>
+      </a>
+      <button class="lang-btn">
+        <i class="fas fa-language"></i> English
+        <i class="fas fa-chevron-up" style="font-size: 0.6rem"></i>
+      </button>
+    </header>
+
+    <main class="page hidden" id="main">
+      <!-- Status tabs -->
+      <div class="status-tabs">
+        <button class="tab-btn active" data-status="all">All</button>
+        <button class="tab-btn" data-status="pending">Pending</button>
+        <button class="tab-btn" data-status="ready">✓ Ready to Ship</button>
+        <button class="tab-btn" data-status="shipped">Shipped</button>
+        <button class="tab-btn" data-status="delivered">Delivered</button>
+        <button class="tab-btn" data-status="cancelled">Cancelled</button>
+        <button class="tab-btn" data-status="returned">Returned</button>
+      </div>
+
+      <!-- Filters -->
+      <div class="filter-card">
+        <div class="filter-row">
+          <button class="badge-red" id="country-btn">
+            <i class="fas fa-plus"></i> Click to choose
+          </button>
+          <span class="badge-orange" id="date-range-badge">Loading…</span>
+        </div>
+        <div class="filter-row">
+          <div class="search-wrap">
+            <input
+              type="text"
+              id="search-order"
+              placeholder="Search by order number"
+            />
+            <i class="fas fa-search"></i>
+          </div>
+          <div class="search-wrap">
+            <input
+              type="text"
+              id="search-sku"
+              placeholder="Search by Seller SKU"
+            />
+            <i class="fas fa-search"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order actions -->
+      <div class="actions-row">
+        <input
+          type="checkbox"
+          id="select-all"
+          style="width: 16px; height: 16px"
+        />
+        <select class="action-select" id="order-action">
+          <option value="">Order actions</option>
+          <option value="mark-ready">Mark as Ready to Ship</option>
+          <option value="mark-shipped">Mark as Shipped</option>
+          <option value="cancel">Cancel Selected</option>
+        </select>
+        <button class="btn-arrow" id="apply-action">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+      <div style="font-size: 0.78rem; color: #55555e; margin-bottom: 0.75rem">
+        Order status and payment updates are managed by admins only.
+      </div>
+
+      <!-- Orders list -->
+      <div id="orders-wrap">
+        <div class="empty-card" id="empty-msg">
+          <i
+            class="fas fa-box-open"
+            style="
+              font-size: 2rem;
+              color: #d4d4da;
+              display: block;
+              margin-bottom: 0.75rem;
+            "
+          ></i>
+          <p>No orders to display!</p>
+        </div>
+        <div class="orders-table-wrap hidden" id="orders-table-wrap">
+          <table class="orders-table">
+            <thead>
+              <tr>
+                <th><input type="checkbox" id="select-all-table" /></th>
+                <th>Order #</th>
+                <th>Date</th>
+                <th>Product</th>
+                <th>Amount (₦)</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="orders-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination-bar">
+        <span class="page-count" id="page-count">0 of 0</span>
+        <div class="page-nav">
+          <button disabled>|&lt;</button>
+          <button disabled>&lt;</button>
+          <button disabled>&gt;</button>
+          <button disabled>&gt;|</button>
+        </div>
+        <div class="per-page">
+          Items per page:
+          <select>
+            <option>100</option>
+            <option>50</option>
+            <option>25</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Export -->
+      <div class="export-bar">
+        <button class="btn-export" id="export-btn">
+          <i class="fas fa-download"></i> Export Orders
+        </button>
+        <button class="btn-filter"><i class="fas fa-filter"></i></button>
+      </div>
+    </main>
+
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav hidden" id="bottom-nav">
+      <a class="nav-item" href="seller-dashboard.html">
+        <div class="nav-vc">vc</div>
+        Home
+      </a>
+      <a class="nav-item active" href="orders.html">
+        <i class="fas fa-clipboard-list"></i>Orders
+      </a>
+      <a class="nav-item" href="manage-products.html">
+        <i class="fas fa-th-large"></i>Manage<br />Products
+      </a>
+      <a class="nav-item" href="account.html">
+        <i class="fas fa-bars"></i>Menu
+      </a>
+    </nav>
+
+    <script type="module">
+      import {
+        auth,
+        db,
+        onAuthStateChanged,
+        signOut,
+        collection,
+        query,
+        where,
+        onSnapshot,
+        updateDoc,
+        doc,
+        orderBy,
+      } from "./firebase-config.js";
+
+      const loadingEl = document.getElementById("loading");
+      const topbarEl = document.getElementById("topbar");
+      const mainEl = document.getElementById("main");
+      const bottomEl = document.getElementById("bottom-nav");
+
+      let allOrders = [];
+      let currentStatus = "all";
+      let currentUser = null;
+      
+      // Set date badge
+      const now = new Date();
+      const threeMonthsAgo = new Date(now);
+      threeMonthsAgo.setMonth(now.getMonth() - 3);
+      const fmt = (d) => d.toISOString().slice(0, 10);
+      document.getElementById("date-range-badge").textContent =
+        `${fmt(threeMonthsAgo)} / ${fmt(now)}`;
+
+      onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+          window.location.href = "login.html";
+          return;
+        }
+        currentUser = user;
+        loadingEl.classList.add("hidden");
+        topbarEl.classList.remove("hidden");
+        mainEl.classList.remove("hidden");
+        bottomEl.classList.remove("hidden");
+        loadOrders(user.uid);
+      });
+
+      function loadOrders(uid) {
+        const q = query(
+          collection(db, "orders"),
+          where("sellerId", "==", uid),
+          orderBy("createdAt", "desc"),
+        );
+        onSnapshot(q, (snap) => {
+          allOrders = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+          renderOrders();
+        });
+      }
+
+      function renderOrders() {
+        const filtered =
+          currentStatus === "all"
+            ? allOrders
+            : allOrders.filter(
+                (o) => (o.status || "").toLowerCase() === currentStatus,
+              );
+        const tbody = document.getElementById("orders-tbody");
+        const emptyMsg = document.getElementById("empty-msg");
+        const tableWrap = document.getElementById("orders-table-wrap");
+        document.getElementById("page-count").textContent =
+          `${filtered.length} of ${allOrders.length}`;
+
+        // Update tab counts
+        document.querySelectorAll(".tab-btn").forEach((btn) => {
+          const st = btn.dataset.status;
+          const count =
+            st === "all"
+              ? allOrders.length
+              : allOrders.filter((o) => (o.status || "").toLowerCase() === st)
+                  .length;
+          btn.textContent =
+            st === "all"
+              ? `All (${count})`
+              : btn.textContent.replace(/\s*\(\d+\)/, "") + ` (${count})`;
+        });
+
+        if (filtered.length === 0) {
+          emptyMsg.classList.remove("hidden");
+          tableWrap.classList.add("hidden");
+          return;
+        }
+        emptyMsg.classList.add("hidden");
+        tableWrap.classList.remove("hidden");
+
+        tbody.innerHTML = filtered
+          .map(
+            (o) => `
+        <tr>
+          <td><input type="checkbox" data-id="${o.id}"/></td>
+          <td style="font-weight:600;">#${o.id.slice(-6).toUpperCase()}</td>
+          <td>${o.createdAt?.toDate ? o.createdAt.toDate().toLocaleDateString() : "—"}</td>
+          <td>${o.productName || "—"}</td>
+          <td>₦${(o.amount || 0).toLocaleString()}</td>
+          <td><span class="status-badge ${statusClass(o.status)}">${capitalize(o.status || "pending")}</span></td>
+          <td>
+            <select disabled title="Admin only" onchange="updateStatus('${o.id}', this.value)" style="padding:.25rem .4rem;border:1px solid #e6e6ea;border-radius:6px;font-size:.78rem;cursor:not-allowed;opacity:0.7;">
+              <option value="">Action</option>
+              <option value="ready">Ready to Ship</option>
+              <option value="shipped">Mark Shipped</option>
+              <option value="delivered">Mark Delivered</option>
+              <option value="cancelled">Cancel</option>
+            </select>
+          </td>
+        </tr>`,
+          )
+          .join("");
+      }
+
+      window.updateStatus = async () => {
+        alert("Order status updates are handled by admin only.");
+      };
+
+      function buildPayoutAwareStatusUpdate(status) {
+        const now = new Date();
+        const updates = { status };
+
+        if (status === "pending" || status === "ready" || status === "shipped") {
+          updates.paymentStatus = "processing";
+        }
+        if (status === "shipped") {
+          updates.shippedAt = now.toISOString();
+        }
+        if (status === "delivered") {
+          updates.deliveredAt = now.toISOString();
+          updates.paymentStatus = "available";
+        }
+        if (status === "cancelled" || status === "returned") {
+          updates.paymentStatus = "cancelled";
+        }
+
+        return updates;
+      }
+
+      function statusClass(s) {
+        return s === "shipped" || s === "delivered"
+          ? "badge-shipped"
+          : s === "cancelled" || s === "returned"
+            ? "badge-cancelled"
+            : "badge-pending";
+      }
+      function capitalize(s) {
+        return s.charAt(0).toUpperCase() + s.slice(1);
+      }
+
+      // Tab switching
+      document.querySelectorAll(".tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".tab-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentStatus = btn.dataset.status;
+          renderOrders();
+        });
+      });
+
+      // Search filtering
+      ["search-order", "search-sku"].forEach((id) => {
+        document.getElementById(id).addEventListener("input", () => {
+          const term = document.getElementById(id).value.toLowerCase();
+          document.querySelectorAll("#orders-tbody tr").forEach((row) => {
+            row.style.display = row.textContent.toLowerCase().includes(term)
+              ? ""
+              : "none";
+          });
+        });
+      });
+
+      // Export
+      document.getElementById("export-btn").addEventListener("click", () => {
+        if (allOrders.length === 0) {
+          alert("No orders to export.");
+          return;
+        }
+        const header = "Order #,Date,Product,Amount,Status";
+        const rows = allOrders
+          .map(
+            (o) =>
+              `#${o.id.slice(-6).toUpperCase()},${o.createdAt?.toDate ? o.createdAt.toDate().toLocaleDateString() : ""},${o.productName || ""},${o.amount || 0},${o.status || ""}`,
+          )
+          .join("\n");
+        const blob = new Blob([header + "\n" + rows], { type: "text/csv" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "orders.csv";
+        a.click();
+      });
+
+      // Apply bulk action
+      document
+        .getElementById("apply-action")
+        .addEventListener("click", async () => {
+          alert("Bulk order status updates are handled by admin only.");
+          return;
+          const action = document.getElementById("order-action").value;
+          if (!action) {
+            alert("Please select an action.");
+            return;
+          }
+          const checked = [
+            ...document.querySelectorAll(
+              "#orders-tbody input[type=checkbox]:checked",
+            ),
+          ].map((c) => c.dataset.id);
+          if (checked.length === 0) {
+            alert("No orders selected.");
+            return;
+          }
+          const statusMap = {
+            "mark-ready": "ready",
+            "mark-shipped": "shipped",
+            cancel: "cancelled",
+          };
+          const newStatus = statusMap[action];
+          if (!newStatus) {
+            alert("Unsupported action selected.");
+            return;
+          }
+          await Promise.all(
+            checked.map((id) =>
+              updateDoc(
+                doc(db, "orders", id),
+                buildPayoutAwareStatusUpdate(newStatus),
+              ),
+            ),
+          );
+        });
+      document.getElementById("select-all").addEventListener("change", (e) => {
+        document
+          .querySelectorAll("#orders-tbody input[type=checkbox]")
+          .forEach((c) => (c.checked = e.target.checked));
+      });
+
+      document.getElementById("order-action").disabled = true;
+      document.getElementById("apply-action").disabled = true;
+    </script>
+      <script src="compliance.js" defer></script>
+      <script type="module" src="assistant.js"></script>
+<script src="dark-mode.js" defer></script>
+</body>
+</html>
+
+

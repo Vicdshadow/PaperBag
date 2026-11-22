@@ -1,0 +1,194 @@
+/* =========================================================
+   PaperBag — time-of-day dark mode
+   Applied when <html data-theme="dark">. Loaded last so it
+   can safely override the white "Royal Black" theme.
+   ========================================================= */
+
+html[data-theme="dark"] {
+  --royal: #f2f2f5;
+  --paper: #141419;
+  --paper-2: #1c1c23;
+  --paper-3: #25252d;
+  --ink: #f5f5f7;
+  --ink-soft: #b9b9c3;
+  --line: #33333d;
+  --gold: #d9b877;
+  color-scheme: dark;
+}
+
+html[data-theme="dark"] body,
+html[data-theme="dark"] .signup-page,
+html[data-theme="dark"] .account-page,
+html[data-theme="dark"] .admin-page,
+html[data-theme="dark"] .seller-portal {
+  background: var(--paper) !important;
+  color: var(--ink) !important;
+}
+
+html[data-theme="dark"] p,
+html[data-theme="dark"] li,
+html[data-theme="dark"] td,
+html[data-theme="dark"] th,
+html[data-theme="dark"] .muted,
+html[data-theme="dark"] .section-label,
+html[data-theme="dark"] .breadcrumb,
+html[data-theme="dark"] .product-info,
+html[data-theme="dark"] .wishlist-item-title {
+  color: var(--ink-soft) !important;
+}
+
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6,
+html[data-theme="dark"] .promo-title,
+html[data-theme="dark"] .product-title,
+html[data-theme="dark"] .wishlist-item-price,
+html[data-theme="dark"] .flash-product-title,
+html[data-theme="dark"] .flash-product-price {
+  color: var(--ink) !important;
+}
+
+/* Surfaces */
+html[data-theme="dark"] .site-header,
+html[data-theme="dark"] .header,
+html[data-theme="dark"] .account-header,
+html[data-theme="dark"] .bottom-nav,
+html[data-theme="dark"] .sidebar,
+html[data-theme="dark"] .admin-sidebar,
+html[data-theme="dark"] .topbar,
+html[data-theme="dark"] .glass-card,
+html[data-theme="dark"] .form-card,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .product-card,
+html[data-theme="dark"] .jumia-product-card,
+html[data-theme="dark"] .flash-product-card,
+html[data-theme="dark"] .wishlist-item,
+html[data-theme="dark"] .chat-window,
+html[data-theme="dark"] .chat-sidebar,
+html[data-theme="dark"] .message-list,
+html[data-theme="dark"] .admin-card,
+html[data-theme="dark"] .stat-card,
+html[data-theme="dark"] .table-wrap,
+html[data-theme="dark"] .modal-content,
+html[data-theme="dark"] .banner-item,
+html[data-theme="dark"] .category-card,
+html[data-theme="dark"] .footer {
+  background: var(--paper-2) !important;
+  border-color: var(--line) !important;
+  color: var(--ink) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+}
+
+html[data-theme="dark"] .promo-banner {
+  background: linear-gradient(135deg, #101016 0%, #23232c 100%) !important;
+}
+
+/* Inputs */
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] .premium-input-group input,
+html[data-theme="dark"] .search-box,
+html[data-theme="dark"] .search-container {
+  background: var(--paper-3) !important;
+  color: var(--ink) !important;
+  border-color: var(--line) !important;
+}
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder {
+  color: #8b8b96 !important;
+}
+
+/* Buttons and accents */
+html[data-theme="dark"] .btn,
+html[data-theme="dark"] .promo-btn,
+html[data-theme="dark"] .btn-small {
+  background: var(--gold) !important;
+  color: #141414 !important;
+  border-color: var(--gold) !important;
+}
+html[data-theme="dark"] .btn:hover,
+html[data-theme="dark"] .promo-btn:hover {
+  filter: brightness(1.06);
+}
+
+/* Tables */
+html[data-theme="dark"] table,
+html[data-theme="dark"] thead,
+html[data-theme="dark"] tbody,
+html[data-theme="dark"] tr,
+html[data-theme="dark"] th,
+html[data-theme="dark"] td {
+  background: transparent !important;
+  border-color: var(--line) !important;
+}
+html[data-theme="dark"] tbody tr:nth-child(even) {
+  background: var(--paper-3) !important;
+}
+
+/* Links and misc */
+html[data-theme="dark"] a {
+  color: var(--gold) !important;
+}
+html[data-theme="dark"] .nav-links a,
+html[data-theme="dark"] .nav-item,
+html[data-theme="dark"] .bottom-nav a,
+html[data-theme="dark"] .sidebar a,
+html[data-theme="dark"] .account-nav a {
+  color: var(--ink-soft) !important;
+}
+html[data-theme="dark"] .nav-item.active,
+html[data-theme="dark"] .nav-links a.active,
+html[data-theme="dark"] .account-nav a.active {
+  color: var(--gold) !important;
+}
+html[data-theme="dark"] .creator-credit,
+html[data-theme="dark"] .empty-state,
+html[data-theme="dark"] .divider,
+html[data-theme="dark"] hr {
+  background: transparent !important;
+  color: var(--ink-soft) !important;
+  border-color: var(--line) !important;
+}
+
+/* Theme toggle button */
+.pb-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(194, 161, 90, 0.45);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+  transition: background 0.18s ease, transform 0.18s ease, color 0.18s ease;
+}
+.pb-theme-toggle:hover {
+  background: rgba(194, 161, 90, 0.16);
+  transform: rotate(-12deg);
+}
+.pb-theme-toggle:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+html[data-theme="dark"] .pb-theme-toggle {
+  color: var(--gold);
+}
+
+/* Hero adapts */
+html[data-theme="dark"] .pb-hero {
+  --hero-ink: #f5f5f7;
+  --hero-sub: #c9c9d2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pb-theme-toggle { transition: none; }
+}

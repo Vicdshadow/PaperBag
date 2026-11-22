@@ -1,0 +1,1166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Details — PaperBag</title>
+    <link rel="stylesheet" href="style.css" />
+    
+    <style>
+      .product-page {
+        padding-top: 20px;
+        padding-bottom: 40px;
+        min-height: 100vh;
+      }
+      .product-layout {
+        display: grid;
+        grid-template-columns: 1fr 400px;
+        gap: 60px;
+        align-items: start;
+      }
+
+      .gallery-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .gallery {
+        display: flex;
+        gap: 20px;
+        overflow-x: auto;
+      }
+      .main-image {
+        width: 100%;
+        max-width: 600px;
+        background: #f8f8fa;
+        aspect-ratio: 3/4;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+      .thumbnails {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .thumbnails img {
+        width: 80px;
+        height: 100px;
+        object-fit: cover;
+        cursor: pointer;
+        opacity: 0.6;
+      }
+      .thumbnails img.active {
+        opacity: 1;
+        border: 1px solid #000;
+      }
+
+      .product-details {
+        position: sticky;
+        top: 120px;
+        height: fit-content;
+        max-height: calc(100vh - 140px);
+        overflow-y: auto;
+      }
+      .p-title {
+        font-size: 28px;
+        margin-bottom: 8px;
+        font-family: var(--font-heading);
+        line-height: 1.2;
+        word-break: break-word;
+      }
+      .p-price {
+        font-size: 24px;
+        color: #444;
+        margin-bottom: 32px;
+        font-weight: 700;
+      }
+      .p-desc {
+        font-size: 14px;
+        color: #55555e;
+        line-height: 1.8;
+        margin-bottom: 40px;
+        word-break: break-word;
+      }
+      .action-area {
+        border: 1px solid #ececec;
+        border-radius: 8px;
+        padding: 10px;
+        background: #fff;
+        margin-bottom: 10px;
+      }
+      .action-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .action-label {
+        font-size: 11px;
+        font-weight: 700;
+        color: #55555e;
+        text-transform: uppercase;
+      }
+      .qty-wrap {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid #e6e6ea;
+        border-radius: 999px;
+        overflow: hidden;
+      }
+      .qty-btn {
+        background: #fff;
+        border: none;
+        width: 28px;
+        height: 28px;
+        font-size: 15px;
+        cursor: pointer;
+      }
+      .qty-value {
+        min-width: 28px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .action-row {
+        display: flex;
+        gap: 6px;
+      }
+      .mini-icon-btn {
+        width: 36px;
+        border: 1px solid #e6e6ea;
+        border-radius: 6px;
+        background: #fff;
+        color: #55555e;
+        font-size: 12px;
+      }
+      .main-add-btn {
+        flex: 1;
+        background: #111116;
+        border-color: #111116;
+        color: #fff;
+        border-radius: 8px;
+      }
+      .mobile-sticky-cart {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 58px;
+        z-index: 1200;
+        background: #fff;
+        border-top: 1px solid #ececec;
+        box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
+        padding: 8px 10px;
+        display: none;
+      }
+      .mobile-sticky-inner {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .mobile-price {
+        font-weight: 800;
+        font-size: 14px;
+        color: #111;
+        white-space: nowrap;
+      }
+      .mobile-add-btn {
+        flex: 1;
+        background: #111116;
+        border-color: #111116;
+        color: #fff;
+        border-radius: 6px;
+        padding: 9px 12px;
+        font-weight: 700;
+        font-size: 12px;
+      }
+      .size-select {
+        width: 100%;
+        max-width: 200px;
+        padding: 10px;
+        border: 1px solid #e6e6ea;
+        border-radius: 6px;
+        font-size: 14px;
+      }
+      .options-section {
+        margin-bottom: 24px;
+      }
+      .option-group {
+        margin-bottom: 16px;
+      }
+      .option-label {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+        display: block;
+      }
+      .color-options {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .color-swatch {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 1px solid #e6e6ea;
+      }
+      .verification-badge {
+        margin-bottom: 20px;
+      }
+      .verification-badge span {
+        background: #e8f5e9;
+        color: #2e7d32;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        display: inline-block;
+      }
+      .inquiry-section {
+        margin-top: 20px;
+      }
+      .inquiry-disclaimer {
+        font-size: 10px;
+        color: #999;
+        margin-top: 8px;
+        text-align: center;
+      }
+      .shipping-info {
+        margin-top: 40px;
+        font-size: 12px;
+        color: #888;
+      }
+      .shipping-info p {
+        margin-top: 8px;
+      }
+
+      /* Tablet screens (900px and below) */
+      @media (max-width: 900px) {
+        .product-page {
+          padding-top: 16px;
+          padding-bottom: 30px;
+        }
+        .product-layout {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .main-image {
+          max-width: 100%;
+        }
+        .product-details {
+          position: relative;
+          top: auto;
+          max-height: none;
+        }
+        .p-title {
+          font-size: 24px;
+        }
+        .p-price {
+          font-size: 20px;
+        }
+      }
+
+      /* Small tablets and large phones (600px and below) */
+      @media (max-width: 600px) {
+        .product-page {
+          padding-top: 12px;
+          padding-bottom: 20px;
+        }
+        .product-layout {
+          gap: 24px;
+        }
+        .gallery-wrapper {
+          min-height: 300px;
+        }
+        .main-image {
+          max-width: 100%;
+          aspect-ratio: 1;
+        }
+        .p-title {
+          font-size: 20px;
+          margin-bottom: 6px;
+        }
+        .p-price {
+          font-size: 18px;
+          margin-bottom: 20px;
+        }
+        .p-desc {
+          font-size: 13px;
+          margin-bottom: 24px;
+        }
+        .options-section {
+          margin-bottom: 16px;
+        }
+        .option-group {
+          margin-bottom: 12px;
+        }
+        .size-select {
+          max-width: 100%;
+        }
+        .action-area {
+          gap: 12px;
+        }
+        .mobile-sticky-cart {
+          display: block;
+        }
+        .action-area {
+          margin-bottom: 60px;
+        }
+        .shipping-info {
+          margin-top: 24px;
+          font-size: 11px;
+        }
+      }
+
+      /* Extra small phones (400px and below) */
+      @media (max-width: 400px) {
+        .container {
+          padding-left: 12px;
+          padding-right: 12px;
+        }
+        .product-page {
+          padding-top: 8px;
+          padding-bottom: 16px;
+        }
+        .product-layout {
+          gap: 16px;
+        }
+        .gallery-wrapper {
+          min-height: 250px;
+        }
+        .main-image {
+          aspect-ratio: 1;
+        }
+        .p-title {
+          font-size: 18px;
+        }
+        .p-price {
+          font-size: 16px;
+        }
+        .p-desc {
+          font-size: 12px;
+        }
+      }
+
+      /* Marketplace style overrides */
+      body.market-product-page {
+        background: #f4f4f4;
+      }
+      .site-header.glass {
+        display: none;
+      }
+      .market-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 1300;
+        background: #fff;
+        border-bottom: 1px solid #ececec;
+        padding: 8px 10px;
+      }
+      .market-topbar-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .market-icon-btn {
+        width: 34px;
+        height: 34px;
+        border: none;
+        background: #fff;
+        color: #1c1c22;
+        font-size: 18px;
+      }
+      .market-search {
+        flex: 1;
+        height: 34px;
+        background: #f1f1f1;
+        border: 1px solid #e5e5e5;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 10px;
+        color: #55555e;
+      }
+      .market-search span {
+        font-family: "Patrick Hand", cursive;
+        font-size: 19px;
+      }
+      .market-subtitle {
+        background: #fff;
+        padding: 10px 14px;
+        border-bottom: 1px solid #ededed;
+        font-family: "Patrick Hand", cursive;
+        font-size: 24px;
+      }
+      .market-main {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 8px 0 120px;
+      }
+      .market-card {
+        background: #fff;
+        border-top: 1px solid #ececec;
+        border-bottom: 1px solid #ececec;
+        margin-bottom: 8px;
+        padding: 10px 12px;
+      }
+      .market-gallery-scroll {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .market-gallery-scroll::-webkit-scrollbar {
+        display: none;
+      }
+      .market-image-panel {
+        min-width: 220px;
+        border: 1px solid #e6e6e6;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #fff;
+      }
+      .market-image-main {
+        width: 100%;
+        height: 170px;
+        object-fit: contain;
+        background: #fff;
+      }
+      .market-image-title {
+        font-family: "Patrick Hand", cursive;
+        font-size: 26px;
+        text-align: center;
+        padding: 4px 8px 8px;
+      }
+      .market-tags {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 4px;
+      }
+      .market-tag {
+        font-size: 10px;
+        font-weight: 700;
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: #fff;
+        background: #0f5776;
+      }
+      .market-tag.orange {
+        background: var(--color-accent);
+      }
+      .market-name {
+        font-family: "Patrick Hand", cursive;
+        font-size: 24px;
+        line-height: 1.2;
+        margin: 4px 0;
+      }
+      .brand-line {
+        font-size: 12px;
+        color: #55555e;
+        margin-bottom: 6px;
+      }
+      .market-flash {
+        background: #111116;
+        color: #fff;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 8px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .market-price-row {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        margin-top: 6px;
+      }
+      .p-price {
+        font-size: 28px;
+        color: #111;
+        margin: 0;
+      }
+      .market-old-price {
+        color: #888;
+        font-size: 14px;
+        text-decoration: line-through;
+      }
+      .market-discount {
+        color: #111116;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .market-rating-line {
+        color: #f4b11c;
+        font-size: 14px;
+        margin-top: 6px;
+      }
+      .market-rating-line span {
+        color: #55555e;
+        font-size: 12px;
+      }
+      .market-actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .market-select {
+        border: 1px solid #e6e6ea;
+        border-radius: 6px;
+        padding: 8px 10px;
+        font-size: 13px;
+        margin-bottom: 8px;
+      }
+      .support-row {
+        display: flex;
+        gap: 8px;
+      }
+      .support-row .btn {
+        flex: 1;
+      }
+      .market-list {
+        margin: 0;
+        padding-left: 16px;
+        color: #444;
+        font-size: 13px;
+      }
+      .market-list li {
+        margin: 4px 0;
+      }
+    </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="assistant.css" />
+    <link rel="stylesheet" href="dark-mode.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="PaperBag &mdash; shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
+  </head>
+  <body class="market-product-page">
+    <header class="market-topbar">
+      <div class="market-topbar-row">
+        <a href="index.html" class="market-icon-btn"
+          ><i class="fas fa-arrow-left"></i
+        ></a>
+        <div class="market-search">
+          <i class="fas fa-search"></i>
+          <span>Search on PaperBag</span>
+        </div>
+        <a href="cart.html" class="market-icon-btn"
+          ><i class="fas fa-shopping-cart"></i
+        ></a>
+        <button type="button" class="market-icon-btn">
+          <i class="fas fa-ellipsis-h"></i>
+        </button>
+      </div>
+      <span id="cartCount" class="cart-count" style="display: none">0</span>
+    </header>
+    <div class="market-subtitle">Details</div>
+
+    <main class="market-main">
+      <section class="market-card">
+        <div class="market-gallery-scroll">
+          <div class="market-image-panel">
+            <img loading="lazy" decoding="async" id="mainImg" src="" alt="Product" class="market-image-main" />
+            <div id="pHeroTitle" class="market-image-title">Loading...</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="market-card">
+        <div class="market-tags">
+          <span class="market-tag">Official Store</span>
+          <span class="market-tag orange">Tech week deal</span>
+        </div>
+        <h1 id="pTitle" class="market-name">Loading...</h1>
+        <p class="brand-line">
+          Brand: <span id="pBrand">PaperBag</span> | Condition:
+          <span id="pCondition">Brand New</span>
+        </p>
+        <div class="market-flash">
+          <span><i class="fas fa-bolt"></i> Flash Sales</span>
+          <span>Time Left 01h : 33m : 14s</span>
+        </div>
+        <div class="market-price-row">
+          <p id="pPrice" class="p-price">₦0</p>
+          <span id="pOldPrice" class="market-old-price"></span>
+          <span id="pDiscount" class="market-discount"></span>
+        </div>
+        <div class="market-rating-line">★★★★☆ <span>(18 ratings)</span></div>
+      </section>
+
+      <section class="market-card">
+        <label for="sizeSelect" class="action-label">Variation</label>
+        <select id="sizeSelect" class="market-select">
+          <option>32 INCH</option>
+          <option>43 INCH</option>
+          <option>50 INCH</option>
+        </select>
+        <div class="market-actions">
+          <div class="qty-wrap">
+            <button id="qtyMinus" class="qty-btn" type="button">-</button>
+            <span id="qtyValue" class="qty-value">1</span>
+            <button id="qtyPlus" class="qty-btn" type="button">+</button>
+          </div>
+          <button id="wishlistBtn" class="mini-icon-btn" type="button">
+            <i class="far fa-heart"></i>
+          </button>
+          <button id="shareBtn" class="mini-icon-btn" type="button">
+            <i class="fas fa-share-alt"></i>
+          </button>
+          <button id="addToCartBtn" class="btn main-add-btn" type="button">
+            Add To Cart
+          </button>
+        </div>
+      </section>
+
+      <section class="market-card">
+        <h3 style="font-family: 'Patrick Hand', cursive; font-size: 22px">
+          Promotions
+        </h3>
+        <ul class="market-list">
+          <li>Call 07000000000 to place your order</li>
+          <li>Enjoy cheaper shipping fees on pickup stations</li>
+        </ul>
+      </section>
+
+      <section class="market-card">
+        <h3 style="font-family: 'Patrick Hand', cursive; font-size: 22px">
+          Delivery and Returns Info
+        </h3>
+        <div class="support-row" style="margin-bottom: 8px">
+          <select class="market-select">
+            <option>Lagos</option>
+          </select>
+          <select class="market-select">
+            <option>ISOLO</option>
+          </select>
+        </div>
+        <div id="verificationBadge" class="verification-badge" style="display: none">
+          <span><i class="fas fa-shield-alt"></i> Secure Checkout</span>
+        </div>
+        <button
+          id="chatAdminBtn"
+          class="btn btn-outline"
+          style="width: 100%; border-color: #1c1c22; color: #1c1c22"
+        >
+          <i class="far fa-comment-dots"></i> Contact Admin Support
+        </button>
+      </section>
+
+      <section class="market-card">
+        <h3 style="font-family: 'Patrick Hand', cursive; font-size: 22px">
+          Product Details
+        </h3>
+        <div id="pDesc" class="p-desc"></div>
+      </section>
+    </main>
+    <div class="mobile-sticky-cart">
+      <div class="mobile-sticky-inner">
+        <div id="mobilePrice" class="mobile-price">₦0</div>
+        <button id="mobileAddToCartBtn" class="mobile-add-btn" type="button">
+          Add To Cart
+        </button>
+      </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div
+      class="container animate-fade-in"
+      style="margin-top: 40px; margin-bottom: 60px"
+    >
+      <h3
+        style="
+          font-size: 20px;
+          font-weight: 600;
+          margin-bottom: 20px;
+          border-bottom: 1px solid #f8f8fa;
+          padding-bottom: 10px;
+        "
+      >
+        Reviews
+      </h3>
+
+      <div id="reviewsList" style="margin-bottom: 30px">
+        <p class="muted">Loading reviews...</p>
+      </div>
+
+      <div
+        id="reviewFormContainer"
+        style="
+          background: #f8f8fa;
+          padding: 20px;
+          border-radius: 8px;
+          display: none;
+        "
+      >
+        <h4 style="font-size: 16px; margin-bottom: 10px">Write a Review</h4>
+        <form id="reviewForm">
+          <div style="margin-bottom: 15px">
+            <label style="font-size: 12px; font-weight: 600">Rating</label>
+            <select
+              id="reviewRating"
+              style="padding: 8px; border: 1px solid #e6e6ea; border-radius: 4px"
+            >
+              <option value="5">5 - Excellent</option>
+              <option value="4">4 - Good</option>
+              <option value="3">3 - Average</option>
+              <option value="2">2 - Poor</option>
+              <option value="1">1 - Terrible</option>
+            </select>
+          </div>
+          <div style="margin-bottom: 15px">
+            <label style="font-size: 12px; font-weight: 600">Comment</label>
+            <textarea
+              id="reviewText"
+              rows="4"
+              style="
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #e6e6ea;
+                border-radius: 4px;
+              "
+              required
+              placeholder="Share your experience..."
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-small">Submit Review</button>
+        </form>
+      </div>
+      <div
+        id="reviewLoginMsg"
+        style="
+          background: #e6e6ea;
+          padding: 15px;
+          border-radius: 8px;
+          text-align: center;
+          display: none;
+        "
+      >
+        <p style="font-size: 14px; margin: 0">
+          Please
+          <a
+            href="login.html"
+            style="text-decoration: underline; font-weight: 600"
+            >Log In</a
+          >
+          to write a review.
+        </p>
+      </div>
+      <div
+        id="reviewNoPurchaseMsg"
+        style="
+          background: #fff3cd;
+          color: #856404;
+          padding: 15px;
+          border-radius: 8px;
+          text-align: center;
+          display: none;
+        "
+      >
+        <p style="font-size: 14px; margin: 0">
+          <i class="fas fa-lock"></i> Verified Purchase Only: You must buy this
+          item to leave a review.
+        </p>
+      </div>
+    </div>
+
+    <!-- Reusing index.js for basic functionality, but might need specific logic -->
+    <script type="module">
+      import { toggleWishlist } from "./wishlist.js";
+      import {
+        db,
+        auth,
+        getDocs,
+        addDoc,
+        collection,
+        query,
+        where,
+        orderBy,
+        doc,
+        getDoc,
+        setDoc,
+        updateDoc,
+        serverTimestamp,
+      } from "./firebase-config.js";
+      import {
+        getProductById,
+        getProductSourceMode,
+        PRODUCT_SOURCE,
+      } from "./display-products.js";
+      import { onAuthStateChanged } from "./firebase-config.js";
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get("id");
+      let currentUser = null;
+      let productData = null;
+      let selectedQty = 1;
+
+      // Auth Listener
+      onAuthStateChanged(auth, (user) => {
+        currentUser = user;
+        // Update cart count if needed (handled by shared logic usually)
+      });
+
+      async function loadProduct() {
+        if (!productId) {
+          window.location.href = "index.html";
+          return;
+        }
+
+        const sourceFromUrl = urlParams.get("source");
+        const preferredSource =
+          sourceFromUrl === PRODUCT_SOURCE.FIREBASE
+            ? PRODUCT_SOURCE.FIREBASE
+            : getProductSourceMode();
+
+        try {
+          if (preferredSource === PRODUCT_SOURCE.LOCAL) {
+            const localProduct = await getProductById(productId, {
+              source: PRODUCT_SOURCE.LOCAL,
+            });
+            if (localProduct) {
+              productData = localProduct;
+              renderProduct(productData);
+              return;
+            }
+          }
+
+          const snap = await getDoc(doc(db, "products", String(productId)));
+          if (snap.exists()) {
+            productData = { id: snap.id, ...snap.data(), source: "firebase" };
+            renderProduct(productData);
+          } else {
+            const fallbackLocal = await getProductById(productId, {
+              source: PRODUCT_SOURCE.LOCAL,
+            });
+            if (fallbackLocal) {
+              productData = fallbackLocal;
+              renderProduct(productData);
+              return;
+            }
+            document.body.innerHTML = "<h1>Product not found</h1>";
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      function formatDate(value) {
+        if (!value) return "";
+        if (typeof value.toDate === "function") {
+          return value.toDate().toLocaleDateString();
+        }
+        if (typeof value.seconds === "number") {
+          return new Date(value.seconds * 1000).toLocaleDateString();
+        }
+        const d = new Date(value);
+        return Number.isNaN(d.getTime()) ? "" : d.toLocaleDateString();
+      }
+
+      function renderProduct(p) {
+        const mainImg = document.getElementById("mainImg");
+        const imageUrl =
+          p.imageUrl ||
+          p.imageURL ||
+          p.image ||
+          "assets/images/placeholder.svg";
+        mainImg.src = imageUrl;
+        mainImg.onerror = function () {
+          this.src = "assets/images/placeholder.svg";
+        };
+        document.getElementById("pTitle").textContent = p.name;
+        const heroTitle = document.getElementById("pHeroTitle");
+        if (heroTitle) heroTitle.textContent = p.name || "Product";
+        document.getElementById("pPrice").textContent =
+          "₦" + Number(p.price).toLocaleString();
+        const mobilePrice = document.getElementById("mobilePrice");
+        if (mobilePrice) {
+          mobilePrice.textContent = "₦" + Number(p.price).toLocaleString();
+        }
+        const oldPriceEl = document.getElementById("pOldPrice");
+        const discountEl = document.getElementById("pDiscount");
+        const oldPrice = Math.round(Number(p.price || 0) * 1.12);
+        if (oldPriceEl) oldPriceEl.textContent = "₦" + oldPrice.toLocaleString();
+        if (discountEl && oldPrice > Number(p.price || 0)) {
+          const percent = Math.round(
+            ((oldPrice - Number(p.price || 0)) / oldPrice) * 100,
+          );
+          discountEl.textContent = `-${percent}%`;
+        }
+        const brandEl = document.getElementById("pBrand");
+        const conditionEl = document.getElementById("pCondition");
+        if (brandEl) brandEl.textContent = p.brand || "PaperBag";
+        if (conditionEl) conditionEl.textContent = p.condition || "Brand New";
+        document.getElementById("pDesc").textContent =
+          p.description || "No description available.";
+
+        // Subcategory display logic if needed
+        let catText = p.category || "";
+        if (p.subCategory) catText += ` > ${p.subCategory}`;
+        if (catText && document.getElementById("pCategory")) {
+          // Assuming an element exists, but if not it's fine
+          document.getElementById("pCategory").textContent = catText;
+        }
+
+        // Handle Sold Out state
+        if (p.soldOut) {
+          const btn = document.getElementById("addToCartBtn");
+          const mobileBtn = document.getElementById("mobileAddToCartBtn");
+          btn.innerHTML = '<i class="fas fa-ban"></i> OUT OF STOCK';
+          btn.disabled = true;
+          btn.style.background = "#9a9aa2";
+          btn.style.cursor = "not-allowed";
+          if (mobileBtn) {
+            mobileBtn.innerHTML = '<i class="fas fa-ban"></i> Out Of Stock';
+            mobileBtn.disabled = true;
+            mobileBtn.style.background = "#9a9aa2";
+            mobileBtn.style.borderColor = "#9a9aa2";
+          }
+          const priceEl = document.getElementById("pPrice");
+          priceEl.innerHTML +=
+            ' <span style="font-size: 14px; background: #b42318; color: white; padding: 4px 8px; border-radius: 4px; vertical-align: super; margin-left: 10px;">SOLD OUT</span>';
+        }
+
+        // Show verification badge for used or high-value items
+        if (
+          p.condition === "used" ||
+          p.condition === "preowned" ||
+          p.price > 50000
+        ) {
+          document.getElementById("verificationBadge").style.display = "block";
+        }
+
+        document.title = `${p.name} — PaperBag`;
+      }
+
+      // Cart Logic
+      async function addToCart() {
+        if (!productData) return;
+
+        if (!currentUser) {
+          // Guest Cart Logic
+          const cart = JSON.parse(localStorage.getItem("guest_cart") || "[]");
+          const existingItem = cart.find((i) => i.id === productData.id);
+          if (existingItem) {
+            existingItem.qty += selectedQty;
+          } else {
+            cart.push({
+              id: productData.id,
+              name: productData.name,
+              price: productData.price,
+              image:
+                productData.imageUrl ||
+                productData.imageURL ||
+                productData.image ||
+                "",
+              qty: selectedQty,
+            });
+          }
+          localStorage.setItem("guest_cart", JSON.stringify(cart));
+          alert("Added to bag (Guest)");
+          document.getElementById("cartCount").textContent = cart.reduce(
+            (n, i) => n + i.qty,
+            0,
+          );
+          return;
+        }
+
+        // Logged In Logic
+        const ref = doc(db, "users", currentUser.uid, "cart", productData.id);
+        const snap = await getDoc(ref);
+
+        if (snap.exists()) {
+          await updateDoc(ref, { qty: (snap.data().qty || 0) + selectedQty });
+        } else {
+          await setDoc(ref, {
+            name: productData.name,
+            price: productData.price,
+            image:
+              productData.imageUrl ||
+              productData.imageURL ||
+              productData.image ||
+              "",
+            qty: selectedQty,
+          });
+        }
+        alert("Added to bag");
+      }
+
+      function updateQtyDisplay() {
+        const qtyEl = document.getElementById("qtyValue");
+        if (qtyEl) qtyEl.textContent = String(selectedQty);
+      }
+
+      document.getElementById("qtyMinus")?.addEventListener("click", () => {
+        selectedQty = Math.max(1, selectedQty - 1);
+        updateQtyDisplay();
+      });
+      document.getElementById("qtyPlus")?.addEventListener("click", () => {
+        selectedQty = Math.min(99, selectedQty + 1);
+        updateQtyDisplay();
+      });
+
+      document.getElementById("wishlistBtn")?.addEventListener("click", () => {
+        toggleWishlist({
+          id: new URLSearchParams(location.search).get("id"),
+          name: document.querySelector(".product-title, h1")?.textContent?.trim() || "Product",
+          price: (document.querySelector(".product-price, .current-price, #priceValue")?.textContent || "0").replace(/[^\d.]/g, ""),
+          image: document.querySelector(".product-main-image img, .product-image img")?.src || "",
+        });
+      });
+      document.getElementById("shareBtn")?.addEventListener("click", async () => {
+        const shareUrl = window.location.href;
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: productData?.name || "PaperBag Product",
+              text: "Check this product on PaperBag",
+              url: shareUrl,
+            });
+            return;
+          } catch (error) {
+            // user cancelled
+          }
+        }
+        await navigator.clipboard.writeText(shareUrl);
+        alert("Product link copied.");
+      });
+
+      document.getElementById("addToCartBtn")?.addEventListener("click", addToCart);
+      document
+        .getElementById("mobileAddToCartBtn")
+        ?.addEventListener("click", addToCart);
+
+      document.getElementById("chatAdminBtn").addEventListener("click", () => {
+        if (!currentUser) {
+          alert("Please log in to contact admin");
+          window.location.href = "login.html";
+          return;
+        }
+        window.location.href = "chat.html?type=admin";
+      });
+
+      // --- Reviews Logic ---
+      async function loadReviews() {
+        const listEl = document.getElementById("reviewsList");
+        try {
+          const q = query(
+            collection(db, "reviews"),
+            where("productId", "==", productId),
+            orderBy("createdAt", "desc"),
+          );
+          const snap = await getDocs(q);
+
+          if (snap.empty) {
+            listEl.innerHTML =
+              '<p class="muted">No reviews yet. Be the first to review!</p>';
+            return;
+          }
+
+          listEl.innerHTML = "";
+          snap.forEach((doc) => {
+            const r = doc.data();
+            const div = document.createElement("div");
+            div.style.marginBottom = "20px";
+            div.style.borderBottom = "1px solid #f8f8fa";
+            div.style.paddingBottom = "15px";
+            div.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <strong>${r.userName || "Anonymous"}</strong>
+                        <span style="color: #f39c12;">${"★".repeat(r.rating)}${"☆".repeat(5 - r.rating)}</span>
+                    </div>
+                    <p style="font-size: 14px; line-height: 1.5; color: #444; margin: 0;">${r.comment}</p>
+                    <small class="muted" style="font-size: 11px;">${formatDate(r.createdAt)}</small>
+                `;
+            listEl.appendChild(div);
+          });
+        } catch (e) {
+          console.error("Error loading reviews:", e);
+          listEl.innerHTML = '<p class="muted">Failed to load reviews.</p>';
+        }
+      }
+
+      async function checkReviewEligibility(user) {
+        if (!user) {
+          document.getElementById("reviewLoginMsg").style.display = "block";
+          return;
+        }
+
+        // Check if user bought this product
+        // We query 'orders' collection where buyerId == user.uid
+        // Then currently check client-side for item match (mock DB limitation, but good enough)
+        const q = query(
+          collection(db, "orders"),
+          where("buyerId", "==", user.uid),
+        );
+        const snap = await getDocs(q);
+
+        let hasPurchased = false;
+        snap.forEach((doc) => {
+          const order = doc.data();
+          if (order.items && order.items.some((i) => i.id === productId)) {
+            hasPurchased = true;
+          }
+        });
+
+        if (hasPurchased) {
+          document.getElementById("reviewFormContainer").style.display =
+            "block";
+
+          // Handle Submit
+          document
+            .getElementById("reviewForm")
+            .addEventListener("submit", async (e) => {
+              e.preventDefault();
+              const rating = document.getElementById("reviewRating").value;
+              const comment = document.getElementById("reviewText").value;
+
+              try {
+                await addDoc(collection(db, "reviews"), {
+                  productId,
+                  userId: user.uid,
+                  userName: user.email.split("@")[0], // Simple username
+                  rating: parseInt(rating),
+                  comment,
+                  createdAt: serverTimestamp(),
+                });
+                alert("Review submitted!");
+                document.getElementById("reviewText").value = "";
+                loadReviews();
+              } catch (err) {
+                alert("Error submitting review: " + err.message);
+              }
+            });
+        } else {
+          document.getElementById("reviewNoPurchaseMsg").style.display =
+            "block";
+        }
+      }
+
+      loadProduct().then(() => {
+        loadReviews();
+        onAuthStateChanged(auth, (u) => checkReviewEligibility(u));
+      });
+    </script>
+    <script type="module" src="index.js"></script>
+    <script type="module" src="auth-state.js"></script>
+
+    <div class="creator-credit" style="font-size: 10px; color: #55555e; text-align: center; padding: 10px; background: #ffffff;">this was made by opedemowo olaoluwa victor</div>
+    <script src="compliance.js" defer></script>  <script type="module" src="wishlist.js"></script>
+    <script type="module" src="assistant.js"></script>
+<script src="dark-mode.js" defer></script>
+</body>
+</html>
+
+
+

@@ -1,17 +1,17 @@
 # Ignore backups from nested git repos
-EKOAST.git.bak/
+PAPERBAG.git.bak/
 .vscode.git.bak/
-sellers.for.ekoast.git.bak/
+sellers.for.paperbag.git.bak/
 # Keep project folders
-!EKOAST/
+!PAPERBAG/
 !.vscode/
-!"sellers for ekoast/"
+!"sellers for paperbag/"
 
 # Secrets and junk test files — never commit these
-EKOAST/backend/serviceAccountKey.json
+PAPERBAG/backend/serviceAccountKey.json
 **/serviceAccountKey.json
 **/*serviceAccount*.json
-EKOAST/_tmp_test.txt
+PAPERBAG/_tmp_test.txt
 
 # Local tooling / deploy caches
 .agent/

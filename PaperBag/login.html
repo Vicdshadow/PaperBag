@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css" />
+    
+    <script src="assets/js/confetti.browser.min.js"></script>
+    <style>
+      #welcomeOverlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        color: white;
+        text-align: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
+      }
+      #welcomeOverlay.active {
+        opacity: 1;
+        pointer-events: all;
+      }
+      .firework-text {
+        font-family: var(--font-body);
+        font-size: 32px;
+        font-weight: 800;
+        margin-bottom: 16px;
+        background: linear-gradient(45deg, #ffffff, #c2a15a, #ffffff);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: glow 2s linear infinite;
+        letter-spacing: -0.02em;
+      }
+      @keyframes glow {
+        0%,
+        100% {
+          filter: drop-shadow(0 0 5px rgba(194, 161, 90, 0.3));
+        }
+        50% {
+          filter: drop-shadow(0 0 15px rgba(194, 161, 90, 0.6));
+        }
+      }
+      .continue-btn { background: linear-gradient(90deg, #c2a15a, #e3cda0); color: #111116; padding: 14px 40px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; margin-top: 24px; transition: all 0.3s ease; }
+      .continue-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px -5px rgba(194, 161, 90, 0.4);
+      }
+    </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="assistant.css" />
+    <link rel="stylesheet" href="dark-mode.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="PaperBag &mdash; shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
+  </head>
+  <body class="signup-page">
+    <div id="welcomeOverlay">
+      <h1 class="firework-text">WELCOME!</h1>
+      <p
+        style="
+          font-size: 16px;
+          color: #e0e0e5;
+          max-width: 320px;
+          line-height: 1.6;
+        "
+      >
+        Your premium marketplace account has been created successfully.
+      </p>
+      <button
+        class="continue-btn"
+        onclick="
+          document.getElementById('welcomeOverlay').classList.remove('active')
+        "
+      >
+        Start Exploring
+      </button>
+    </div>
+
+    <div class="glass-card animate-fade-in">
+      <div class="signup-header">
+        <div
+          class="brand-container"
+          style="text-align: center; margin-bottom: 20px"
+        >
+          
+        </div>
+        <h2>Welcome Back</h2>
+        <p>Sign in to your profile</p>
+      </div>
+
+      <div
+        id="roleHint"
+        style="
+          background: rgba(194, 161, 90, 0.1);
+          padding: 12px;
+          border-radius: 12px;
+          margin-bottom: 24px;
+          border: 1px solid rgba(194, 161, 90, 0.2);
+          display: none;
+        "
+      >
+        <p
+          style="font-size: 11px; color: #c2a15a; margin: 0; text-align: center"
+        >
+          <strong>Seller/Host Login:</strong> Enter your credentials and we'll
+          take you straight to your dashboard.
+        </p>
+      </div>
+
+      <form id="loginForm">
+        <div class="premium-input-group">
+          <label for="email">Email Address</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="name@example.com"
+            required
+          />
+        </div>
+
+        <div class="premium-input-group">
+          <label for="password">Password</label>
+          <div style="position: relative">
+            <input
+              id="password"
+              type="password"
+              placeholder="Your password"
+              required
+              style="padding-right: 46px !important"
+            />
+            <i
+              class="fas fa-eye"
+              id="togglePassword"
+              style="
+                position: absolute;
+                right: 16px;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+                color: #72727b;
+              "
+            ></i>
+          </div>
+        </div>
+
+        <div style="text-align: right; margin-top: -8px; margin-bottom: 20px">
+          <a
+            href="reset-password.html"
+            id="forgotPasswordBtn"
+            style="
+              font-size: 12px;
+              color: #72727b;
+              text-decoration: none;
+              font-weight: 500;
+              transition: color 0.3s ease;
+            "
+            onmouseover="this.style.color = '#111116'"
+            onmouseout="this.style.color = '#72727b'"
+            >Forgot Password?</a
+          >
+        </div>
+
+        <button class="btn-premium" type="submit">Login</button>
+
+        <div class="divider">
+          <span>OR</span>
+        </div>
+
+        <button type="button" id="googleBtn" class="btn-premium-outline">
+          <img loading="lazy" decoding="async"
+            src="assets/images/google.svg" width="20" alt="Google"
+          />
+          Continue with Google
+        </button>
+
+        <button
+          type="button"
+          id="appleBtn"
+          class="btn-premium-outline"
+          style="margin-top: 12px"
+        >
+          <i class="fab fa-apple" style="font-size: 20px"></i>
+          Sign in with Apple
+        </button>
+      </form>
+
+      <p
+        style="
+          margin-top: 24px;
+          font-size: 13px;
+          text-align: center;
+          color: #72727b;
+        "
+      >
+        New here?
+        <a
+          href="signup.html"
+          style="color: var(--color-accent); font-weight: 700"
+          >Create account</a
+        >
+      </p>
+
+      <div
+        style="
+          margin-top: 24px;
+          padding-top: 20px;
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          text-align: center;
+        "
+      >
+        <p style="font-size: 13px; color: #64748b">
+          Are you a Service Provider or Host?
+          <a
+            href="signup.html?role=host"
+            style="
+              color: var(--color-accent);
+              font-weight: 700;
+              display: block;
+              margin-top: 8px;
+              font-size: 14px;
+            "
+            >Become a Partner / Join as Host</a
+          >
+        </p>
+      </div>
+    </div>
+
+    <script type="module" src="login.js?v=20260305-1"></script>
+    <script>
+      // Show hint if coming from "Join as Host" or specific link
+      const params = new URLSearchParams(window.location.search);
+      if (params.has("seller") || params.has("host")) {
+        const hint = document.getElementById("roleHint");
+        if (hint) hint.style.display = "block";
+      }
+
+      // Password visibility toggle
+      const togglePassword = document.getElementById("togglePassword");
+      const passwordInput = document.getElementById("password");
+
+      if (togglePassword && passwordInput) {
+        togglePassword.addEventListener("click", function () {
+          const type =
+            passwordInput.getAttribute("type") === "password"
+              ? "text"
+              : "password";
+          passwordInput.setAttribute("type", type);
+          this.classList.toggle("fa-eye");
+          this.classList.toggle("fa-eye-slash");
+        });
+      }
+    </script>
+    <script type="module" src="auth-state.js?v=20260305-1"></script>
+      <script src="compliance.js" defer></script>  <script type="module" src="wishlist.js"></script>
+    <script type="module" src="assistant.js"></script>
+<script src="dark-mode.js" defer></script>
+</body>
+</html>

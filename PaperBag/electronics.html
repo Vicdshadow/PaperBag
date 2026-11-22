@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Electronics & Gadgets</title>
+    <link rel="stylesheet" href="style.css" />
+    
+    <style>
+      .subsections-page {
+        padding: 60px 0;
+      }
+      .subsections-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+      .phones-hero-title {
+        font-family: "Patrick Hand", cursive;
+        font-size: 34px;
+        margin: 8px 0 14px;
+        color: #191919;
+      }
+      .phones-head-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .phones-back-btn,
+      .phones-cart-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        background: #fff;
+        border: 1px solid #e7e7e7;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #111116;
+      }
+      .phones-search-chip {
+        flex: 1;
+        background: #efefef;
+        border: 1px solid #e5e5e5;
+        border-radius: 8px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 12px;
+        color: #55555e;
+        font-family: "Patrick Hand", cursive;
+        font-size: 22px;
+      }
+      .phones-filter-row {
+        display: flex;
+        gap: 8px;
+        margin: 8px 0 12px;
+      }
+      .phones-filter-chip {
+        background: #f2f2f2;
+        border: 1px solid #e7e7e7;
+        border-radius: 6px;
+        padding: 7px 10px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #33333b;
+      }
+      .phones-strip {
+        background: #111116;
+        color: #111;
+        text-align: center;
+        font-family: "Patrick Hand", cursive;
+        font-size: 30px;
+        border-radius: 4px;
+        padding: 4px 10px;
+        margin: 10px 0 14px;
+      }
+      .phones-shop-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+      .phones-shop-item {
+        position: relative;
+        border-radius: 6px;
+        overflow: hidden;
+        background: #fff;
+        border: 1px solid #ececec;
+      }
+      .phones-shop-item img {
+        width: 100%;
+        aspect-ratio: 0.85;
+        object-fit: cover;
+      }
+      .phones-pill {
+        position: absolute;
+        bottom: 6px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #ef2f2f;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 700;
+        border-radius: 999px;
+        padding: 4px 10px;
+        white-space: nowrap;
+      }
+      .top-deals-row {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        scrollbar-width: none;
+      }
+      .top-deals-row::-webkit-scrollbar {
+        display: none;
+      }
+      .deal-card {
+        min-width: 160px;
+        background: #fff;
+        border: 1px solid #ececec;
+        border-radius: 8px;
+        padding: 8px;
+      }
+      .deal-card img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: contain;
+        background: #f7f7f7;
+        border-radius: 6px;
+      }
+      .deal-name {
+        font-family: "Patrick Hand", cursive;
+        font-size: 20px;
+        margin-top: 6px;
+        color: #1f1f1f;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .deal-price {
+        font-size: 30px;
+        font-family: "Patrick Hand", cursive;
+        color: #111;
+      }
+      .more-cats-title {
+        margin-top: 24px;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      @media (max-width: 768px) {
+        .subsections-page {
+          padding-top: 12px;
+        }
+        .subsections-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 10px;
+          margin-top: 16px;
+        }
+        .section-title {
+          display: none;
+        }
+      }
+    </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="assistant.css" />
+    <link rel="stylesheet" href="dark-mode.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="PaperBag &mdash; shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
+  </head>
+  <body>
+    <header class="site-header glass">
+      <div class="container header-inner">
+        <nav class="nav-links mobile-hidden">
+          <a href="index.html">Shop</a>
+          <a href="new-arrivals.html">New Arrivals</a>
+          <a href="catalogue.html" class="active">Catalogue</a>
+        </nav>
+        
+        <div class="nav-icons">
+          <div class="search-container" id="searchContainer">
+            <i class="fas fa-search" id="searchIcon"></i>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Search..."
+            />
+            <i class="fas fa-times-circle search-clear" id="clearSearch"></i>
+          </div>
+          <a href="account.html"><i class="far fa-user"></i></a>
+          <a href="cart.html" class="cart-link">
+            <i class="fas fa-shopping-bag"></i>
+            <span id="cartCount" class="cart-count">0</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="subsections-page container animate-fade-in">
+      <h1 class="phones-hero-title">Phones &amp; Tablets</h1>
+      <div class="phones-head-row">
+        <a class="phones-back-btn" href="catalogue.html"
+          ><i class="fas fa-arrow-left"></i
+        ></a>
+        <div class="phones-search-chip">
+          <i class="fas fa-search"></i>
+          <span>Search on PaperBag</span>
+        </div>
+        <a class="phones-cart-btn" href="cart.html"
+          ><i class="fas fa-shopping-cart"></i
+        ></a>
+      </div>
+      <div class="phones-filter-row">
+        <span class="phones-filter-chip"><i class="fas fa-paper-plane"></i> EXPRESS</span>
+        <span class="phones-filter-chip">Brand <i class="fas fa-chevron-down"></i></span>
+        <span class="phones-filter-chip">Price <i class="fas fa-chevron-down"></i></span>
+      </div>
+
+      <div class="phones-strip">Shop by Category</div>
+      <div class="phones-shop-grid">
+        <a
+          class="phones-shop-item"
+          href="index.html?cat=electronics&sub=Smartphones%20%26%20Feature%20Phones&q=android"
+        >
+          <img loading="lazy" decoding="async" src="assets/images/smartphone.jpg" alt="Android" />
+          <span class="phones-pill">Android</span>
+        </a>
+        <a
+          class="phones-shop-item"
+          href="index.html?cat=electronics&sub=Smartphones%20%26%20Feature%20Phones&q=iphone"
+        >
+          <img loading="lazy" decoding="async" src="assets/images/iphones.jpg" alt="iPhone" />
+          <span class="phones-pill">IPhone</span>
+        </a>
+        <a
+          class="phones-shop-item"
+          href="index.html?cat=electronics&sub=Tablets%20%26%20iPads"
+        >
+          <img loading="lazy" decoding="async" src="assets/images/tablet.jpg" alt="Tablet" />
+          <span class="phones-pill">Tablet</span>
+        </a>
+        <a
+          class="phones-shop-item"
+          href="index.html?cat=electronics&q=renewed"
+        >
+          <img loading="lazy" decoding="async" src="assets/images/redmi2.jpg" alt="Renewed Phones" />
+          <span class="phones-pill">Renewed Phones</span>
+        </a>
+        <a
+          class="phones-shop-item"
+          href="index.html?cat=electronics&q=fold"
+        >
+          <img loading="lazy" decoding="async" src="assets/images/smartphone.jpg" alt="Fold Phones" />
+          <span class="phones-pill">Fold Phones</span>
+        </a>
+        <a
+          class="phones-shop-item"
+          href="index.html?cat=electronics&sub=Earbuds%20%26%20Headphones"
+        >
+          <img loading="lazy" decoding="async" src="assets/images/earbuds.jpg" alt="Earbuds" />
+          <span class="phones-pill">Earbuds</span>
+        </a>
+      </div>
+
+      <div class="phones-strip">Top Deals</div>
+      <div id="phonesTopDeals" class="top-deals-row">
+        <div class="deal-card">Loading deals...</div>
+      </div>
+
+      <h2 class="more-cats-title">More Electronics Categories</h2>
+
+      <div class="subsections-grid">
+        <!-- Laptops, Notebooks & Ultrabooks -->
+        <div class="product-card">
+          <a
+            href="index.html?cat=electronics&sub=Laptops%2C%20Notebooks%20%26%20Ultrabooks"
+          >
+            <div class="product-image">
+              <img loading="lazy" decoding="async"
+                src="assets/images/laptop.jpg"
+                alt="Laptops"
+                onerror="
+                  this.src =
+                    'assets/images/remote/remote-91e5a83128.jpg'
+                "
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">Laptops, Notebooks & Ultrabooks</h3>
+            </div>
+          </a>
+        </div>
+
+        <!-- Desktop PCs & All-in-One PCs -->
+        <div class="product-card">
+          <a
+            href="index.html?cat=electronics&sub=Desktop%20PCs%20%26%20All-in-One%20PCs"
+          >
+            <div class="product-image">
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-b4f42a80e5.jpg"
+                alt="Desktops"
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">Desktop PCs & All-in-One PCs</h3>
+            </div>
+          </a>
+        </div>
+
+        <!-- Smart TVs (LCD, OLED, QLED) -->
+        <div class="product-card">
+          <a
+            href="index.html?cat=electronics&sub=Smart%20TVs%20(LCD%2C%20OLED%2C%20QLED)"
+          >
+            <div class="product-image">
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-a14a58a60e.jpg"
+                alt="TVs"
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">Smart TVs (LCD, OLED, QLED)</h3>
+            </div>
+          </a>
+        </div>
+
+        <!-- Television Accessories (Mounts, Remotes) -->
+        <div class="product-card">
+          <a
+            href="index.html?cat=electronics&sub=Television%20Accessories%20(Mounts%2C%20Remotes)"
+          >
+            <div class="product-image">
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-c2b9545dcb.jpg"
+                alt="TV Accessories"
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">
+                Television Accessories (Mounts, Remotes)
+              </h3>
+            </div>
+          </a>
+        </div>
+
+        <!-- Monitors -->
+        <div class="product-card">
+          <a href="index.html?cat=electronics&sub=Monitors">
+            <div class="product-image">
+              <img loading="lazy" decoding="async"
+                src="assets/images/computer_monitor.jpg"
+                alt="Monitors"
+                onerror="
+                  this.src =
+                    'assets/images/remote/remote-f4804af48a.jpg'
+                "
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">Monitors</h3>
+            </div>
+          </a>
+        </div>
+
+        <!-- Computer Components -->
+        <div class="product-card">
+          <a
+            href="index.html?cat=electronics&sub=Computer%20Components%20(Motherboards%2C%20CPUs%2C%20RAM%2C%20SSDs%2C%20Graphics%20Cards)"
+          >
+            <div class="product-image">
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-bec499ea10.jpg"
+                alt="Components"
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">Computer Components</h3>
+            </div>
+          </a>
+        </div>
+
+        <!-- Storage Devices -->
+        <div class="product-card">
+          <a
+            href="index.html?cat=electronics&sub=Storage%20Devices%20(External%20HDDs%2C%20SSDs%2C%20Flash%20Drives)"
+          >
+            <div class="product-image">
+              <img loading="lazy" decoding="async"
+                src="assets/images/storage devices.webp"
+                alt="Storage"
+                onerror="
+                  this.src =
+                    'assets/images/placeholder.svg'
+                "
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">Storage Devices</h3>
+            </div>
+          </a>
+        </div>
+
+        <!-- Printers, Scanners, Copiers -->
+        <div class="product-card">
+          <a
+            href="index.html?cat=electronics&sub=Printers%2C%20Scanners%2C%20Copiers"
+          >
+            <div class="product-image">
+              <img loading="lazy" decoding="async"
+                src="assets/images/printer.jpg"
+                alt="Printers"
+                onerror="
+                  this.src =
+                    'assets/images/remote/remote-4122ffe235.jpg'
+                "
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">Printers, Scanners, Copiers</h3>
+            </div>
+          </a>
+        </div>
+
+        <!-- Networking Equipment -->
+        <div class="product-card">
+          <a
+            href="index.html?cat=electronics&sub=Networking%20Equipment%20(Routers%2C%20Switches%2C%20Modems%2C%20Network%20Cards)"
+          >
+            <div class="product-image">
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-9ac2d5ba4f.jpg"
+                alt="Networking"
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">Networking Equipment</h3>
+            </div>
+          </a>
+        </div>
+
+        <!-- Smart Home Devices -->
+        <div class="product-card">
+          <a
+            href="index.html?cat=electronics&sub=Smart%20Home%20Devices%20(Security%20Cameras%2C%20Smart%20Bulbs%2C%20Smart%20Plugs%2C%20Hubs)"
+          >
+            <div class="product-image">
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-55519ef7ad.jpg"
+                alt="Smart Home"
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">Smart Home Devices</h3>
+            </div>
+          </a>
+        </div>
+
+        <!-- Bluetooth Speakers -->
+        <div class="product-card">
+          <a
+            href="index.html?cat=electronics&sub=Bluetooth%20Speakers"
+          >
+            <div class="product-image">
+              <img loading="lazy" decoding="async"
+                src="assets/images/bluetooth_speaker.jpg"
+                alt="Audio"
+                onerror="
+                  this.src =
+                    'assets/images/remote/remote-4aee8514f8.jpg'
+                "
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">Bluetooth Speakers</h3>
+            </div>
+          </a>
+        </div>
+
+        <!-- Headphones / Earbuds / Earphones -->
+        <div class="product-card">
+          <a
+            href="index.html?cat=electronics&sub=Headphones%20%2F%20Earbuds%20%2F%20Earphones"
+          >
+            <div class="product-image">
+              <img loading="lazy" decoding="async"
+                src="assets/images/earbuds.jpg"
+                alt="Headphones"
+                onerror="
+                  this.src =
+                    'assets/images/remote/remote-4aee8514f8.jpg'
+                "
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">Headphones / Earbuds / Earphones</h3>
+            </div>
+          </a>
+        </div>
+
+        <!-- Gaming Consoles & Accessories -->
+        <div class="product-card">
+          <a
+            href="index.html?cat=electronics&sub=Gaming%20Consoles%20%26%20Accessories%20(Controllers%2C%20VR%20Gear)"
+          >
+            <div class="product-image">
+              <img loading="lazy" decoding="async"
+                src="assets/images/consoles_games.jpg"
+                alt="Gaming"
+                onerror="
+                  this.src =
+                    'assets/images/remote/remote-5eae0da492.jpg'
+                "
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">Gaming Consoles & Accessories</h3>
+            </div>
+          </a>
+        </div>
+
+        <!-- Wearables -->
+        <div class="product-card">
+          <a
+            href="index.html?cat=electronics&sub=Wearables%20(Smartwatches%2C%20Fitness%20Bands)"
+          >
+            <div class="product-image">
+              <img loading="lazy" decoding="async"
+                src="assets/images/smartwatch.jpg"
+                alt="Wearables"
+                onerror="
+                  this.src =
+                    'assets/images/remote/remote-2f5342f2a7.jpg'
+                "
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">Wearables</h3>
+            </div>
+          </a>
+        </div>
+
+        <!-- Car Tech -->
+        <div class="product-card">
+          <a
+            href="index.html?cat=electronics&sub=Car%20Tech%20(Dash%20Cams%2C%20Infotainment%20Systems)"
+          >
+            <div class="product-image">
+              <img loading="lazy" decoding="async"
+                src="assets/images/car tech.jpg"
+                alt="Car Tech"
+                onerror="
+                  this.src =
+                    'assets/images/placeholder.svg'
+                "
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">Car Tech</h3>
+            </div>
+          </a>
+        </div>
+
+        <!-- Drone & Camera Equipment -->
+        <div class="product-card">
+          <a
+            href="index.html?cat=electronics&sub=Drone%20%26%20Camera%20Equipment%20(DSLRs%2C%20Mirrorless%2C%20Lenses%2C%20Tripods)"
+          >
+            <div class="product-image">
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-d65b15254d.jpg"
+                alt="Drones & Cameras"
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">Drone & Camera Equipment</h3>
+            </div>
+          </a>
+        </div>
+
+        <!-- TV Boxes / Streaming Devices -->
+        <div class="product-card">
+          <a
+            href="index.html?cat=electronics&sub=TV%20Boxes%20%2F%20Streaming%20Devices"
+          >
+            <div class="product-image">
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-9ac2d5ba4f.jpg"
+                alt="TV Boxes"
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">TV Boxes / Streaming Devices</h3>
+            </div>
+          </a>
+        </div>
+
+        <!-- Cables, Adapters, Chargers, Power Banks -->
+        <div class="product-card">
+          <a
+            href="index.html?cat=electronics&sub=Cables%2C%20Adapters%2C%20Chargers%2C%20Power%20Banks"
+          >
+            <div class="product-image">
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-a35d4bff77.jpg"
+                alt="Cables & Chargers"
+              />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title">
+                Cables, Adapters, Chargers, Power Banks
+              </h3>
+            </div>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container text-center">
+        <div class="footer-bottom">
+          &copy; 2024. All rights reserved.
+        <div class="creator-credit" style="font-size: 10px; color: #55555e; margin-top: 5px;">this was made by opedemowo olaoluwa victor</div>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="index.js"></script>
+    <script type="module">
+      import { auth, db } from "./firebase-config.js";
+      import { fetchAllProducts } from "./display-products.js";
+      import {
+        getDocs,
+        collection,
+      } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+      import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+      const cartCountEl = document.getElementById("cartCount");
+      onAuthStateChanged(auth, async (user) => {
+        if (!cartCountEl) return;
+        let count = 0;
+        if (user) {
+          const snap = await getDocs(collection(db, "users", user.uid, "cart"));
+          count = snap.docs.reduce((n, d) => n + (d.data().qty || 0), 0);
+        } else {
+          const guestCart = JSON.parse(
+            localStorage.getItem("guest_cart") || "[]",
+          );
+          count = guestCart.reduce((n, i) => n + (i.qty || 0), 0);
+        }
+        cartCountEl.textContent = count;
+        cartCountEl.style.display = count > 0 ? "flex" : "none";
+      });
+
+      async function renderTopDeals() {
+        const el = document.getElementById("phonesTopDeals");
+        if (!el) return;
+        try {
+          const all = await fetchAllProducts();
+          const electronics = all
+            .filter(
+              (p) =>
+                String(p.category || "")
+                  .toLowerCase()
+                  .includes("electronics") ||
+                String(p.category || "")
+                  .toLowerCase()
+                  .includes("phone"),
+            )
+            .slice(0, 12);
+
+          if (!electronics.length) {
+            el.innerHTML = '<div class="deal-card">No top deals yet.</div>';
+            return;
+          }
+
+          el.innerHTML = electronics
+            .map((p) => {
+              const img = p.imageUrl || p.image || "assets/images/smartphone.jpg";
+              const name = String(
+                p.name || p.title || p.productName || p.productTitle || "Phone",
+              );
+              const price = Number(p.price || 0).toLocaleString();
+              return `
+                <a class="deal-card" href="product.html?id=${encodeURIComponent(p.id)}&source=${encodeURIComponent(p.source || "firebase")}">
+                  <img loading="lazy" decoding="async" src="${img}" alt="${name}" onerror="this.src='assets/images/smartphone.jpg'">
+                  <div class="deal-name">${name}</div>
+                  <div class="deal-price">₦ ${price}</div>
+                </a>
+              `;
+            })
+            .join("");
+        } catch (error) {
+          console.error("Top deals load failed:", error);
+          el.innerHTML = '<div class="deal-card">Failed to load top deals.</div>';
+        }
+      }
+
+      renderTopDeals();
+    </script>
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="index.html" class="nav-item">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+      <a href="catalogue.html" class="nav-item active">
+        <i class="fas fa-list-ul"></i>
+        <span>Catalogue</span>
+      </a>
+      <a href="cart.html" class="nav-item">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Cart</span>
+      </a>
+      <a href="wishlist.html" class="nav-item">
+        <i class="far fa-heart"></i>
+        <span>Wishlist</span>
+      </a>
+      <a href="account.html" class="nav-item">
+        <i class="fas fa-user"></i>
+        <span>Account</span>
+      </a>
+      <a href="chat.html" class="nav-item">
+        <i class="fas fa-comments"></i>
+        <span>Chat</span>
+      </a>
+    </nav>
+    <script type="module" src="auth-state.js"></script>
+      <script src="compliance.js" defer></script>  <script type="module" src="wishlist.js"></script>
+    <script type="module" src="assistant.js"></script>
+<script src="dark-mode.js" defer></script>
+</body>
+</html>
+
+
+
+

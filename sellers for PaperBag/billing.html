@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Billing — Seller Center</title>
+    
+    <style>
+*,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background: #e6e6ea;
+        color: #111116;
+        min-height: 100vh;
+        padding-bottom: 72px;
+      }
+      /* TOP BAR */
+      .topbar {
+        background: #fff;
+        border-bottom: 1px solid #e6e6ea;
+        padding: 0.75rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+      .topbar-left {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .topbar-logo {
+        width: 32px;
+        height: 32px;
+        background: #111116;
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 0.9rem;
+      }
+      .topbar-title {
+        font-weight: 700;
+        font-size: 1rem;
+      }
+      .topbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .icon-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #f1f1f4;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #55555e;
+        font-size: 0.95rem;
+        transition: background 0.15s;
+      }
+      .icon-btn:hover {
+        background: #e6e6ea;
+      }
+      .balance-icon {
+        background: #22c55e;
+        color: #fff;
+      }
+      /* PAGE */
+      .page {
+        padding: 1rem;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      /* Balance cards row */
+      .balance-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+        margin-bottom: 0.85rem;
+      }
+      @media (min-width: 540px) {
+        .balance-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+      .balance-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 1rem;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+      }
+      .balance-card .label {
+        font-size: 0.75rem;
+        color: #55555e;
+        margin-bottom: 0.3rem;
+      }
+      .balance-card .value {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: #111116;
+      }
+      .balance-card .sub {
+        font-size: 0.72rem;
+        color: #55555e;
+        margin-top: 0.15rem;
+      }
+      .balance-card.main {
+        border: 2px solid #22c55e;
+      }
+      .balance-card.main .check {
+        width: 32px;
+        height: 32px;
+        background: #22c55e;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+      }
+      .btn-add-budget {
+        background: #111116;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 0.45rem 0.9rem;
+        font-size: 0.8rem;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: inherit;
+        margin-top: 0.6rem;
+        width: 100%;
+        transition: opacity 0.15s;
+      }
+      .btn-add-budget:hover {
+        opacity: 0.9;
+      }
+      .plan-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 1rem;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+      }
+      .plan-card .label {
+        font-size: 0.75rem;
+        color: #55555e;
+        margin-bottom: 0.3rem;
+      }
+      .plan-card .plan-name {
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: #111116;
+      }
+      /* Transactions */
+      .section-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.75rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .section-title {
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: #111116;
+      }
+      .search-input {
+        padding: 0.45rem 0.75rem;
+        border: 1.5px solid #e6e6ea;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 0.83rem;
+        outline: none;
+        min-width: 140px;
+      }
+      .search-input:focus {
+        border-color: #111116;
+      }
+      .filter-select {
+        padding: 0.45rem 0.65rem;
+        border: 1.5px solid #e6e6ea;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 0.82rem;
+        outline: none;
+        cursor: pointer;
+      }
+      .btn-download {
+        background: #111116;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 0.45rem 0.9rem;
+        font-size: 0.8rem;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-family: inherit;
+        transition: opacity 0.15s;
+      }
+      .btn-download:hover {
+        opacity: 0.9;
+      }
+      /* Month group */
+      .month-group {
+        margin-bottom: 0.85rem;
+      }
+      .month-label {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #111116;
+        padding: 0.55rem 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: #fff;
+        border-radius: 10px 10px 0 0;
+        border: 1px solid #e6e6ea;
+      }
+      .month-label i {
+        font-size: 0.8rem;
+      }
+      .tx-table-wrap {
+        background: #fff;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+        overflow: auto;
+      }
+      .tx-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.83rem;
+      }
+      .tx-table th {
+        background: #f9fafb;
+        padding: 0.6rem 1rem;
+        text-align: left;
+        font-weight: 600;
+        color: #33333b;
+        border-bottom: 1px solid #e6e6ea;
+        white-space: nowrap;
+      }
+      .tx-table td {
+        padding: 0.6rem 1rem;
+        border-bottom: 1px solid #f1f1f4;
+        color: #33333b;
+      }
+      .tx-table tr:last-child td {
+        border-bottom: none;
+      }
+      .sort-icon {
+        cursor: pointer;
+        margin-left: 0.25rem;
+        color: #72727b;
+        font-size: 0.7rem;
+      }
+      /* Empty */
+      .empty-card {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+        padding: 3rem 1rem;
+        text-align: center;
+      }
+      .empty-card p {
+        color: #72727b;
+        font-size: 0.9rem;
+      }
+      /* Add Budget Modal */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 200;
+        padding: 1rem;
+      }
+      .modal-overlay.hidden {
+        display: none;
+      }
+      .modal-box {
+        background: #fff;
+        border-radius: 12px;
+        padding: 1.5rem;
+        width: 100%;
+        max-width: 360px;
+        position: relative;
+      }
+      .modal-close {
+        position: absolute;
+        right: 14px;
+        top: 12px;
+        border: none;
+        background: none;
+        font-size: 1.4rem;
+        color: #55555e;
+        cursor: pointer;
+        line-height: 1;
+      }
+      .modal-box h3 {
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        font-weight: 700;
+      }
+      .form-group {
+        margin-bottom: 1rem;
+      }
+      .form-group label {
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #33333b;
+        margin-bottom: 0.35rem;
+      }
+      .form-input {
+        width: 100%;
+        padding: 0.65rem 0.85rem;
+        border: 1.5px solid #e6e6ea;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 0.9rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .form-input:focus {
+        border-color: #111116;
+        box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.1);
+      }
+      .btn-primary {
+        width: 100%;
+        padding: 0.78rem;
+        border-radius: 8px;
+        border: none;
+        background: #111116;
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.95rem;
+        cursor: pointer;
+        font-family: inherit;
+        transition: opacity 0.15s;
+      }
+      .btn-primary:hover {
+        opacity: 0.9;
+      }
+      /* Loading */
+      #loading {
+        position: fixed;
+        inset: 0;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        z-index: 9999;
+        color: #111116;
+        font-weight: 600;
+      }
+      .spinner {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 3px solid #fed7aa;
+        border-top-color: #111116;
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .hidden {
+        display: none !important;
+      }
+      /* Bottom nav */
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #e6e6ea;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        z-index: 100;
+      }
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        padding: 0.6rem 0 0.75rem;
+        font-size: 0.68rem;
+        color: #55555e;
+        text-decoration: none;
+        transition: color 0.15s;
+        border: none;
+        background: none;
+        font-family: inherit;
+        cursor: pointer;
+      }
+      .nav-item i {
+        font-size: 1.2rem;
+      }
+      .nav-item.active {
+        color: #111116;
+      }
+      .nav-vc {
+        width: 26px;
+        height: 26px;
+        background: #111116;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 0.6rem;
+        font-weight: 800;
+      }
+    </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="assistant.css" />
+    <link rel="stylesheet" href="dark-mode.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="PaperBag &mdash; shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
+  </head>
+  <body>
+    <div id="loading">
+      <div class="spinner"></div>
+      <span>Loading billing…</span>
+    </div>
+
+    <header class="topbar hidden" id="topbar">
+      <div class="topbar-left">
+        
+        <span class="topbar-title">Account Statements</span>
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn"><i class="fas fa-cog"></i></button>
+        <button class="icon-btn balance-icon">
+          <i class="fas fa-dollar-sign"></i>
+        </button>
+        <button class="icon-btn"><i class="fas fa-question"></i></button>
+        <button class="icon-btn"><i class="fas fa-bell"></i></button>
+      </div>
+    </header>
+
+    <main class="page hidden" id="main">
+      <!-- Balance cards -->
+      <div class="balance-grid">
+        <div class="balance-card main">
+          <div class="check"><i class="fas fa-check"></i></div>
+          <div class="label">
+            Your Balance:
+            <i class="fas fa-question-circle" style="font-size: 0.7rem"></i>
+          </div>
+          <div class="value" id="balance-val">₦0</div>
+          <button class="btn-add-budget" id="add-budget-btn">Add Budget</button>
+        </div>
+        <div
+          class="balance-card"
+          style="border: 2px dashed #ff9100; background: #fffcf0"
+        >
+          <div class="label" style="color: #ff9100">
+            Pending Payments:
+            <i class="fas fa-history" style="font-size: 0.7rem"></i>
+          </div>
+          <div class="value" id="pending-val">₦0</div>
+          <div class="sub" style="font-weight: 600; color: #ff9100">
+            Payout: 7-14 Days
+          </div>
+        </div>
+        <div class="balance-card">
+          <div class="label">Your Last Payment:</div>
+          <div class="value" id="last-payment-val">₦0</div>
+          <div class="sub" id="last-payment-date">—</div>
+        </div>
+        <div class="balance-card">
+          <div class="label">Your Next Payment:</div>
+          <div class="value" id="next-payment-val">₦0</div>
+          <button
+            style="
+              background: none;
+              border: 1px solid #e6e6ea;
+              border-radius: 6px;
+              padding: 0.3rem 0.6rem;
+              font-size: 0.75rem;
+              margin-top: 0.5rem;
+              cursor: pointer;
+              font-family: inherit;
+            "
+          >
+            Stop Automatic Payment
+          </button>
+        </div>
+        <div class="plan-card">
+          <div class="label">Your plan:</div>
+          <div class="plan-name" id="plan-name">Free</div>
+        </div>
+      </div>
+
+      <!-- Transaction History -->
+      <div class="section-head">
+        <span class="section-title">Transaction history</span>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap">
+          <input
+            type="text"
+            class="search-input"
+            id="tx-search"
+            placeholder="Search by name / id"
+          />
+          <select class="filter-select" id="tx-filter">
+            <option value="all">All</option>
+            <option value="debit">Debit</option>
+            <option value="credit">Credit</option>
+          </select>
+          <button class="btn-download" id="download-btn">
+            <i class="fas fa-download"></i> Download report
+          </button>
+        </div>
+      </div>
+
+      <div id="tx-wrap">
+        <div class="empty-card" id="tx-empty">
+          <i
+            class="fas fa-receipt"
+            style="
+              font-size: 2rem;
+              color: #d4d4da;
+              display: block;
+              margin-bottom: 0.75rem;
+            "
+          ></i>
+          <p>No transactions yet.</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Add Budget Modal -->
+    <div class="modal-overlay hidden" id="budget-modal">
+      <div class="modal-box">
+        <button class="modal-close" id="close-budget">&times;</button>
+        <h3>Add Budget</h3>
+        <div class="form-group">
+          <label>Amount (₦)</label>
+          <input
+            type="number"
+            class="form-input"
+            id="budget-amount"
+            placeholder="e.g. 5000"
+            min="100"
+          />
+        </div>
+        <div class="form-group">
+          <label>Payment Method</label>
+          <select class="form-input" id="budget-method">
+            <option>Bank Transfer</option>
+            <option>Card</option>
+            <option>USSD</option>
+          </select>
+        </div>
+        <button class="btn-primary" id="confirm-budget">Confirm Payment</button>
+      </div>
+    </div>
+
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav hidden" id="bottom-nav">
+      <a class="nav-item" href="seller-dashboard.html">
+        <div class="nav-vc">vc</div>
+        Home
+      </a>
+      <a class="nav-item" href="orders.html">
+        <i class="fas fa-clipboard-list"></i>Orders
+      </a>
+      <a class="nav-item" href="manage-products.html">
+        <i class="fas fa-th-large"></i>Manage<br />Products
+      </a>
+      <a class="nav-item" href="account.html">
+        <i class="fas fa-bars"></i>Menu
+      </a>
+    </nav>
+
+    <script type="module">
+      import {
+        auth,
+        db,
+        onAuthStateChanged,
+        signOut,
+        doc,
+        getDoc,
+        collection,
+        query,
+        where,
+        onSnapshot,
+        addDoc,
+        serverTimestamp,
+      } from "./firebase-config.js";
+
+      const loadingEl = document.getElementById("loading");
+
+      onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+          window.location.href = "login.html";
+          return;
+        }
+
+        // Load user billing data
+        try {
+          const snap = await getDoc(doc(db, "billing", user.uid));
+          if (snap.exists()) {
+            const d = snap.data();
+            document.getElementById("balance-val").textContent =
+              `₦${(d.balance || 0).toLocaleString()}`;
+            document.getElementById("last-payment-val").textContent =
+              `₦${(d.lastPayment || 0).toLocaleString()}`;
+            document.getElementById("last-payment-date").textContent =
+              d.lastPaymentDate || "—";
+            document.getElementById("next-payment-val").textContent =
+              `₦${(d.nextPayment || 0).toLocaleString()}`;
+            document.getElementById("plan-name").textContent = d.plan || "Free";
+          }
+        } catch (_) {}
+        // â”€â”€ LOAD PENDING PAYMENTS â”€â”€
+        const pendingQuery = query(
+          collection(db, "orders"),
+          where("sellerId", "==", user.uid),
+        );
+        onSnapshot(pendingQuery, (snap) => {
+          let totalPending = 0;
+          snap.forEach((d) => {
+            const data = d.data();
+            const amount = Number(data.amount ?? data.totalAmount ?? 0);
+            const paymentStatus = (data.paymentStatus || "").toLowerCase();
+            const status = (data.status || "").toLowerCase();
+            const isPending =
+              paymentStatus === "processing" ||
+              paymentStatus === "pending" ||
+              (!paymentStatus &&
+                ["pending", "ready", "shipped", "verified"].includes(status));
+            if (isPending) totalPending += amount;
+          });
+          document.getElementById("pending-val").textContent =
+            `₦${totalPending.toLocaleString()}`;
+        });
+
+
+        // Load transactions
+        const q = query(
+          collection(db, "transactions"),
+          where("sellerId", "==", user.uid),
+        );
+        onSnapshot(q, (snap) => {
+          renderTransactions(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
+        });
+
+        loadingEl.classList.add("hidden");
+        document.getElementById("topbar").classList.remove("hidden");
+        document.getElementById("main").classList.remove("hidden");
+        document.getElementById("bottom-nav").classList.remove("hidden");
+
+        // Budget modal
+        document
+          .getElementById("add-budget-btn")
+          .addEventListener("click", () => {
+            document.getElementById("budget-modal").classList.remove("hidden");
+          });
+        document
+          .getElementById("close-budget")
+          .addEventListener("click", () => {
+            document.getElementById("budget-modal").classList.add("hidden");
+          });
+        document
+          .getElementById("confirm-budget")
+          .addEventListener("click", async () => {
+            const amount = Number(
+              document.getElementById("budget-amount").value,
+            );
+            const method = document.getElementById("budget-method").value;
+            if (!amount || amount < 100) {
+              alert("Minimum amount is ₦100.");
+              return;
+            }
+            try {
+              await addDoc(collection(db, "transactions"), {
+                sellerId: user.uid,
+                amount,
+                type: "credit",
+                description: `Budget top-up via ${method}`,
+                paymentType: method,
+                createdAt: serverTimestamp(),
+              });
+              document.getElementById("budget-modal").classList.add("hidden");
+              alert(`₦${amount.toLocaleString()} budget request submitted!`);
+            } catch (e) {
+              alert("Error: " + e.message);
+            }
+          });
+
+        // Search & filter
+        document
+          .getElementById("tx-search")
+          .addEventListener("input", () => filterRender());
+        document
+          .getElementById("tx-filter")
+          .addEventListener("change", () => filterRender());
+
+        // Download
+        document
+          .getElementById("download-btn")
+          .addEventListener("click", () => {
+            const rows = document.querySelectorAll(".tx-table tbody tr");
+            if (!rows.length) {
+              alert("No transactions to download.");
+              return;
+            }
+            const csv = [
+              "Date,Description,Payment Type,Debit,Credit",
+              ...[...rows].map((r) =>
+                [...r.querySelectorAll("td")]
+                  .map((td) => td.textContent.trim())
+                  .join(","),
+              ),
+            ].join("\n");
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+            a.download = "transactions.csv";
+            a.click();
+          });
+      });
+
+      let _allTx = [];
+      function renderTransactions(txList) {
+        _allTx = txList.sort(
+          (a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0),
+        );
+        filterRender();
+      }
+
+      function filterRender() {
+        const term = document.getElementById("tx-search").value.toLowerCase();
+        const filter = document.getElementById("tx-filter").value;
+        const filtered = _allTx.filter((t) => {
+          const matchTerm =
+            !term ||
+            (t.description || "").toLowerCase().includes(term) ||
+            (t.id || "").includes(term);
+          const matchType =
+            filter === "all" || (t.type || "").toLowerCase() === filter;
+          return matchTerm && matchType;
+        });
+
+        const wrap = document.getElementById("tx-wrap");
+        const empty = document.getElementById("tx-empty");
+        if (filtered.length === 0) {
+          empty.classList.remove("hidden");
+          return;
+        }
+        empty.classList.add("hidden");
+
+        // Group by month
+        const byMonth = {};
+        filtered.forEach((t) => {
+          const d = t.createdAt?.toDate ? t.createdAt.toDate() : new Date();
+          const key = d.toLocaleString("default", {
+            month: "long",
+            year: "numeric",
+          });
+          if (!byMonth[key]) byMonth[key] = [];
+          byMonth[key].push(t);
+        });
+
+        wrap.innerHTML = Object.entries(byMonth)
+          .map(
+            ([month, txs]) => `
+        <div class="month-group">
+          <div class="month-label"><i class="fas fa-caret-right"></i> ${month}</div>
+          <div class="tx-table-wrap">
+            <table class="tx-table">
+              <thead><tr>
+                <th>Date <span class="sort-icon">⇅</span></th>
+                <th>Description</th>
+                <th>Payment Type <span class="sort-icon">⇅</span></th>
+                <th>Debit <span class="sort-icon">⇅</span></th>
+                <th>Credit <span class="sort-icon">⇅</span></th>
+              </tr></thead>
+              <tbody>
+                ${txs
+                  .map((t) => {
+                    const d = t.createdAt?.toDate
+                      ? t.createdAt.toDate()
+                      : new Date();
+                    const isDebit = (t.type || "debit") === "debit";
+                    return `<tr>
+                    <td>${d.toLocaleDateString("en-GB", { day: "2-digit", month: "short" })}</td>
+                    <td>${t.description || "—"}</td>
+                    <td>${t.paymentType || "Daily Cost"}</td>
+                    <td>${isDebit ? "₦" + Number(t.amount).toLocaleString() : "—"}</td>
+                    <td>${!isDebit ? "₦" + Number(t.amount).toLocaleString() : "—"}</td>
+                  </tr>`;
+                  })
+                  .join("")}
+              </tbody>
+            </table>
+          </div>
+        </div>`,
+          )
+          .join("");
+      }
+    </script>
+      <script src="compliance.js" defer></script>
+      <script type="module" src="assistant.js"></script>
+<script src="dark-mode.js" defer></script>
+</body>
+</html>
+
+

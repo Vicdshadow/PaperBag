@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 220" role="img" aria-labelledby="pbTitle pbDesc">
+  <title id="pbTitle">PaperBag</title>
+  <desc id="pbDesc">A kraft paper bag with torn top edge and the words "paper bag" cut out of its front.</desc>
+  <defs>
+    <linearGradient id="bagFace" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d9b27e"/>
+      <stop offset="0.45" stop-color="#c89b63"/>
+      <stop offset="1" stop-color="#a97b45"/>
+    </linearGradient>
+    <linearGradient id="bagSide" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9c6f3c"/>
+      <stop offset="1" stop-color="#b7844c"/>
+    </linearGradient>
+    <linearGradient id="crease" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7d552b" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#7d552b" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#7d552b" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#3a2712" flood-opacity="0.28"/>
+    </filter>
+    <mask id="paperCut">
+      <rect x="0" y="0" width="340" height="220" fill="#fff"/>
+      <text x="170" y="143" text-anchor="middle"
+            font-family="Inter, Arial, sans-serif" font-size="39" font-weight="800"
+            letter-spacing="1.5" fill="#000">paper bag</text>
+    </mask>
+  </defs>
+
+  <ellipse cx="170" cy="204" rx="112" ry="8" fill="#2b1d0d" opacity="0.16"/>
+
+  <g filter="url(#soft)">
+    <!-- Handles -->
+    <path d="M92 70 C92 26 138 26 138 70" fill="none" stroke="#a97b45" stroke-width="9" stroke-linecap="round"/>
+    <path d="M202 70 C202 26 248 26 248 70" fill="none" stroke="#a97b45" stroke-width="9" stroke-linecap="round"/>
+    <path d="M92 70 C92 26 138 26 138 70" fill="none" stroke="#e8c99b" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+    <path d="M202 70 C202 26 248 26 248 70" fill="none" stroke="#e8c99b" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+
+    <!-- Bag body with torn top edge -->
+    <path d="M50 72 L68 65 L86 74 L104 65 L122 74 L140 65 L158 74 L176 65 L194 74 L212 65 L230 74 L248 65 L266 74 L284 65 L291 72 L274 194 L67 194 Z"
+          fill="url(#bagFace)" mask="url(#paperCut)"/>
+
+    <!-- Side fold shading -->
+    <path d="M50 72 L67 194 L84 194 L69 72 Z" fill="url(#bagSide)" opacity="0.55" mask="url(#paperCut)"/>
+    <path d="M291 72 L274 194 L257 194 L271 72 Z" fill="url(#bagSide)" opacity="0.4" mask="url(#paperCut)"/>
+
+    <!-- Paper creases -->
+    <path d="M120 74 L128 194 M220 74 L212 194" stroke="url(#crease)" stroke-width="3" fill="none" mask="url(#paperCut)"/>
+
+    <!-- Torn edge highlight -->
+    <path d="M50 72 L68 65 L86 74 L104 65 L122 74 L140 65 L158 74 L176 65 L194 74 L212 65 L230 74 L248 65 L266 74 L284 65 L291 72"
+          fill="none" stroke="#f0d6ab" stroke-width="2.5" stroke-linejoin="round" opacity="0.85"/>
+  </g>
+</svg>

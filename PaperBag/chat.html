@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="chat.css" />
+    
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="assistant.css" />
+    <link rel="stylesheet" href="dark-mode.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="PaperBag &mdash; shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
+  </head>
+  <body>
+    <!-- Preloader -->
+    <div id="preloader">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header glass">
+      <div class="container header-inner">
+        <nav class="nav-links mobile-hidden">
+          <a href="index.html">Shop</a>
+          <a href="Autos.html">Autos</a>
+          <a href="real-estate.html">Real Estate</a>
+          <a href="Air B&B.html">Stay</a>
+          <a href="catalogue.html">Catalogue</a>
+        </nav>
+
+        
+
+        <div class="nav-icons">
+          <a href="account.html"><i class="far fa-user"></i></a>
+          <a href="cart.html" class="cart-link">
+            <i class="fas fa-shopping-bag"></i>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Chat Container -->
+    <div class="chat-container">
+      <!-- Conversations Sidebar -->
+      <div class="conversations-sidebar">
+        <div class="sidebar-header">
+          <h2>Messages</h2>
+          <button type="button" class="pb-ask-assistant" id="pbAskAssistant" title="Instant answers from the PaperBag assistant">
+            <i class="fas fa-bolt" aria-hidden="true"></i> Ask assistant
+          </button>
+          <button id="newChatBtn" class="btn-icon" title="New Chat">
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+
+        <!-- New Chat Modal -->
+        <div id="newChatModal" class="chat-modal" style="display: none">
+          <div class="modal-content">
+            <h3>Start New Chat</h3>
+            <button id="chatWithAdminBtn" class="chat-option-btn">
+              <i class="fas fa-headset"></i>
+              <div>
+                <strong>Chat with Admin</strong>
+                <span>Get help and support</span>
+              </div>
+            </button>
+            <button id="closeChatModal" class="btn-secondary">Cancel</button>
+          </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-conversations">
+          <i class="fas fa-search"></i>
+          <input
+            type="text"
+            id="searchConversations"
+            placeholder="Search conversations..."
+          />
+        </div>
+
+        <!-- Conversation List -->
+        <div id="conversationList" class="conversation-list">
+          <div class="loading-conversations">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading conversations...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat Area -->
+      <div class="chat-area">
+        <!-- Empty State -->
+        <div id="emptyChatState" class="empty-chat-state">
+          <i class="fas fa-comments"></i>
+          <h3>Welcome to  Chat</h3>
+          <p>Select a conversation to start messaging</p>
+          <button id="startChatBtn" class="btn-primary">
+            <i class="fas fa-plus"></i> Start New Chat
+          </button>
+        </div>
+
+        <!-- Active Chat -->
+        <div id="activeChat" class="active-chat" style="display: none">
+          <!-- Chat Header -->
+          <div class="chat-header">
+            <div class="chat-header-info">
+              <div class="avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="chat-header-details">
+                <h3 id="chatRecipientName">Admin</h3>
+                <span id="chatRecipientStatus" class="status-text">Online</span>
+              </div>
+            </div>
+            <div class="chat-header-actions">
+              <button
+                class="btn-icon"
+                title="Chat Info"
+                onclick="
+                  document.getElementById('chatOptionsDropdown').style.display =
+                    document.getElementById('chatOptionsDropdown').style
+                      .display === 'none'
+                      ? 'block'
+                      : 'none'
+                "
+              >
+                <i class="fas fa-ellipsis-v"></i>
+              </button>
+              <div
+                id="chatOptionsDropdown"
+                style="
+                  display: none;
+                  position: absolute;
+                  right: 20px;
+                  top: 70px;
+                  background: white;
+                  border-radius: 8px;
+                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                  width: 160px;
+                  z-index: 100;
+                "
+              >
+                <button
+                  onclick="exportChat()"
+                  style="
+                    display: block;
+                    width: 100%;
+                    text-align: left;
+                    padding: 12px 16px;
+                    border: none;
+                    background: none;
+                    cursor: pointer;
+                    color: #33333b;
+                  "
+                >
+                  <i class="fas fa-download" style="margin-right: 8px"></i>
+                  Export Chat
+                </button>
+                <button
+                  onclick="blockUser()"
+                  style="
+                    display: block;
+                    width: 100%;
+                    text-align: left;
+                    padding: 12px 16px;
+                    border: none;
+                    background: none;
+                    cursor: pointer;
+                    color: #b42318;
+                  "
+                >
+                  <i class="fas fa-ban" style="margin-right: 8px"></i> Block
+                  User
+                </button>
+                <button
+                  onclick="reportUser()"
+                  style="
+                    display: block;
+                    width: 100%;
+                    text-align: left;
+                    padding: 12px 16px;
+                    border: none;
+                    background: none;
+                    cursor: pointer;
+                    color: #ed8936;
+                  "
+                >
+                  <i class="fas fa-flag" style="margin-right: 8px"></i> Report
+                  User
+                </button>
+              </div>
+              <button
+                id="closeChatBtn"
+                class="btn-icon mobile-only"
+                title="Close Chat"
+              >
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Messages Area -->
+          <div id="messagesArea" class="messages-area">
+            <!-- Messages will be dynamically loaded here -->
+          </div>
+
+          <!-- Typing Indicator -->
+          <div
+            id="typingIndicator"
+            class="typing-indicator"
+            style="display: none"
+          >
+            <div class="typing-dots">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <span class="typing-text">typing...</span>
+          </div>
+
+          <!-- Message Input -->
+          <div class="message-input-container">
+            <button
+              class="btn-icon"
+              title="Attach File"
+              onclick="document.getElementById('fileInput').click()"
+            >
+              <i class="fas fa-paperclip"></i>
+            </button>
+            <input
+              type="file"
+              id="fileInput"
+              hidden
+              accept="image/*,.pdf,.doc,.docx"
+            />
+            <textarea
+              id="messageInput"
+              placeholder="Type your message..."
+              rows="1"
+            ></textarea>
+            <button id="sendMessageBtn" class="btn-send">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container text-center">
+        <div class="footer-bottom">
+          &copy; 2024. All rights reserved.
+        <div class="creator-credit" style="font-size: 10px; color: #55555e; margin-top: 5px;">this was made by opedemowo olaoluwa victor</div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="index.html" class="nav-item">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+      <a href="catalogue.html" class="nav-item">
+        <i class="fas fa-list-ul"></i>
+        <span>Catalogue</span>
+      </a>
+      <a href="cart.html" class="nav-item">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Cart</span>
+      </a>
+      <a href="chat.html" class="nav-item active">
+        <i class="fas fa-comments"></i>
+        <span>Chat</span>
+      </a>
+      <a href="account.html" class="nav-item">
+        <i class="fas fa-user"></i>
+        <span>Account</span>
+      </a>
+    </nav>
+
+    <script src="preloader.js"></script>
+    <script type="module" src="chat.js"></script>
+    <script type="module" src="auth-state.js"></script>
+      <script src="compliance.js" defer></script>  <script type="module" src="wishlist.js"></script>
+    <script type="module" src="assistant.js"></script>
+<script src="dark-mode.js" defer></script>
+</body>
+</html>
+
+
+

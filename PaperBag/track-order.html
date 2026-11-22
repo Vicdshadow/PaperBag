@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Track Order</title>
+    <link rel="stylesheet" href="style.css" />
+    
+    <style>
+      .track-page {
+        padding: 60px 0;
+        max-width: 600px;
+        margin: 0 auto;
+        min-height: 60vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .track-form {
+        background: #fff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+      .form-group input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #e6e6ea;
+        border-radius: 6px;
+        font-size: 16px;
+      }
+      .status-result {
+        margin-top: 30px;
+        padding: 24px;
+        border-radius: 12px;
+        background: #fff;
+        border: 1px solid var(--color-border);
+        box-shadow: var(--shadow-sm);
+        display: none;
+      }
+      #map {
+        height: 300px;
+        width: 100%;
+        margin-top: 20px;
+        border-radius: 8px;
+        background: #f8f8fa;
+        display: none;
+      }
+      .tracking-steps {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      .step {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        font-size: 14px;
+      }
+      .step i {
+        color: #e6e6ea;
+        font-size: 18px;
+      }
+      .step.active i {
+        color: var(--color-accent);
+      }
+    </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="assistant.css" />
+    <link rel="stylesheet" href="dark-mode.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="PaperBag &mdash; shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
+  </head>
+  <body>
+
+    <header class="site-header glass">
+      <div class="container header-inner">
+        <nav class="nav-links mobile-hidden">
+          <a href="index.html">Shop</a>
+          <a href="Autos.html">Autos</a>
+          <a href="real-estate.html">Real Estate</a>
+        </nav>
+        
+        <div class="nav-icons">
+          <a href="account.html"><i class="far fa-user"></i></a>
+          <a href="cart.html" class="cart-link">
+            <i class="fas fa-shopping-bag"></i>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container track-page animate-fade-in">
+      <div class="track-form">
+        <h1 class="section-title" style="margin-bottom: 10px">Track Order</h1>
+        <p class="muted" style="margin-bottom: 30px">
+          Enter your Order ID (starts with BT- or PAY-) to see live updates.
+        </p>
+
+        <form id="trackForm">
+          <div class="form-group">
+            <label for="orderId">Order ID</label>
+            <input
+              type="text"
+              id="orderId"
+              placeholder="e.g. BT-123456789"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            id="trackBtn"
+            class="btn btn-primary"
+            style="width: 100%"
+          >
+            Track Package
+          </button>
+        </form>
+
+        <div id="statusResult" class="status-result">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <h3 id="displayStatus">
+              <i class="fas fa-truck"></i> Status: <span>Processing</span>
+            </h3>
+            <span id="orderDate" class="muted" style="font-size: 12px"></span>
+          </div>
+
+          <div id="trackingMap" class="map-container">
+            <div id="map"></div>
+            <p
+              id="mapPlaceholder"
+              style="
+                text-align: center;
+                padding: 40px;
+                background: #f8f9fa;
+                border-radius: 8px;
+                margin-top: 15px;
+                font-size: 13px;
+                color: #55555e;
+              "
+            >
+              <i
+                class="fas fa-map-marked-alt"
+                style="font-size: 24px; display: block; margin-bottom: 10px"
+              ></i>
+              Loading map tracking...
+            </p>
+          </div>
+
+          <div class="tracking-steps">
+            <div class="step" id="step_processing">
+              <i class="fas fa-check-circle"></i>
+              <span>Order Received (Payment verified)</span>
+            </div>
+            <div class="step" id="step_verified">
+              <i class="fas fa-check-circle"></i>
+              <span>Payment Verified</span>
+            </div>
+            <div class="step" id="step_shipped">
+              <i class="fas fa-check-circle"></i> <span>Package Shipped</span>
+            </div>
+            <div class="step" id="step_nearby">
+              <i class="fas fa-check-circle"></i>
+              <span>Arrived at Local Center</span>
+            </div>
+            <div class="step" id="step_delivered">
+              <i class="fas fa-check-circle"></i> <span>Delivered</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container text-center">
+        <div class="footer-bottom">
+          &copy; 2024. All rights reserved.
+        <div class="creator-credit" style="font-size: 10px; color: #55555e; margin-top: 5px;">this was made by opedemowo olaoluwa victor</div>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module">
+      import {
+        db,
+        collection,
+        doc,
+        getDoc,
+        getDocs,
+        onSnapshot,
+        query,
+        where,
+      } from "./firebase-config.js";
+
+      let map, marker;
+
+      function initMap(lat, lng) {
+        const coords = { lat: lat || 6.5244, lng: lng || 3.3792 }; // Lagos default
+
+        if (!window.google || !window.google.maps) {
+          document.getElementById("mapPlaceholder").textContent =
+            "Google Maps API key required for live view.";
+          return;
+        }
+
+        document.getElementById("mapPlaceholder").style.display = "none";
+        document.getElementById("map").style.display = "block";
+
+        if (!map) {
+          map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 14,
+            center: coords,
+            styles: [{ featureType: "poi", stylers: [{ visibility: "off" }] }],
+          });
+          marker = new google.maps.Marker({
+            position: coords,
+            map: map,
+            icon: "assets/images/placeholder.svg", // Delivery icon
+            title: "Your Package",
+          });
+        } else {
+          const newPos = new google.maps.LatLng(coords.lat, coords.lng);
+          marker.setPosition(newPos);
+          map.panTo(newPos);
+        }
+      }
+
+      document
+        .getElementById("trackForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const orderId = document.getElementById("orderId").value.trim();
+          const btn = document.getElementById("trackBtn");
+
+          btn.textContent = "Checking records...";
+          btn.disabled = true;
+
+          try {
+            // 1. Fetch Order once (by doc ID or paymentRef)
+            let orderRef = doc(db, "orders", orderId);
+            let orderSnap = await getDoc(orderRef);
+
+            if (!orderSnap.exists()) {
+              const paymentQuery = query(
+                collection(db, "orders"),
+                where("paymentRef", "==", orderId),
+              );
+              const paymentSnap = await getDocs(paymentQuery);
+              if (paymentSnap.empty) {
+                alert("Order not found. Please check your ID.");
+                btn.textContent = "Track Package";
+                btn.disabled = false;
+                return;
+              }
+              orderSnap = paymentSnap.docs[0];
+              orderRef = doc(db, "orders", orderSnap.id);
+            }
+
+            const orderData = orderSnap.data();
+            showStatus(orderData);
+
+            // 2. Listen for live updates if tracking coordinates exist
+            onSnapshot(orderRef, (snapshot) => {
+              const updatedData = snapshot.data();
+              if (updatedData) {
+                showStatus(updatedData);
+                if (updatedData.tracking) {
+                  initMap(updatedData.tracking.lat, updatedData.tracking.lng);
+                }
+              }
+            });
+
+            btn.textContent = "Track Package";
+            btn.disabled = false;
+            document.getElementById("statusResult").style.display = "block";
+            document
+              .getElementById("statusResult")
+              .scrollIntoView({ behavior: "smooth" });
+          } catch (err) {
+            console.error(err);
+            alert("Error fetching order status.");
+            btn.textContent = "Track Package";
+            btn.disabled = false;
+          }
+        });
+
+      function showStatus(data) {
+        const statuses = ["processing", "verified", "shipped", "nearby", "delivered"];
+        const status = (data.status || "processing").toLowerCase();
+        const normalizedStatus = ["released", "completed"].includes(status) ? "delivered" : status;
+        const currentIdx = Math.max(
+          0,
+          statuses.indexOf(normalizedStatus),
+        );
+
+        const labelMap = {
+          processing: "Order Received (Awaiting Payment)",
+          verified: "Payment Verified",
+          shipped: "Package Shipped",
+          nearby: "Arrived at Local Center",
+          delivered: "Delivered",
+          released: "Delivered (Payment verified Released)",
+        };
+
+        const displayLabel =
+          labelMap[status] || status.charAt(0).toUpperCase() + status.slice(1);
+
+        document
+          .getElementById("displayStatus")
+          .querySelector("span").textContent = displayLabel;
+
+        if (data.createdAt) {
+          document.getElementById("orderDate").textContent =
+            "Ordered on: " + data.createdAt.toDate().toLocaleDateString();
+        }
+
+        // Highlight steps
+        statuses.forEach((s, i) => {
+          const el = document.getElementById("step_" + s);
+          if (i <= currentIdx) {
+            el.classList.add("active");
+            el.querySelector("i").className = "fas fa-check-circle";
+          } else {
+            el.classList.remove("active");
+            el.querySelector("i").className = "far fa-circle";
+          }
+        });
+      }
+    </script>
+    <script type="module" src="index.js"></script>
+    <nav class="bottom-nav">
+      <a href="index.html" class="nav-item">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+      <a href="catalogue.html" class="nav-item">
+        <i class="fas fa-list-ul"></i>
+        <span>Catalogue</span>
+      </a>
+      <a href="cart.html" class="nav-item">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Cart</span>
+      </a>
+      <a href="account.html" class="nav-item">
+        <i class="fas fa-user"></i>
+        <span>Account</span>
+      </a>
+      <a href="chat.html" class="nav-item">
+        <i class="fas fa-comments"></i>
+        <span>Chat</span>
+      </a>
+    </nav>
+    <script type="module" src="auth-state.js"></script>
+      <script src="compliance.js" defer></script>  <script type="module" src="wishlist.js"></script>
+    <script type="module" src="assistant.js"></script>
+<script src="dark-mode.js" defer></script>
+</body>
+</html>
+
+
+
+
