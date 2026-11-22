@@ -1,22 +1,58 @@
-// PaperBag wishlist — works for guests (localStorage) and signed-in users (Firestore).
-import {
-  auth,
-  db,
-  onAuthStateChanged,
-  collection,
-  doc,
-  setDoc,
-  deleteDoc,
-  getDocs,
-  serverTimestamp,
-  onSnapshot,
-} from "./firebase-config.js";
-
+// PaperBag wishlist — visible immediately for guests, then syncs to Firestore
+// when Firebase is available. Firebase is loaded dynamically so a blocked or
+// slow CDN can never stop the wishlist heart from rendering.
 const GUEST_KEY = "guest_wishlist";
 let currentUser = null;
 let items = [];
 let unsubscribe = null;
 let ready = false;
+
+// Firebase handles are assigned only if ./firebase-config.js loads successfully.
+let auth = null;
+let db = null;
+let onAuthStateChanged = null;
+let collection = null;
+let doc = null;
+let setDoc = null;
+let deleteDoc = null;
+let serverTimestamp = null;
+let onSnapshot = null;
+let firebaseLoaded = false;
+
+async function loadFirebase() {
+  if (firebaseLoaded) return true;
+  try {
+    const fb = await import("./firebase-config.js");
+    auth = fb.auth;
+    db = fb.db;
+    onAuthStateChanged = fb.onAuthStateChanged;
+    collection = fb.collection;
+    doc = fb.doc;
+    setDoc = fb.setDoc;
+    deleteDoc = fb.deleteDoc;
+    serverTimestamp = fb.serverTimestamp;
+    onSnapshot = fb.onSnapshot;
+    firebaseLoaded = !!(auth && db && onAuthStateChanged);
+    return firebaseLoaded;
+  } catch (err) {
+    console.warn("Wishlist running in local-only mode:", err);
+    firebaseLoaded = false;
+    return false;
+  }
+}
+
+function canSync() {
+  return !!(
+    currentUser &&
+    db &&
+    doc &&
+    setDoc &&
+    deleteDoc &&
+    serverTimestamp &&
+    collection &&
+    onSnapshot
+  );
+}
 
 function readGuest() {
   try {
@@ -28,7 +64,11 @@ function readGuest() {
 }
 
 function writeGuest(list) {
-  localStorage.setItem(GUEST_KEY, JSON.stringify(list));
+  try {
+    localStorage.setItem(GUEST_KEY, JSON.stringify(list));
+  } catch (err) {
+    console.warn("Could not save guest wishlist:", err);
+  }
 }
 
 function normalize(p) {
@@ -135,7 +175,7 @@ async function toggle(product) {
   if (!p.id) return;
   const exists = isInWishlist(p.id);
 
-  if (currentUser) {
+  if (canSync()) {
     const ref = doc(db, "users", currentUser.uid, "wishlist", p.id);
     try {
       if (exists) {
@@ -148,27 +188,24 @@ async function toggle(product) {
         ? items.filter((i) => String(i.id) !== p.id)
         : [...items, p];
       notify();
+      return;
     } catch (err) {
       console.warn("Wishlist write failed, saving locally:", err);
-      const g = readGuest();
-      const rest = g.filter((x) => String(x.id) !== p.id);
-      writeGuest(exists ? rest : [...rest, p]);
-      items = readGuest();
-      notify();
     }
-  } else {
-    const g = readGuest();
-    const rest = g.filter((x) => String(x.id) !== p.id);
-    const next = exists ? rest : [...rest, p];
-    writeGuest(next);
-    items = next;
-    notify();
   }
+
+  // Guest / offline fallback — always works.
+  const g = readGuest();
+  const rest = g.filter((x) => String(x.id) !== p.id);
+  const next = exists ? rest : [...rest, p];
+  writeGuest(next);
+  items = next;
+  notify();
 }
 
 async function mergeGuestIntoAccount(user) {
   const guest = readGuest();
-  if (!guest.length) return;
+  if (!guest.length || !canSync()) return;
   const col = collection(db, "users", user.uid, "wishlist");
   try {
     for (const p of guest) {
@@ -221,9 +258,9 @@ function makeHeartLink() {
   return link;
 }
 
-//Pages use many different header layouts. Put the heart in the first matching
-//header action area; if none exists yet, keep a floating heart so the wishlist
-//is always visible and clickable. Move it into the header once one appears.
+// Pages use many different header layouts. Put the heart in the first matching
+// header action area; if none exists yet, keep a floating heart so the wishlist
+// is always visible and clickable. Move it into the header once one appears.
 function injectHeaderHeart() {
   if (document.querySelector(".wishlist-link:not(.pb-wishlist-fab)")) return true;
 
@@ -281,18 +318,8 @@ function bindEvents() {
   });
 }
 
-function init() {
-  bindEvents();
-  const inHeader = injectHeaderHeart();
-  // Some pages build their header after DOMContentLoaded. Until then the
-  // floating heart keeps the wishlist visible; move it into the header later.
-  if (!inHeader && typeof MutationObserver !== "undefined") {
-    const observer = new MutationObserver(() => {
-      if (injectHeaderHeart()) observer.disconnect();
-    });
-    observer.observe(document.documentElement, { childList: true, subtree: true });
-  }
-  renderPage();
+function setupAuthListener() {
+  if (!firebaseLoaded || !onAuthStateChanged || !auth) return;
   onAuthStateChanged(auth, async (user) => {
     currentUser = user || null;
     if (unsubscribe) {
@@ -322,6 +349,25 @@ function init() {
       notify();
     }
   });
+}
+
+function init() {
+  bindEvents();
+
+  // Render the heart and guest data before any network dependency.
+  const inHeader = injectHeaderHeart();
+  if (!inHeader && typeof MutationObserver !== "undefined") {
+    const observer = new MutationObserver(() => {
+      if (injectHeaderHeart()) observer.disconnect();
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+  }
+  items = readGuest();
+  ready = true;
+  notify();
+
+  // Enhance with account sync when Firebase is reachable.
+  loadFirebase().then(setupAuthListener);
 }
 
 window.PaperBagWishlist = {
