@@ -104,7 +104,7 @@ function renderSections(grouped) {
       return `
         <a href="product.html?id=${p.id}" class="category-product-card" style="${linkStyle}" ${linkAttrs}>
           <div class="category-product-image">
-            <img src="${img}" alt="${p.name || "Product"}" onerror="this.src='https://via.placeholder.com/300x300?text=No+Image'">
+            <img src="${img}" alt="${p.name || "Product"}" onerror="this.src='assets/images/placeholder.svg'">
             ${badge}
           </div>
           <div class="category-product-info">

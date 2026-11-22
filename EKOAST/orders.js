@@ -76,7 +76,7 @@ function renderFilteredOrders() {
   filtered.forEach((o) => {
     const mainItem = o.items[0] || {
       name: "Unknown Item",
-      img: "assets/images/placeholder.png",
+      img: "assets/images/placeholder.svg",
     };
     const dateStr = o.createdAt
       ? o.createdAt
@@ -94,14 +94,14 @@ function renderFilteredOrders() {
     const card = document.createElement("div");
     card.className = "order-card animate-fade-in";
     card.innerHTML = `
-      <img src="${mainItem.image || mainItem.img || "assets/images/placeholder.png"}" class="order-img" />
+      <img src="${mainItem.image || mainItem.img || "assets/images/placeholder.svg"}" class="order-img" />
       <div class="order-info">
         <div class="order-name">${mainItem.name} ${o.items.length > 1 ? `(+${o.items.length - 1} more)` : ""}</div>
         <div class="order-ref">Order #${o.id.slice(-6)}</div>
         <div class="status-pill ${statusClass}">${getStatusLabel(o.status)}</div>
         <div class="order-date">On ${dateStr}</div>
       </div>
-      <div style="display: flex; align-items: center; color: #f68b1e; font-size: 14px;">
+      <div style="display: flex; align-items: center; color: #111116; font-size: 14px;">
         <i class="fas fa-chevron-right"></i>
       </div>
     `;

@@ -317,10 +317,10 @@ function setupRealtimeProducts(userId) {
       if (snapshot.empty) {
         productCountBadge.classList.add("hidden");
         productsContainer.innerHTML = `
-          <div style="grid-column:1/-1; text-align:center; padding:3rem; background:#fff; border-radius:0.75rem; border: 1px dashed #e5e7eb;">
-            <i class="fas fa-box-open" style="font-size:3rem; color:#d1d5db; display:block; margin-bottom:1rem;"></i>
-            <p style="color:#6b7280; margin:0; font-size:1rem;">You haven't uploaded any products yet.</p>
-            <p style="color:#9ca3af; margin:0.5rem 0 0; font-size:0.85rem;">Use the form on the left to add your first product.</p>
+          <div style="grid-column:1/-1; text-align:center; padding:3rem; background:#fff; border-radius:0.75rem; border: 1px dashed #e6e6ea;">
+            <i class="fas fa-box-open" style="font-size:3rem; color:#d4d4da; display:block; margin-bottom:1rem;"></i>
+            <p style="color:#55555e; margin:0; font-size:1rem;">You haven't uploaded any products yet.</p>
+            <p style="color:#72727b; margin:0.5rem 0 0; font-size:0.85rem;">Use the form on the left to add your first product.</p>
           </div>
         `;
         return;
@@ -356,7 +356,7 @@ function setupRealtimeProducts(userId) {
             src="${product.imageURL || product.imageUrl || product.image || ""}"
             alt="${escapeHtml(product.name)}"
             class="product-image"
-            onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'"
+            onerror="this.src='assets/images/placeholder.svg'"
           >
           <div class="product-details">
             <h3 class="product-title">${escapeHtml(product.name)}</h3>

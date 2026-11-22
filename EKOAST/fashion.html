@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fashion & Accessories</title>
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    
     <style>
       .subsections-page {
         padding: 60px 0;
@@ -20,6 +17,13 @@
         margin-top: 40px;
       }
     </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="EKOAST â€” shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
   </head>
   <body>
     <header class="site-header glass">
@@ -29,9 +33,7 @@
           <a href="new-arrivals.html">New Arrivals</a>
           <a href="catalogue.html" class="active">Catalogue</a>
         </nav>
-        <a href="index.html" class="logo">
-          <!-- Logo removed -->
-        </a>
+        
         <div class="nav-icons">
           <div class="search-container" id="searchContainer">
             <i class="fas fa-search" id="searchIcon"></i>
@@ -61,8 +63,8 @@
         <div class="product-card">
           <a href="index.html?cat=fashion&sub=Clothing%20(Men,%20Women,%20Kids)">
             <div class="product-image slideshow-container">
-              <img
-                src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=600&q=60"
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-992b7c28d7.jpg"
                 class="slide active"
                 alt="Clothing"
               />
@@ -75,8 +77,8 @@
         <div class="product-card">
           <a href="index.html?cat=fashion&sub=Bags,%20Wallets">
             <div class="product-image slideshow-container">
-              <img
-                src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=600&q=60"
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-175879abd7.jpg"
                 class="slide active"
                 alt="Bags, Wallets"
               />
@@ -89,8 +91,8 @@
         <div class="product-card">
           <a href="index.html?cat=fashion&sub=Shoes%20/%20Sneakers">
             <div class="product-image slideshow-container">
-              <img
-                src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&q=60"
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-27bea62f38.jpg"
                 class="slide active"
                 alt="Shoes / Sneakers"
               />
@@ -103,8 +105,8 @@
         <div class="product-card">
           <a href="index.html?cat=fashion&sub=Belts,%20Hats,%20Scarves">
             <div class="product-image slideshow-container">
-              <img
-                src="https://images.unsplash.com/photo-1529958030586-3aae4ca485ff?auto=format&fit=crop&w=600&q=60"
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-d93e256868.jpg"
                 class="slide active"
                 alt="Belts, Hats, Scarves"
               />
@@ -117,8 +119,8 @@
         <div class="product-card">
           <a href="index.html?cat=fashion&sub=Jewelry,%20Watches">
             <div class="product-image slideshow-container">
-              <img
-                src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=60"
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-808df00aa2.jpg"
                 class="slide active"
                 alt="Jewelry, Watches"
               />
@@ -131,8 +133,8 @@
         <div class="product-card">
           <a href="index.html?cat=fashion&sub=Sunglasses">
             <div class="product-image slideshow-container">
-              <img
-                src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=60"
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-7323726b16.jpg"
                 class="slide active"
                 alt="Sunglasses"
               />
@@ -145,8 +147,8 @@
         <div class="product-card">
           <a href="index.html?cat=fashion&sub=Fashion%20Accessories">
             <div class="product-image slideshow-container">
-              <img
-                src="https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?auto=format&fit=crop&w=600&q=60"
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-6c3107121a.jpg"
                 class="slide active"
                 alt="Fashion Accessories"
               />
@@ -163,14 +165,13 @@
       <div class="container text-center">
         <div class="footer-bottom">
           &copy; 2024. All rights reserved.
-        <div class="creator-credit" style="font-size: 10px; color: #718096; margin-top: 5px;">this was made by opedemowo olaoluwa victor</div>
+        <div class="creator-credit" style="font-size: 10px; color: #55555e; margin-top: 5px;">this was made by opedemowo olaoluwa victor</div>
         </div>
       </div>
     </footer>
 
     <script type="module" src="index.js"></script>
     <script type="module" src="index.js"></script>
-    <script src="slideshow.js" defer></script>
     <script type="module">
       import { auth, db } from "./firebase-config.js";
       import {
@@ -223,7 +224,7 @@
       </a>
     </nav>
     <script type="module" src="auth-state.js"></script>
-  </body>
+      <script src="compliance.js" defer></script></body>
 </html>
 
 

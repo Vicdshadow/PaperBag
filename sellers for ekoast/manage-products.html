@@ -4,13 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Manage Products — Seller Center</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
-      *,
+*,
       *::before,
       *::after {
         box-sizing: border-box;
@@ -19,14 +15,14 @@
       }
       body {
         font-family: "Inter", sans-serif;
-        background: #f0f0f0;
-        color: #1f2937;
+        background: #e6e6ea;
+        color: #111116;
         min-height: 100vh;
         padding-bottom: 72px;
       }
       .topbar {
         background: #fff;
-        border-bottom: 1px solid #e5e7eb;
+        border-bottom: 1px solid #e6e6ea;
         padding: 0.75rem 1rem;
         display: flex;
         align-items: center;
@@ -43,7 +39,7 @@
       .topbar-logo {
         width: 32px;
         height: 32px;
-        background: #ff6600;
+        background: #111116;
         border-radius: 7px;
         display: flex;
         align-items: center;
@@ -56,7 +52,7 @@
         font-size: 1rem;
       }
       .btn-add {
-        background: #ff6600;
+        background: #111116;
         color: #fff;
         border: none;
         border-radius: 8px;
@@ -99,24 +95,24 @@
         right: 10px;
         top: 50%;
         transform: translateY(-50%);
-        color: #ff6600;
+        color: #111116;
         font-size: 0.82rem;
       }
       .search-wrap input {
         width: 100%;
         padding: 0.5rem 2rem 0.5rem 0.7rem;
-        border: 1.5px solid #e5e7eb;
+        border: 1.5px solid #e6e6ea;
         border-radius: 8px;
         font-family: inherit;
         font-size: 0.83rem;
         outline: none;
       }
       .search-wrap input:focus {
-        border-color: #ff6600;
+        border-color: #111116;
       }
       .cat-select {
         padding: 0.5rem 0.75rem;
-        border: 1.5px solid #e5e7eb;
+        border: 1.5px solid #e6e6ea;
         border-radius: 8px;
         font-family: inherit;
         font-size: 0.83rem;
@@ -140,11 +136,11 @@
       .stat-mini .val {
         font-size: 1.3rem;
         font-weight: 800;
-        color: #ff6600;
+        color: #111116;
       }
       .stat-mini .lbl {
         font-size: 0.72rem;
-        color: #6b7280;
+        color: #55555e;
         margin-top: 0.15rem;
       }
       /* Product grid */
@@ -183,14 +179,14 @@
         text-overflow: ellipsis;
       }
       .product-price {
-        color: #ff6600;
+        color: #111116;
         font-weight: 700;
         font-size: 0.95rem;
         margin-bottom: 0.2rem;
       }
       .product-cat {
         font-size: 0.72rem;
-        color: #6b7280;
+        color: #55555e;
         margin-bottom: 0.5rem;
       }
       .product-status {
@@ -207,7 +203,7 @@
       }
       .status-inactive {
         background: #fee2e2;
-        color: #dc2626;
+        color: #b42318;
       }
       .product-actions {
         display: flex;
@@ -220,26 +216,26 @@
         font-size: 0.76rem;
         font-weight: 600;
         cursor: pointer;
-        border: 1.5px solid #e5e7eb;
+        border: 1.5px solid #e6e6ea;
         font-family: inherit;
         transition: all 0.15s;
       }
       .btn-edit {
         background: #f9fafb;
-        color: #374151;
+        color: #33333b;
       }
       .btn-edit:hover {
-        background: #e5e7eb;
+        background: #e6e6ea;
       }
       .btn-delete {
         background: #fee2e2;
-        color: #dc2626;
+        color: #b42318;
         border-color: #fecaca;
       }
       .btn-delete:hover {
-        background: #dc2626;
+        background: #b42318;
         color: #fff;
-        border-color: #dc2626;
+        border-color: #b42318;
       }
       /* Empty state */
       .empty-state {
@@ -251,12 +247,12 @@
       }
       .empty-state i {
         font-size: 2.5rem;
-        color: #d1d5db;
+        color: #d4d4da;
         display: block;
         margin-bottom: 0.75rem;
       }
       .empty-state p {
-        color: #9ca3af;
+        color: #72727b;
         font-size: 0.9rem;
         margin-bottom: 1rem;
       }
@@ -302,7 +298,7 @@
         border: none;
         background: none;
         font-size: 1.4rem;
-        color: #6b7280;
+        color: #55555e;
         cursor: pointer;
       }
       .modal-box h3 {
@@ -317,16 +313,16 @@
         display: block;
         font-size: 0.8rem;
         font-weight: 600;
-        color: #374151;
+        color: #33333b;
         margin-bottom: 0.35rem;
       }
       .form-group label span {
-        color: #ff6600;
+        color: #111116;
       }
       .form-input {
         width: 100%;
         padding: 0.62rem 0.85rem;
-        border: 1.5px solid #e5e7eb;
+        border: 1.5px solid #e6e6ea;
         border-radius: 8px;
         font-family: inherit;
         font-size: 0.88rem;
@@ -334,7 +330,7 @@
         transition: border-color 0.2s;
       }
       .form-input:focus {
-        border-color: #ff6600;
+        border-color: #111116;
         box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.1);
       }
       textarea.form-input {
@@ -347,7 +343,7 @@
         gap: 0.75rem;
       }
       .img-drop {
-        border: 2px dashed #e5e7eb;
+        border: 2px dashed #e6e6ea;
         border-radius: 8px;
         padding: 1.2rem;
         text-align: center;
@@ -358,17 +354,17 @@
       }
       .img-drop:hover,
       .img-drop.drag {
-        border-color: #ff6600;
+        border-color: #111116;
         background: #fff7ed;
       }
       .img-drop i {
         font-size: 1.8rem;
-        color: #9ca3af;
+        color: #72727b;
         margin-bottom: 0.4rem;
       }
       .img-drop p {
         font-size: 0.78rem;
-        color: #9ca3af;
+        color: #72727b;
       }
       #img-preview {
         max-width: 100px;
@@ -383,7 +379,7 @@
         padding: 0.75rem;
         border-radius: 8px;
         border: none;
-        background: #ff6600;
+        background: #111116;
         color: #fff;
         font-weight: 700;
         font-size: 0.95rem;
@@ -427,7 +423,7 @@
         justify-content: center;
         gap: 1rem;
         z-index: 9999;
-        color: #ff6600;
+        color: #111116;
         font-weight: 600;
       }
       .spinner {
@@ -435,7 +431,7 @@
         height: 36px;
         border-radius: 50%;
         border: 3px solid #fed7aa;
-        border-top-color: #ff6600;
+        border-top-color: #111116;
         animation: spin 0.8s linear infinite;
       }
       @keyframes spin {
@@ -452,7 +448,7 @@
         left: 0;
         right: 0;
         background: #fff;
-        border-top: 1px solid #e5e7eb;
+        border-top: 1px solid #e6e6ea;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         z-index: 100;
@@ -464,7 +460,7 @@
         gap: 3px;
         padding: 0.6rem 0 0.75rem;
         font-size: 0.68rem;
-        color: #6b7280;
+        color: #55555e;
         text-decoration: none;
         transition: color 0.15s;
         border: none;
@@ -476,12 +472,12 @@
         font-size: 1.2rem;
       }
       .nav-item.active {
-        color: #ff6600;
+        color: #111116;
       }
       .nav-vc {
         width: 26px;
         height: 26px;
-        background: #ff6600;
+        background: #111116;
         border-radius: 6px;
         display: flex;
         align-items: center;
@@ -491,6 +487,13 @@
         font-weight: 800;
       }
     </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="EKOAST â€” shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
   </head>
   <body>
     <div id="loading">
@@ -504,7 +507,7 @@
         class="topbar-left"
         style="text-decoration: none; color: inherit"
       >
-        <div class="topbar-logo"><i class="fas fa-store"></i></div>
+        
         <span class="topbar-title">Manage Products</span>
       </a>
       <button class="btn-add" id="open-upload">
@@ -569,7 +572,7 @@
         <h3>
           <i
             class="fas fa-cloud-upload-alt"
-            style="color: #ff6600; margin-right: 6px"
+            style="color: #111116; margin-right: 6px"
           ></i
           >Add New Product
         </h3>
@@ -657,7 +660,7 @@
                 style="display: none"
                 required
               />
-              <img id="img-preview" src="" alt="preview" />
+              <img loading="lazy" decoding="async" id="img-preview" src="" alt="preview" />
             </div>
           </div>
           <button type="submit" id="submit-btn" class="btn-primary">
@@ -787,7 +790,7 @@
           .map(
             (p) => `
         <div class="product-card">
-          <img src="${p.imageURL || p.imageUrl || p.image || ""}" alt="${p.name}" onerror="this.src='https://placehold.co/400x300?text=No+Image'"/>
+          <img loading="lazy" decoding="async" src="${p.imageURL || p.imageUrl || p.image || ""}" alt="${p.name}" onerror="this.src='assets/images/placeholder.svg'"/>
           <div class="product-body">
             <div class="product-title" title="${p.name}">${p.name}</div>
             <div class="product-price">₦${Number(p.price || 0).toLocaleString()}</div>
@@ -1045,6 +1048,7 @@
         }
       };
     </script>
+      <script src="compliance.js" defer></script>
   </body>
 </html>
 

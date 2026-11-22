@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Details — Ekoast</title>
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    
     <style>
       .product-page {
         padding-top: 20px;
@@ -37,7 +34,7 @@
       .main-image {
         width: 100%;
         max-width: 600px;
-        background: #f9f9f9;
+        background: #f8f8fa;
         aspect-ratio: 3/4;
         object-fit: cover;
         border-radius: 8px;
@@ -81,7 +78,7 @@
       }
       .p-desc {
         font-size: 14px;
-        color: #666;
+        color: #55555e;
         line-height: 1.8;
         margin-bottom: 40px;
         word-break: break-word;
@@ -103,13 +100,13 @@
       .action-label {
         font-size: 11px;
         font-weight: 700;
-        color: #666;
+        color: #55555e;
         text-transform: uppercase;
       }
       .qty-wrap {
         display: inline-flex;
         align-items: center;
-        border: 1px solid #ddd;
+        border: 1px solid #e6e6ea;
         border-radius: 999px;
         overflow: hidden;
       }
@@ -133,16 +130,16 @@
       }
       .mini-icon-btn {
         width: 36px;
-        border: 1px solid #ddd;
+        border: 1px solid #e6e6ea;
         border-radius: 6px;
         background: #fff;
-        color: #555;
+        color: #55555e;
         font-size: 12px;
       }
       .main-add-btn {
         flex: 1;
-        background: #f68b1e;
-        border-color: #f68b1e;
+        background: #111116;
+        border-color: #111116;
         color: #fff;
         border-radius: 8px;
       }
@@ -171,8 +168,8 @@
       }
       .mobile-add-btn {
         flex: 1;
-        background: #f68b1e;
-        border-color: #f68b1e;
+        background: #111116;
+        border-color: #111116;
         color: #fff;
         border-radius: 6px;
         padding: 9px 12px;
@@ -183,7 +180,7 @@
         width: 100%;
         max-width: 200px;
         padding: 10px;
-        border: 1px solid #ddd;
+        border: 1px solid #e6e6ea;
         border-radius: 6px;
         font-size: 14px;
       }
@@ -210,7 +207,7 @@
         height: 24px;
         border-radius: 50%;
         cursor: pointer;
-        border: 1px solid #ddd;
+        border: 1px solid #e6e6ea;
       }
       .verification-badge {
         margin-bottom: 20px;
@@ -375,7 +372,7 @@
         height: 34px;
         border: none;
         background: #fff;
-        color: #333;
+        color: #1c1c22;
         font-size: 18px;
       }
       .market-search {
@@ -388,7 +385,7 @@
         align-items: center;
         gap: 8px;
         padding: 0 10px;
-        color: #666;
+        color: #55555e;
       }
       .market-search span {
         font-family: "Patrick Hand", cursive;
@@ -465,11 +462,11 @@
       }
       .brand-line {
         font-size: 12px;
-        color: #666;
+        color: #55555e;
         margin-bottom: 6px;
       }
       .market-flash {
-        background: #f68b1e;
+        background: #111116;
         color: #fff;
         border-radius: 4px;
         display: flex;
@@ -496,7 +493,7 @@
         text-decoration: line-through;
       }
       .market-discount {
-        color: #f68b1e;
+        color: #111116;
         font-size: 12px;
         font-weight: 700;
       }
@@ -506,7 +503,7 @@
         margin-top: 6px;
       }
       .market-rating-line span {
-        color: #666;
+        color: #55555e;
         font-size: 12px;
       }
       .market-actions {
@@ -515,7 +512,7 @@
         align-items: center;
       }
       .market-select {
-        border: 1px solid #ddd;
+        border: 1px solid #e6e6ea;
         border-radius: 6px;
         padding: 8px 10px;
         font-size: 13px;
@@ -538,6 +535,13 @@
         margin: 4px 0;
       }
     </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="EKOAST â€” shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
   </head>
   <body class="market-product-page">
     <header class="market-topbar">
@@ -564,7 +568,7 @@
       <section class="market-card">
         <div class="market-gallery-scroll">
           <div class="market-image-panel">
-            <img id="mainImg" src="" alt="Product" class="market-image-main" />
+            <img loading="lazy" decoding="async" id="mainImg" src="" alt="Product" class="market-image-main" />
             <div id="pHeroTitle" class="market-image-title">Loading...</div>
           </div>
         </div>
@@ -645,7 +649,7 @@
         <button
           id="chatAdminBtn"
           class="btn btn-outline"
-          style="width: 100%; border-color: #333; color: #333"
+          style="width: 100%; border-color: #1c1c22; color: #1c1c22"
         >
           <i class="far fa-comment-dots"></i> Contact Admin Support
         </button>
@@ -677,7 +681,7 @@
           font-size: 20px;
           font-weight: 600;
           margin-bottom: 20px;
-          border-bottom: 1px solid #eee;
+          border-bottom: 1px solid #f8f8fa;
           padding-bottom: 10px;
         "
       >
@@ -691,7 +695,7 @@
       <div
         id="reviewFormContainer"
         style="
-          background: #f9f9f9;
+          background: #f8f8fa;
           padding: 20px;
           border-radius: 8px;
           display: none;
@@ -703,7 +707,7 @@
             <label style="font-size: 12px; font-weight: 600">Rating</label>
             <select
               id="reviewRating"
-              style="padding: 8px; border: 1px solid #ddd; border-radius: 4px"
+              style="padding: 8px; border: 1px solid #e6e6ea; border-radius: 4px"
             >
               <option value="5">5 - Excellent</option>
               <option value="4">4 - Good</option>
@@ -720,7 +724,7 @@
               style="
                 width: 100%;
                 padding: 10px;
-                border: 1px solid #ddd;
+                border: 1px solid #e6e6ea;
                 border-radius: 4px;
               "
               required
@@ -733,7 +737,7 @@
       <div
         id="reviewLoginMsg"
         style="
-          background: #f0f0f0;
+          background: #e6e6ea;
           padding: 15px;
           border-radius: 8px;
           text-align: center;
@@ -866,10 +870,10 @@
           p.imageUrl ||
           p.imageURL ||
           p.image ||
-          "https://via.placeholder.com/600x800?text=";
+          "assets/images/placeholder.svg";
         mainImg.src = imageUrl;
         mainImg.onerror = function () {
-          this.src = "https://via.placeholder.com/600x800?text=No+Image";
+          this.src = "assets/images/placeholder.svg";
         };
         document.getElementById("pTitle").textContent = p.name;
         const heroTitle = document.getElementById("pHeroTitle");
@@ -911,17 +915,17 @@
           const mobileBtn = document.getElementById("mobileAddToCartBtn");
           btn.innerHTML = '<i class="fas fa-ban"></i> OUT OF STOCK';
           btn.disabled = true;
-          btn.style.background = "#a0aec0";
+          btn.style.background = "#9a9aa2";
           btn.style.cursor = "not-allowed";
           if (mobileBtn) {
             mobileBtn.innerHTML = '<i class="fas fa-ban"></i> Out Of Stock';
             mobileBtn.disabled = true;
-            mobileBtn.style.background = "#a0aec0";
-            mobileBtn.style.borderColor = "#a0aec0";
+            mobileBtn.style.background = "#9a9aa2";
+            mobileBtn.style.borderColor = "#9a9aa2";
           }
           const priceEl = document.getElementById("pPrice");
           priceEl.innerHTML +=
-            ' <span style="font-size: 14px; background: #e53e3e; color: white; padding: 4px 8px; border-radius: 4px; vertical-align: super; margin-left: 10px;">SOLD OUT</span>';
+            ' <span style="font-size: 14px; background: #b42318; color: white; padding: 4px 8px; border-radius: 4px; vertical-align: super; margin-left: 10px;">SOLD OUT</span>';
         }
 
         // Show escrow badge if it's a used/preowned product or high value
@@ -1060,7 +1064,7 @@
             const r = doc.data();
             const div = document.createElement("div");
             div.style.marginBottom = "20px";
-            div.style.borderBottom = "1px solid #eee";
+            div.style.borderBottom = "1px solid #f8f8fa";
             div.style.paddingBottom = "15px";
             div.innerHTML = `
                     <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
@@ -1143,8 +1147,8 @@
     <script type="module" src="index.js"></script>
     <script type="module" src="auth-state.js"></script>
 
-    <div class="creator-credit" style="font-size: 10px; color: #718096; text-align: center; padding: 10px; background: #f4f7f6;">this was made by opedemowo olaoluwa victor</div>
-</body>
+    <div class="creator-credit" style="font-size: 10px; color: #55555e; text-align: center; padding: 10px; background: #ffffff;">this was made by opedemowo olaoluwa victor</div>
+    <script src="compliance.js" defer></script></body>
 </html>
 
 

@@ -225,10 +225,10 @@ function renderConversations() {
       <div style="flex: 1; min-width: 0;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
           <strong style="font-size: 13px;">${participants}</strong>
-          <span style="font-size: 11px; color: #718096;">${lastTime}</span>
+          <span style="font-size: 11px; color: #55555e;">${lastTime}</span>
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div style="font-size: 12px; color: #718096; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">
+          <div style="font-size: 12px; color: #55555e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;">
             ${conv.lastMessage || "No messages"}
           </div>
           ${unreadCount > 0 ? `<span class="unread-badge">${unreadCount}</span>` : ""}

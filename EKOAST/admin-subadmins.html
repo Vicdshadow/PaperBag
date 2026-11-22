@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Manage Sub-Admins Admin</title>
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    
     <style>
       :root {
         --admin-sidebar-w: 240px;
-        --admin-accent: #ff6600;
-        --admin-dark: #001f3f;
-        --admin-bg: #f4f7f6;
+        --admin-accent: #111116;
+        --admin-dark: #111116;
+        --admin-bg: #ffffff;
       }
       body {
         background: var(--admin-bg);
@@ -66,7 +63,7 @@
         filter: brightness(0) invert(1);
       }
       .sidebar-logo span {
-        font-family: "Playfair Display", serif;
+        font-family: "Fraunces", serif;
         font-size: 22px;
         font-weight: 700;
       }
@@ -76,7 +73,7 @@
         padding: 12px 15px;
         background: none;
         border: none;
-        color: #a0aec0;
+        color: #9a9aa2;
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -110,14 +107,14 @@
       .admin-table th {
         text-align: left;
         padding: 12px;
-        border-bottom: 2px solid #eee;
-        color: #718096;
+        border-bottom: 2px solid #f8f8fa;
+        color: #55555e;
         font-size: 12px;
         text-transform: uppercase;
       }
       .admin-table td {
         padding: 15px 12px;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid #f8f8fa;
       }
       .form-group {
         margin-bottom: 20px;
@@ -131,7 +128,7 @@
       .form-group input {
         width: 100%;
         padding: 10px;
-        border: 1px solid #ddd;
+        border: 1px solid #e6e6ea;
         border-radius: 8px;
       }
       .btn {
@@ -146,14 +143,18 @@
         color: white;
       }
     </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="EKOAST â€” shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
   </head>
   <body>
     <div class="admin-layout">
       <aside class="admin-sidebar">
-        <div class="sidebar-logo">
-          <img src="logo.png" alt="E" />
-          <span></span>
-        </div>
+        
         <nav class="sidebar-nav">
           <button class="tab-btn" onclick="window.location.href = 'admin.html'">
             <i class="fas fa-chart-line"></i> <span>Overview</span>
@@ -210,8 +211,8 @@
             class="tab-btn"
             onclick="window.location.href = 'admin-super.html'"
           >
-            <i class="fas fa-bolt" style="color: #fc8181"></i>
-            <span style="color: #fc8181; font-weight: 600">Super Admin</span>
+            <i class="fas fa-bolt" style="color: #f97066"></i>
+            <span style="color: #f97066; font-weight: 600">Super Admin</span>
           </button>
           <button
             class="tab-btn"
@@ -296,8 +297,8 @@
     <script type="module" src="admin-subadmins.js"></script>
     <script type="module" src="auth-state.js"></script>
 
-    <div class="creator-credit" style="font-size: 10px; color: #718096; text-align: center; padding: 10px; background: #f4f7f6;">this was made by opedemowo olaoluwa victor</div>
-</body>
+    <div class="creator-credit" style="font-size: 10px; color: #55555e; text-align: center; padding: 10px; background: #ffffff;">this was made by opedemowo olaoluwa victor</div>
+    <script src="compliance.js" defer></script></body>
 </html>
 
 

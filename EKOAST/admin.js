@@ -321,7 +321,7 @@ function renderSystemAlerts(
     hasAlerts = true;
     alertsContainer.innerHTML += `
       <div class="alert-item" onclick="window.location.href='admin-reviews.html'">
-        <i class="fas fa-flag" style="color: #e53e3e;"></i>
+        <i class="fas fa-flag" style="color: #b42318;"></i>
         <span><strong>${flaggedReviews} Review(s)</strong> flagged for low rating.</span>
       </div>`;
   }
@@ -762,10 +762,10 @@ function renderSuperUsers(users) {
         <td class="action-btns">
              ${
                u.status !== "suspended"
-                 ? `<button class="btn-mini btn-outline" style="border-color: #fc8181; color: #c53030;" onclick="window.suspendUser('${u.id}')"><i class="fas fa-ban"></i> SUSPEND</button>`
+                 ? `<button class="btn-mini btn-outline" style="border-color: #f97066; color: #c53030;" onclick="window.suspendUser('${u.id}')"><i class="fas fa-ban"></i> SUSPEND</button>`
                  : `<button class="btn-mini btn-outline" style="border-color: #38a169; color: #2f855a;" onclick="window.reactivateUser('${u.id}')"><i class="fas fa-undo"></i> RESTORE</button>`
              }
-             <button class="btn-mini btn-outline" style="background: #e53e3e; color: white; border-color: #e53e3e;" onclick="window.deleteUser('${u.id}')"><i class="fas fa-trash"></i> NUKE</button>
+             <button class="btn-mini btn-outline" style="background: #b42318; color: white; border-color: #b42318;" onclick="window.deleteUser('${u.id}')"><i class="fas fa-trash"></i> NUKE</button>
         </td>
     `;
     superListEl.appendChild(tr);
@@ -790,7 +790,7 @@ function renderProducts(products) {
     const tr = document.createElement("tr");
     const isSoldOut = p.soldOut === true;
     const itemStyle = isSoldOut
-      ? "text-decoration: line-through; color: #a0aec0;"
+      ? "text-decoration: line-through; color: #9a9aa2;"
       : "";
 
     // Construct sub-category display if it exists
@@ -804,7 +804,7 @@ function renderProducts(products) {
     tr.innerHTML = `
             <td>
                 <div style="display: flex; align-items: center; gap: 12px;">
-                    <img src="${p.imageUrl || p.image || ""}" alt="${p.name}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px; border: 1px solid #e2e8f0;" onerror="this.src='https://via.placeholder.com/40x40?text=?'">
+                    <img src="${p.imageUrl || p.image || ""}" alt="${p.name}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px; border: 1px solid #e6e6ea;" onerror="this.src='assets/images/placeholder.svg'">
                     <div style="font-weight: 600; ${itemStyle}">${p.name}</div>
                 </div>
             </td>
@@ -816,7 +816,7 @@ function renderProducts(products) {
             </td>
             <td class="action-btns">
                 <button class="btn-mini btn-outline" style="border-color: #3182ce; color: #3182ce;" onclick="window.openEditProductModal('${p.id}')">EDIT</button>
-                <button class="btn-mini btn-outline" style="color: #e53e3e; border-color: #feb2b2;" onclick="window.deleteProduct('${p.id}')">DELETE</button>
+                <button class="btn-mini btn-outline" style="color: #b42318; border-color: #feb2b2;" onclick="window.deleteProduct('${p.id}')">DELETE</button>
             </td>
         `;
     productListEl.appendChild(tr);
@@ -838,10 +838,10 @@ function renderReviews(reviews) {
                 <div style="font-weight:600; font-size:13px;">${r.productName || "Product #" + r.productId}</div>
             </td>
             <td>${r.userName || "Anonymous"}</td>
-            <td style="color: ${isBad ? "#e53e3e" : "#f6ad55"}; letter-spacing: 2px;">${stars}</td>
+            <td style="color: ${isBad ? "#b42318" : "#f6ad55"}; letter-spacing: 2px;">${stars}</td>
             <td style="max-width: 300px; font-size: 13px;">${r.comment}</td>
             <td>
-                ${isBad ? `<button class="btn-mini btn-outline" style="color: #e53e3e; border-color: #feb2b2;" onclick="window.sendWarning('${r.userEmail || "User"}')">WARN USER</button>` : ""}
+                ${isBad ? `<button class="btn-mini btn-outline" style="color: #b42318; border-color: #feb2b2;" onclick="window.sendWarning('${r.userEmail || "User"}')">WARN USER</button>` : ""}
                 <button class="btn-mini btn-outline" onclick="window.deleteReview('${r.id}')"><i class="fas fa-trash"></i></button>
             </td>
         `;
@@ -882,7 +882,7 @@ function renderVouchers(vouchers) {
             <td>${v.assignedEmail || '<span class="muted">Anyone</span>'}</td>
             <td><span class="status-pill ${statusClass}">${v.status || "active"}</span></td>
             <td class="action-btns">
-                ${!isExpired ? `<button class="btn-mini btn-outline" style="color: #e53e3e; border-color: #feb2b2;" onclick="window.deleteVoucher('${v.id}')">REVOKE</button>` : ""}
+                ${!isExpired ? `<button class="btn-mini btn-outline" style="color: #b42318; border-color: #feb2b2;" onclick="window.deleteVoucher('${v.id}')">REVOKE</button>` : ""}
                 <button class="btn-mini btn-outline" onclick="window.deleteVoucher('${v.id}', true)"><i class="fas fa-trash"></i></button>
             </td>
         `;
@@ -922,7 +922,7 @@ function renderPayoutRequests(payouts) {
         ${p.details.accountNumber} - ${p.details.accountName}
       </td>
       <td>
-        ${isPending ? `<button class="btn-mini btn-primary" style="background:#10b981;" onclick="window.approvePayout('${p.id}')">CONFIRM PAYOUT</button>` : `<span class="status-pill" style="${statusStyle}">PAID</span>`}
+        ${isPending ? `<button class="btn-mini btn-primary" style="background:#c2a15a;" onclick="window.approvePayout('${p.id}')">CONFIRM PAYOUT</button>` : `<span class="status-pill" style="${statusStyle}">PAID</span>`}
       </td>
     `;
     listEl.appendChild(tr);
@@ -1129,7 +1129,7 @@ window.openEditProductModal = (pid) => {
     previewImg.src =
       product.imageUrl ||
       product.image ||
-      "https://via.placeholder.com/80?text=?";
+      "assets/images/placeholder.svg";
   }
 
   // Reset file input

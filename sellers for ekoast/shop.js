@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initial Loading State
   container.innerHTML = `
-        <div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #6b7280;">
+        <div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #55555e;">
             <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 1rem; color: #2563eb;"></i>
             <p>Loading latest products...</p>
         </div>
@@ -67,9 +67,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (snapshot.empty) {
         container.innerHTML = `
-                <div style="grid-column: 1/-1; text-align: center; padding: 3rem; background: #fff; border-radius: 0.75rem; border: 1px dashed #d1d5db;">
-                    <i class="fas fa-store-slash" style="font-size: 3rem; color: #9ca3af; margin-bottom: 1rem;"></i>
-                    <p style="color: #6b7280; font-size: 1.1rem; margin: 0;">No active products available at the moment.</p>
+                <div style="grid-column: 1/-1; text-align: center; padding: 3rem; background: #fff; border-radius: 0.75rem; border: 1px dashed #d4d4da;">
+                    <i class="fas fa-store-slash" style="font-size: 3rem; color: #72727b; margin-bottom: 1rem;"></i>
+                    <p style="color: #55555e; font-size: 1.1rem; margin: 0;">No active products available at the moment.</p>
                 </div>
             `;
         return;
@@ -109,16 +109,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         card.innerHTML = `
                 <div style="position: relative;">
-                    <img src="${product.imageURL || product.image || ""}" alt="${product.name}" style="width: 100%; height: 220px; object-fit: cover; border-bottom: 1px solid #f3f4f6;" onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'">
+                    <img src="${product.imageURL || product.image || ""}" alt="${product.name}" style="width: 100%; height: 220px; object-fit: cover; border-bottom: 1px solid #f1f1f4;" onerror="this.src='assets/images/placeholder.svg'">
                     ${product.category ? `<span style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 500;">${product.category}</span>` : ""}
                 </div>
                 <div style="padding: 1.25rem; flex-grow: 1; display: flex; flex-direction: column;">
-                    <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #111827; font-weight: 600;">${product.name}</h3>
+                    <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #111116; font-weight: 600;">${product.name}</h3>
                     <span style="display:inline-block; width: fit-content; margin: 0 0 0.75rem 0; padding: 0.2rem 0.55rem; border-radius: 999px; background: ${conditionLabel === "Preowned" ? "#fff7ed" : "#ecfdf5"}; color: ${conditionLabel === "Preowned" ? "#9a3412" : "#065f46"}; font-size: 0.75rem; font-weight: 600;">${conditionLabel}</span>
-                    <p style="margin: 0 0 1rem 0; color: #6b7280; font-size: 0.9rem; flex-grow: 1; line-height: 1.5;">
+                    <p style="margin: 0 0 1rem 0; color: #55555e; font-size: 0.9rem; flex-grow: 1; line-height: 1.5;">
                         ${product.description ? product.description.substring(0, 90) + (product.description.length > 90 ? "..." : "") : ""}
                     </p>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 1rem; border-top: 1px solid #f3f4f6;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 1rem; border-top: 1px solid #f1f1f4;">
                         <span style="font-weight: 700; font-size: 1.25rem; color: #2563eb;">₦${product.price ? product.price.toLocaleString() : "0"}</span>
                         <button class="buy-btn" data-id="${id}" style="
                             background: #2563eb; 
@@ -223,7 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
     (error) => {
       console.error("Error fetching shop products:", error);
       container.innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; padding: 2rem; background: #fee2e2; border-radius: 0.75rem; border: 1px solid #fecaca; color: #dc2626;">
+            <div style="grid-column: 1/-1; text-align: center; padding: 2rem; background: #fee2e2; border-radius: 0.75rem; border: 1px solid #fecaca; color: #b42318;">
                 <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
                 <p style="margin: 0; font-weight: 500;">Error loading products. Please try again later.</p>
             </div>

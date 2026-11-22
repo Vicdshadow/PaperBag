@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Office / Tech Equipment</title>
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    
     <style>
       .subsections-page {
         padding: 60px 0;
@@ -20,6 +17,13 @@
         margin-top: 40px;
       }
     </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="EKOAST â€” shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
   </head>
   <body>
     <header class="site-header glass">
@@ -29,9 +33,7 @@
           <a href="new-arrivals.html">New Arrivals</a>
           <a href="catalogue.html" class="active">Catalogue</a>
         </nav>
-        <a href="index.html" class="logo">
-          <!-- Logo removed -->
-        </a>
+        
         <div class="nav-icons">
           <div class="search-container" id="searchContainer">
             <i class="fas fa-search" id="searchIcon"></i>
@@ -61,13 +63,13 @@
             href="index.html?cat=office&sub=Office%20Furniture%20(Desks,%20Chairs)"
           >
             <div class="product-image slideshow-container">
-              <img
+              <img loading="lazy" decoding="async"
                 src="assets/images/tables and chairs.jpg"
                 class="slide active"
                 alt="Office Furniture"
                 onerror="
                   this.src =
-                    'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=600&q=60'
+                    'assets/images/remote/remote-2695f972bf.jpg'
                 "
               />
             </div>
@@ -81,13 +83,13 @@
             href="index.html?cat=office&sub=Printers%20/%20Scanners%20/%20Copiers"
           >
             <div class="product-image slideshow-container">
-              <img
+              <img loading="lazy" decoding="async"
                 src="assets/images/printer.jpg"
                 class="slide active"
                 alt="Printers / Scanners / Copiers"
                 onerror="
                   this.src =
-                    'https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=600&q=60'
+                    'assets/images/remote/remote-4122ffe235.jpg'
                 "
               />
             </div>
@@ -99,8 +101,8 @@
         <div class="product-card">
           <a href="index.html?cat=office&sub=Projectors">
             <div class="product-image slideshow-container">
-              <img
-                src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=600&q=60"
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-d71c007b4f.jpg"
                 class="slide active"
                 alt="Projectors"
               />
@@ -113,8 +115,8 @@
         <div class="product-card">
           <a href="index.html?cat=office&sub=Shredders">
             <div class="product-image slideshow-container">
-              <img
-                src="https://images.unsplash.com/photo-1625225233840-695456021cde?auto=format&fit=crop&w=600&q=60"
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-28b8280447.jpg"
                 class="slide active"
                 alt="Shredders"
               />
@@ -127,8 +129,8 @@
         <div class="product-card">
           <a href="index.html?cat=office&sub=Office%20Supplies">
             <div class="product-image slideshow-container">
-              <img
-                src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=600&q=60"
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-bd6575afef.jpg"
                 class="slide active"
                 alt="Office Supplies"
               />
@@ -145,14 +147,13 @@
       <div class="container text-center">
         <div class="footer-bottom">
           &copy; 2024. All rights reserved.
-        <div class="creator-credit" style="font-size: 10px; color: #718096; margin-top: 5px;">this was made by opedemowo olaoluwa victor</div>
+        <div class="creator-credit" style="font-size: 10px; color: #55555e; margin-top: 5px;">this was made by opedemowo olaoluwa victor</div>
         </div>
       </div>
     </footer>
 
     <script type="module" src="index.js"></script>
     <script type="module" src="index.js"></script>
-    <script src="slideshow.js" defer></script>
     <script type="module">
       import { auth, db } from "./firebase-config.js";
       import {
@@ -205,7 +206,7 @@
       </a>
     </nav>
     <script type="module" src="auth-state.js"></script>
-  </body>
+      <script src="compliance.js" defer></script></body>
 </html>
 
 

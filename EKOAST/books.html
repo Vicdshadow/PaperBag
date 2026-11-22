@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Books & Educational Materials</title>
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    
     <style>
       .subsections-page {
         padding: 60px 0;
@@ -20,6 +17,13 @@
         margin-top: 40px;
       }
     </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="EKOAST â€” shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
   </head>
   <body>
     <header class="site-header glass">
@@ -29,9 +33,7 @@
           <a href="new-arrivals.html">New Arrivals</a>
           <a href="catalogue.html" class="active">Catalogue</a>
         </nav>
-        <a href="index.html" class="logo">
-          <!-- Logo removed -->
-        </a>
+        
         <div class="nav-icons">
           <div class="search-container" id="searchContainer">
             <i class="fas fa-search" id="searchIcon"></i>
@@ -61,8 +63,8 @@
         <div class="product-card">
           <a href="index.html?cat=books&sub=Fiction%20%26%20Nonfiction">
             <div class="product-image slideshow-container">
-              <img
-                src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=60"
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-51fbeb2a9b.jpg"
                 class="slide active"
                 alt="Fiction & Nonfiction"
               />
@@ -75,8 +77,8 @@
         <div class="product-card">
           <a href="index.html?cat=books&sub=Educational%20Textbooks">
             <div class="product-image slideshow-container">
-              <img
-                src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=60"
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-57252d29b2.jpg"
                 class="slide active"
                 alt="Educational Textbooks"
               />
@@ -89,8 +91,8 @@
         <div class="product-card">
           <a href="index.html?cat=books&sub=Programming%20/%20Tech%20Books">
             <div class="product-image slideshow-container">
-              <img
-                src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=600&q=60"
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-0017f6dcc3.jpg"
                 class="slide active"
                 alt="Programming / Tech Books"
               />
@@ -103,8 +105,8 @@
         <div class="product-card">
           <a href="index.html?cat=books&sub=Self-Help,%20Business%20Books">
             <div class="product-image slideshow-container">
-              <img
-                src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=60"
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-a0843b7cd5.jpg"
                 class="slide active"
                 alt="Self-Help, Business Books"
               />
@@ -117,8 +119,8 @@
         <div class="product-card">
           <a href="index.html?cat=books&sub=Children's%20Books">
             <div class="product-image slideshow-container">
-              <img
-                src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=600&q=60"
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-383da46e72.jpg"
                 class="slide active"
                 alt="Children's Books"
               />
@@ -131,8 +133,8 @@
         <div class="product-card">
           <a href="index.html?cat=books&sub=Art%20/%20Coffee%20Table%20Books">
             <div class="product-image slideshow-container">
-              <img
-                src="https://images.unsplash.com/photo-1513001900722-370f803f498d?auto=format&fit=crop&w=600&q=60"
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-caa59bc837.jpg"
                 class="slide active"
                 alt="Art / Coffee Table Books"
               />
@@ -149,14 +151,13 @@
       <div class="container text-center">
         <div class="footer-bottom">
           &copy; 2024. All rights reserved.
-        <div class="creator-credit" style="font-size: 10px; color: #718096; margin-top: 5px;">this was made by opedemowo olaoluwa victor</div>
+        <div class="creator-credit" style="font-size: 10px; color: #55555e; margin-top: 5px;">this was made by opedemowo olaoluwa victor</div>
         </div>
       </div>
     </footer>
 
     <script type="module" src="index.js"></script>
     <script type="module" src="index.js"></script>
-    <script src="slideshow.js" defer></script>
     <script type="module">
       import { auth, db } from "./firebase-config.js";
       import {
@@ -209,7 +210,7 @@
       </a>
     </nav>
     <script type="module" src="auth-state.js"></script>
-  </body>
+      <script src="compliance.js" defer></script></body>
 </html>
 
 

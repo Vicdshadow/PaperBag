@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Upload Service Listings</title>
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    
     <style>
       .upload-page {
         padding: 40px 0;
@@ -41,12 +38,12 @@
       .form-group textarea {
         width: 100%;
         padding: 12px;
-        border: 1px solid #ddd;
+        border: 1px solid #e6e6ea;
         border-radius: 8px;
         font-family: inherit;
       }
       .image-upload-area {
-        border: 2px dashed #ddd;
+        border: 2px dashed #e6e6ea;
         padding: 40px;
         text-align: center;
         border-radius: 12px;
@@ -58,22 +55,18 @@
         background: #fff9f5;
       }
     </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="EKOAST â€” shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
   </head>
   <body>
     <header class="site-header glass">
       <div class="container header-inner">
-        <a href="index.html" class="logo">
-          <!-- Logo removed -->
-          <span
-            style="
-              font-size: 12px;
-              font-weight: 600;
-              color: #555;
-              margin-left: 5px;
-            "
-            >PARTNER HUB</span
-          >
-        </a>
+        
         <nav class="nav-links">
           <a href="upload-services.html" class="active">Upload Listing</a>
         </nav>
@@ -345,7 +338,7 @@
           try {
             // In a real app we would upload images here, but for now we'll use a placeholder
             const imageUrl =
-              "https://images.unsplash.com/photo-1512403754473-27835f7b9984?auto=format&fit=crop&w=800&q=80";
+              "assets/images/remote/remote-6a91458c6f.jpg";
 
             await addDoc(collection(db, "specialized_listings"), {
               vertical,
@@ -380,8 +373,8 @@
     </script>
     <script type="module" src="auth-state.js"></script>
 
-    <div class="creator-credit" style="font-size: 10px; color: #718096; text-align: center; padding: 10px; background: #f4f7f6;">this was made by opedemowo olaoluwa victor</div>
-</body>
+    <div class="creator-credit" style="font-size: 10px; color: #55555e; text-align: center; padding: 10px; background: #ffffff;">this was made by opedemowo olaoluwa victor</div>
+    <script src="compliance.js" defer></script></body>
 </html>
 
 

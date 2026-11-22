@@ -4,30 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Seller Dashboard</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap");
-      :root {
-        --bg-1: #f8f3ea;
-        --bg-2: #e8dcc8;
-        --ink: #2f2a24;
-        --ink-soft: #6e6355;
-        --gold: #b9925a;
-        --gold-deep: #8f6f3f;
-        --line: #d9ccb9;
-        --card-bg: #fffcf8;
-        --danger: #b94a36;
-        --primary: #8f6f3f;
-        --border: #d9ccb9;
+:root {
+        --bg-1: #ffffff;
+        --bg-2: #f8f8fa;
+        --ink: #111116;
+        --ink-soft: #55555e;
+        --gold: #111116;
+        --gold-deep: #000000;
+        --line: #e6e6ea;
+        --card-bg: #ffffff;
+        --danger: #b42318;
+        --primary: #000000;
+        --border: #e6e6ea;
       }
       * {
         box-sizing: border-box;
       }
       body {
-        font-family: "Manrope", -apple-system, sans-serif;
+        font-family: "Inter", -apple-system, sans-serif;
         margin: 0;
         padding: 0;
         background:
@@ -55,7 +51,7 @@
       }
       .header h1 {
         margin: 0;
-        font-family: "Cormorant Garamond", serif;
+        font-family: "Fraunces", serif;
         font-size: 2rem;
         color: #241f18;
       }
@@ -123,7 +119,7 @@
         margin-top: 0;
         margin-bottom: 1rem;
         font-size: 1.35rem;
-        font-family: "Cormorant Garamond", serif;
+        font-family: "Fraunces", serif;
         border-bottom: 1px solid var(--line);
         padding-bottom: 0.65rem;
       }
@@ -152,7 +148,7 @@
       }
       .form-input:focus {
         outline: none;
-        border-color: #b9925a;
+        border-color: #111116;
         box-shadow: 0 0 0 2px rgba(185, 146, 90, 0.15);
       }
       textarea.form-input {
@@ -160,7 +156,7 @@
         min-height: 100px;
       }
       .btn-primary {
-        background: linear-gradient(135deg, #b9925a, #8f6f3f);
+        background: linear-gradient(135deg, #111116, #000000);
         color: #fffdf8;
         border: none;
         padding: 0.75rem 1.1rem;
@@ -190,17 +186,17 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        font-family: "Cormorant Garamond", serif;
+        font-family: "Fraunces", serif;
         color: #241f18;
       }
       .product-count-badge {
-        background: #8f6f3f;
+        background: #000000;
         color: #fffdf8;
         border-radius: 999px;
         padding: 3px 10px;
         font-size: 0.78rem;
         font-weight: 700;
-        font-family: "Manrope", sans-serif;
+        font-family: "Inter", sans-serif;
       }
       .products-grid {
         display: grid;
@@ -374,7 +370,7 @@
       }
       .modal-box h2 {
         margin-top: 0;
-        font-family: "Cormorant Garamond", serif;
+        font-family: "Fraunces", serif;
       }
       .hidden {
         display: none !important;
@@ -387,6 +383,13 @@
         min-height: 1.2em;
       }
     </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="EKOAST â€” shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
   </head>
   <body>
     <!-- Auth Loading Screen -->
@@ -409,7 +412,7 @@
           <a
             href="seller-wallet.html"
             class="home-link"
-            style="margin-right: 15px; color: #10b981"
+            style="margin-right: 15px; color: #c2a15a"
           >
             <i class="fas fa-wallet"></i> Wallet & Payouts
           </a>
@@ -508,7 +511,7 @@
                 id="image-preview-wrap"
                 style="margin-top: 10px; display: none"
               >
-                <img
+                <img loading="lazy" decoding="async"
                   id="image-preview"
                   src=""
                   alt="Preview"
@@ -590,6 +593,7 @@
     </div>
 
     <script type="module" src="./seller.js"></script>
+      <script src="compliance.js" defer></script>
   </body>
 </html>
 

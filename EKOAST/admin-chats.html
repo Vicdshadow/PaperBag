@@ -6,16 +6,13 @@
     <title>Chat Management - Admin Panel</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="chat.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
+    
     <style>
       :root {
         --admin-sidebar-w: 240px;
-        --admin-accent: #ff6600;
-        --admin-dark: #001f3f;
-        --admin-bg: #f4f7f6;
+        --admin-accent: #111116;
+        --admin-dark: #111116;
+        --admin-bg: #ffffff;
       }
 
       body {
@@ -74,7 +71,7 @@
         filter: brightness(0) invert(1);
       }
       .sidebar-logo span {
-        font-family: "Playfair Display", serif;
+        font-family: "Fraunces", serif;
         font-size: 22px;
         font-weight: 700;
         color: white;
@@ -86,7 +83,7 @@
         padding: 12px 15px;
         background: none;
         border: none;
-        color: #a0aec0;
+        color: #9a9aa2;
         font-size: 14px;
         cursor: pointer;
         transition: 0.3s;
@@ -128,8 +125,8 @@
 
       .btn-outline {
         background: transparent;
-        border: 1.5px solid #e2e8f0;
-        color: #4a5568;
+        border: 1.5px solid #e6e6ea;
+        color: #33333b;
       }
 
       @media (max-width: 768px) {
@@ -143,6 +140,13 @@
         }
       }
     </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="EKOAST â€” shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
   </head>
   <body>
     <!-- Preloader -->
@@ -153,10 +157,7 @@
     <div class="admin-layout">
       <!-- Admin Sidebar -->
       <aside class="admin-sidebar">
-        <div class="sidebar-logo">
-          <img src="logo.png" alt="E" />
-          <span></span>
-        </div>
+        
 
         <nav class="sidebar-nav">
           <button class="tab-btn" onclick="window.location.href = 'admin.html'">
@@ -208,8 +209,8 @@
             class="tab-btn"
             onclick="window.location.href = 'admin-super.html'"
           >
-            <i class="fas fa-bolt" style="color: #fc8181"></i>
-            <span style="color: #fc8181; font-weight: 600">Super Admin</span>
+            <i class="fas fa-bolt" style="color: #f97066"></i>
+            <span style="color: #f97066; font-weight: 600">Super Admin</span>
           </button>
           <button
             class="tab-btn"
@@ -249,7 +250,7 @@
           </div>
           <div
             style="
-              color: #4a5568;
+              color: #33333b;
               font-size: 14px;
               display: flex;
               align-items: center;
@@ -308,7 +309,7 @@
                 ><span></span><span></span> <span></span><span></span
                 ><span></span>
               </div>
-              <p style="color: #718096; font-size: 14px">
+              <p style="color: #55555e; font-size: 14px">
                 Loading conversations...
               </p>
             </div>
@@ -403,8 +404,8 @@
     <script type="module" src="admin-chats.js"></script>
     <script type="module" src="auth-state.js"></script>
 
-    <div class="creator-credit" style="font-size: 10px; color: #718096; text-align: center; padding: 10px; background: #f4f7f6;">this was made by opedemowo olaoluwa victor</div>
-</body>
+    <div class="creator-credit" style="font-size: 10px; color: #55555e; text-align: center; padding: 10px; background: #ffffff;">this was made by opedemowo olaoluwa victor</div>
+    <script src="compliance.js" defer></script></body>
 </html>
 
 

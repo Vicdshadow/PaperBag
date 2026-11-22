@@ -480,7 +480,7 @@ function renderProducts(list) {
       p.imageUrl ||
       p.imageURL ||
       p.image ||
-      "https://via.placeholder.com/400?text=Logo";
+      "assets/images/placeholder.svg";
     const isSoldOut = p.soldOut === true;
     const categoryLabel =
       CATEGORY_NAMES[p._categoryKey] || p.category || p.categoryLabel || "";
@@ -516,7 +516,7 @@ function renderProducts(list) {
 
     div.innerHTML = `
       <a href="product.html?id=${encodeURIComponent(p.id)}&source=${encodeURIComponent(p.source || defaultSourceMode)}" class="product-image jumia-product-image ${isSoldOut ? "opacity-60" : ""}">
-        <img src="${imageUrl}" alt="${name}" onerror="this.src='https://via.placeholder.com/400?text=No+Image'">
+        <img src="${imageUrl}" alt="${name}" onerror="this.src='assets/images/placeholder.svg'">
         <span class="jumia-badge">Tech week deal</span>
         ${discountPercent > 0 ? `<span class="jumia-discount">-${discountPercent}%</span>` : ""}
         <span class="jumia-wishlist"><i class="far fa-heart"></i></span>
@@ -535,7 +535,7 @@ function renderProducts(list) {
           data-price="${Number(p.price || 0)}"
           data-image="${String(imageUrl).replace(/"/g, "&quot;")}"
           ${isSoldOut ? "disabled" : ""}
-          style="${isSoldOut ? "background:#9ca3af;border-color:#9ca3af;cursor:not-allowed;" : ""}"
+          style="${isSoldOut ? "background:#72727b;border-color:#72727b;cursor:not-allowed;" : ""}"
         >
           ${isSoldOut ? "Out Of Stock" : "Add To Cart"}
         </button>
@@ -924,7 +924,7 @@ async function loadFlashProducts() {
         "min-w-[160px] md:min-w-[180px] group flex flex-col gap-2 rounded-xl bg-white p-3 border border-gray-100 shadow-sm hover:shadow-md transition-all";
 
       const imageUrl =
-        product.image || "https://via.placeholder.com/200?text=Logo";
+        product.image || "assets/images/placeholder.svg";
 
       card.innerHTML = `
         <a href="product.html?id=${product.id}" class="flex flex-col h-full relative">
@@ -934,7 +934,7 @@ async function loadFlashProducts() {
               : `<div class="absolute top-1 left-1 bg-red-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded z-10">-${discountPercent}%</div>`
           }
           <div class="aspect-square rounded-lg overflow-hidden bg-gray-100 mb-2">
-            <img src="${imageUrl}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/200?text=No+Image'">
+            <img src="${imageUrl}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='assets/images/placeholder.svg'">
           </div>
           <div class="flex flex-col flex-grow">
             <h4 class="text-[12px] font-medium text-eko-secondary line-clamp-1 mb-1">${product.name}</h4>

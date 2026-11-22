@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IT Equipment</title>
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    
     <style>
       .subsections-page {
         padding: 60px 0;
@@ -20,6 +17,13 @@
         margin-top: 40px;
       }
     </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="EKOAST â€” shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
   </head>
   <body>
     <header class="site-header glass">
@@ -29,9 +33,7 @@
           <a href="new-arrivals.html">New Arrivals</a>
           <a href="catalogue.html" class="active">Catalogue</a>
         </nav>
-        <a href="index.html" class="logo">
-          <!-- Logo removed -->
-        </a>
+        
         <div class="nav-icons">
           <div class="search-container" id="searchContainer">
             <i class="fas fa-search" id="searchIcon"></i>
@@ -59,7 +61,7 @@
         <div class="product-card">
           <a href="index.html?cat=it&sub=Laptops%20%26%20Desktops">
             <div class="product-image slideshow-container">
-              <img
+              <img loading="lazy" decoding="async"
                 src="assets/images/laptop.jpg"
                 class="slide active"
                 alt="Laptops"
@@ -73,7 +75,7 @@
         <div class="product-card">
           <a href="index.html?cat=it&sub=Computer%20Monitors">
             <div class="product-image slideshow-container">
-              <img
+              <img loading="lazy" decoding="async"
                 src="assets/images/computer_monitor.jpg"
                 class="slide active"
                 alt="Monitors"
@@ -87,7 +89,7 @@
         <div class="product-card">
           <a href="index.html?cat=it&sub=Keyboards%20%26%20Mouse">
             <div class="product-image slideshow-container">
-              <img
+              <img loading="lazy" decoding="async"
                 src="assets/images/Keyboards & Mouse.webp"
                 class="slide active"
                 alt="Keyboards"
@@ -101,7 +103,7 @@
         <div class="product-card">
           <a href="index.html?cat=it&sub=Printers%20%26%20Scanners">
             <div class="product-image slideshow-container">
-              <img
+              <img loading="lazy" decoding="async"
                 src="assets/images/printer.jpg"
                 class="slide active"
                 alt="Printers"
@@ -117,18 +119,18 @@
             href="index.html?cat=it&sub=Networking%20Devices%20(Routers%2C%20Switches)"
           >
             <div class="product-image slideshow-container">
-              <img
-                src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=60"
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-9ac2d5ba4f.jpg"
                 class="slide active"
                 alt="Networking"
               />
-              <img
-                src="https://images.unsplash.com/photo-1551739451-82e5bf1159f2?auto=format&fit=crop&w=600&q=60"
+              <img loading="lazy" decoding="async"
+                src="assets/images/laptop.jpg"
                 class="slide"
                 alt="Networking"
               />
-              <img
-                src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=60"
+              <img loading="lazy" decoding="async"
+                src="assets/images/remote/remote-94b623f08f.jpg"
                 class="slide"
                 alt="Networking"
               />
@@ -143,7 +145,7 @@
             href="index.html?cat=it&sub=External%20Hard%20Drives%20%26%20Flash%20Drives"
           >
             <div class="product-image slideshow-container">
-              <img
+              <img loading="lazy" decoding="async"
                 src="assets/images/storage devices.webp"
                 class="slide active"
                 alt="Storage"
@@ -161,13 +163,12 @@
       <div class="container text-center">
         <div class="footer-bottom">
           &copy; 2024. All rights reserved.
-        <div class="creator-credit" style="font-size: 10px; color: #718096; margin-top: 5px;">this was made by opedemowo olaoluwa victor</div>
+        <div class="creator-credit" style="font-size: 10px; color: #55555e; margin-top: 5px;">this was made by opedemowo olaoluwa victor</div>
         </div>
       </div>
     </footer>
 
     <script type="module" src="index.js"></script>
-    <script src="slideshow.js" defer></script>
     <script type="module">
       import { auth, db } from "./firebase-config.js";
       import {
@@ -220,7 +221,7 @@
       </a>
     </nav>
     <script type="module" src="auth-state.js"></script>
-  </body>
+      <script src="compliance.js" defer></script></body>
 </html>
 
 

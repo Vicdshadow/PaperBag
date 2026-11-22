@@ -4,22 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Seller Login — </title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap");
-      :root {
-        --bg-1: #f8f3ea;
-        --bg-2: #e8dcc8;
-        --ink: #2f2a24;
-        --ink-soft: #6e6355;
-        --panel-dark-1: #1f1b17;
-        --panel-dark-2: #32281f;
-        --gold: #b9925a;
-        --gold-deep: #8f6f3f;
-        --line: #d9ccb9;
+:root {
+        --bg-1: #ffffff;
+        --bg-2: #f8f8fa;
+        --ink: #111116;
+        --ink-soft: #55555e;
+        --panel-dark-1: #111116;
+        --panel-dark-2: #24242c;
+        --gold: #111116;
+        --gold-deep: #000000;
+        --line: #e6e6ea;
       }
       *,
       *::before,
@@ -30,7 +26,7 @@
       }
 
       body {
-        font-family: "Manrope", -apple-system, sans-serif;
+        font-family: "Inter", -apple-system, sans-serif;
         min-height: 100vh;
         display: flex;
         background:
@@ -87,7 +83,7 @@
         filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
       }
       .panel-left h1 {
-        font-family: "Cormorant Garamond", serif;
+        font-family: "Fraunces", serif;
         font-size: 2.5rem;
         font-weight: 700;
         letter-spacing: 0.2px;
@@ -133,7 +129,7 @@
         margin-bottom: 1.8rem;
       }
       .panel-right h2 {
-        font-family: "Cormorant Garamond", serif;
+        font-family: "Fraunces", serif;
         font-size: 2rem;
         font-weight: 700;
         color: #221d17;
@@ -188,7 +184,7 @@
         color: #a59681;
       }
       input:focus {
-        border-color: #b9925a;
+        border-color: #111116;
         box-shadow: 0 0 0 3px rgba(185, 146, 90, 0.16);
       }
       .toggle-password {
@@ -225,7 +221,7 @@
       .btn-primary {
         width: 100%;
         padding: 0.82rem;
-        background: linear-gradient(135deg, #b9925a, #8f6f3f);
+        background: linear-gradient(135deg, #111116, #000000);
         color: #fffdf8;
         border: none;
         border-radius: 0.6rem;
@@ -290,7 +286,7 @@
         padding: 0.75rem;
         border: 1.5px solid #d9cdbd;
         border-radius: 0.6rem;
-        background: #fffcf8;
+        background: #ffffff;
         color: #3f352a;
         font-size: 0.9rem;
         font-weight: 600;
@@ -341,12 +337,12 @@
       .alert-error {
         background: #fff2ef;
         border: 1px solid #f4c2b8;
-        color: #b94a36;
+        color: #b42318;
       }
       .alert-success {
         background: #eff8f1;
         border: 1px solid #b8e4c4;
-        color: #1b7a3a;
+        color: #111116;
       }
       .alert-info {
         background: #f1f4fb;
@@ -421,6 +417,13 @@
         }
       }
     </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="EKOAST â€” shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
   </head>
 
   <body>
@@ -511,7 +514,7 @@
             x="100"
             y="117"
             font-size="9"
-            fill="#ff6600"
+            fill="#111116"
             text-anchor="middle"
           >
             ★
@@ -635,8 +638,8 @@
                 id="google-login-btn"
                 class="btn-social btn-google"
               >
-                <img
-                  src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                <img loading="lazy" decoding="async"
+                  src="assets/images/google.svg"
                   alt="Google"
                 />
                 Google
@@ -697,6 +700,7 @@
     </div>
 
     <script type="module" src="./login.js"></script>
+      <script src="compliance.js" defer></script>
   </body>
 </html>
 

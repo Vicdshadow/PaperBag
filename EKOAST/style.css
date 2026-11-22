@@ -1,28 +1,32 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Patrick+Hand&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap");
+/* Fonts are self-hosted in assets/fonts/ — no third-party requests. */
 
 :root {
-  --font-heading: "Playfair Display", serif;
-  --font-body: "Inter", sans-serif;
+  --font-heading: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
 
-  /* Premium Color Palette */
-  --color-text: #0d1b2a;
-  --color-text-light: #415a77;
-  --color-bg: #eaebed;
-  --color-bg-alt: #e0e3e6;
-  --color-accent: #f57c00; /* Vibrant Orange */
-  --color-secondary: #0d1b2a; /* Deep Midnight Blue */
+  /* White + emerald black palette */
+  --color-text: #111116;
+  --color-text-light: #55555e;
+  --color-bg: #ffffff;
+  --color-bg-alt: #ffffff;
+  --color-surface: #ffffff;
+  --color-accent: #111116;
+  --color-accent-dark: #000000;
+  --color-accent-soft: #faf7ef;
+  --color-accent-alt: #111116;
+  --color-secondary: #111116;
   --color-black: #000000;
-  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border: #e6e6ea;
 
   /* Glassmorphism */
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-stroke: rgba(255, 255, 255, 0.3);
-  --glass-blur: blur(12px);
+  --glass-bg: rgba(255, 255, 255, 0.88);
+  --glass-stroke: rgba(22, 35, 31, 0.08);
+  --glass-blur: blur(14px);
 
   /* Shadows */
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.12);
+  --shadow-sm: 0 1px 2px rgba(16, 27, 23, 0.05);
+  --shadow-md: 0 6px 18px rgba(16, 27, 23, 0.08);
+  --shadow-lg: 0 18px 40px rgba(16, 27, 23, 0.12);
 
   --spacing-container: 1240px;
   --spacing-gutter: 24px;
@@ -226,7 +230,7 @@ img {
   height: 90vh;
   background:
     linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
-    url("https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?q=80&w=2000&auto=format&fit=crop")
+    url("assets/images/remote/remote-5989590b65.jpg")
       center/cover no-repeat;
   display: flex;
   align-items: center;
@@ -723,14 +727,14 @@ textarea:focus {
 
 .inbox-cta {
   margin-top: 24px;
-  background: linear-gradient(135deg, #d9a441 0%, #f2c97b 100%);
+  background: linear-gradient(135deg, #c2a15a 0%, #f2c97b 100%);
   border: none;
   color: #1a1409;
   box-shadow: 0 12px 24px rgba(217, 164, 65, 0.35);
 }
 
 .inbox-cta:hover {
-  background: linear-gradient(135deg, #f2c97b 0%, #d9a441 100%);
+  background: linear-gradient(135deg, #f2c97b 0%, #c2a15a 100%);
   color: #1a1409;
 }
 
@@ -905,7 +909,7 @@ textarea:focus {
 .menu-label i {
   width: 20px;
   text-align: center;
-  color: #333;
+  color: #1c1c22;
 }
 
 .menu-item .fa-chevron-right {
@@ -945,7 +949,7 @@ textarea:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #333;
+  color: #1c1c22;
   font-size: 11px;
   gap: 4px;
   flex: 1;
@@ -991,20 +995,20 @@ textarea:focus {
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #e6e6ea;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .app-search-bar {
   display: flex;
   align-items: center;
-  background: #f5f5f5;
+  background: #f8f8fa;
   border-radius: 8px;
   padding: 8px 12px;
 }
 
 .app-search-bar i {
-  color: #666;
+  color: #55555e;
   margin-right: 10px;
   font-size: 16px;
 }
@@ -1046,7 +1050,7 @@ textarea:focus {
   align-items: center;
   font-size: 11px;
   font-weight: 500;
-  color: #333;
+  color: #1c1c22;
 }
 .quick-link-img {
   width: 100%;
@@ -1054,7 +1058,7 @@ textarea:focus {
   border-radius: 8px;
   object-fit: cover;
   margin-bottom: 6px;
-  background: #f0f0f0;
+  background: #e6e6ea;
 }
 
 /* Flash Sales Section */
@@ -1120,7 +1124,7 @@ textarea:focus {
 .flash-sale-price {
   font-size: 15px;
   font-weight: 600;
-  color: #333;
+  color: #1c1c22;
 }
 .flash-sale-old-price {
   font-size: 11px;
@@ -1130,19 +1134,19 @@ textarea:focus {
 }
 .flash-sale-stock {
   font-size: 10px;
-  color: #666;
+  color: #55555e;
   margin-bottom: 4px;
 }
 .stock-bar {
   width: 100%;
   height: 6px;
-  background: #eee;
+  background: #f8f8fa;
   border-radius: 3px;
   overflow: hidden;
 }
 .stock-bar-fill {
   height: 100%;
-  background: #f68b1e; /* Jumia Orange */
+  background: #111116; /* Emerald accent */
   border-radius: 3px;
 }
 .flash-sale-discount {
@@ -1165,7 +1169,7 @@ textarea:focus {
   overflow-x: auto;
   scrollbar-width: none;
   background: #fff;
-  border-bottom: 8px solid #f5f5f5;
+  border-bottom: 8px solid #f8f8fa;
 }
 .category-circles::-webkit-scrollbar {
   display: none;
@@ -1183,12 +1187,12 @@ textarea:focus {
   height: 60px;
   border-radius: 50%;
   object-fit: cover;
-  background: #f9f9f9;
+  background: #f8f8fa;
 }
 .category-circle-title {
   font-size: 11px;
   line-height: 1.2;
-  color: #333;
+  color: #1c1c22;
 }
 
 /* Mobile Banner */
@@ -1426,7 +1430,7 @@ textarea:focus {
 
 /* Premium Signup Page Remake */
 .signup-page {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  background: linear-gradient(135deg, #111116 0%, #1e293b 100%);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -1489,7 +1493,7 @@ textarea:focus {
 }
 
 .signup-header p {
-  color: #94a3b8;
+  color: #72727b;
   font-size: 14px;
 }
 
@@ -1509,7 +1513,7 @@ textarea:focus {
   text-align: center;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  color: #94a3b8;
+  color: #72727b;
   position: relative;
   overflow: hidden;
 }
@@ -1555,7 +1559,7 @@ textarea:focus {
   display: block;
   font-size: 11px;
   font-weight: 600;
-  color: #94a3b8;
+  color: #72727b;
   margin-bottom: 6px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -1599,11 +1603,11 @@ textarea:focus {
   width: 33.33%;
 }
 .strength-medium {
-  background: #f59e0b;
+  background: #111116;
   width: 66.66%;
 }
 .strength-strong {
-  background: #10b981;
+  background: #c2a15a;
   width: 100%;
 }
 
@@ -1864,7 +1868,7 @@ textarea:focus {
 
 .promo-btn {
   display: inline-block;
-  background: #7c3aed;
+  background: #111116;
   color: white;
   padding: 14px 32px;
   border-radius: 50px;
@@ -1876,7 +1880,7 @@ textarea:focus {
 }
 
 .promo-btn:hover {
-  background: #6d28d9;
+  background: #08080b;
   transform: translateY(-2px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   opacity: 1;
@@ -1905,7 +1909,7 @@ textarea:focus {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #d1d5db;
+  background: #d4d4da;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -1941,12 +1945,12 @@ textarea:focus {
 }
 
 .category-scroll::-webkit-scrollbar-thumb {
-  background: #d1d5db;
+  background: #d4d4da;
   border-radius: 3px;
 }
 
 .category-scroll::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+  background: #72727b;
 }
 
 .category-card {
@@ -2016,7 +2020,7 @@ textarea:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(135deg, #dc2626 0%, #f97316 100%);
+  background: linear-gradient(135deg, #b42318 0%, #f97316 100%);
   padding: 16px 24px;
   border-radius: 16px;
   margin-bottom: 24px;
@@ -2093,12 +2097,12 @@ textarea:focus {
 }
 
 .flash-products-scroll::-webkit-scrollbar-thumb {
-  background: #d1d5db;
+  background: #d4d4da;
   border-radius: 3px;
 }
 
 .flash-products-scroll::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+  background: #72727b;
 }
 
 /* Enhanced Product Cards for Flash Sales */
@@ -2108,7 +2112,7 @@ textarea:focus {
   background: white;
   border-radius: 16px;
   overflow: hidden;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #e6e6ea;
   transition: all 0.3s ease;
   position: relative;
 }
@@ -2137,7 +2141,7 @@ textarea:focus {
   position: absolute;
   top: 8px;
   left: 8px;
-  background: #dc2626;
+  background: #b42318;
   color: white;
   padding: 6px 12px;
   border-radius: 20px;
@@ -2199,7 +2203,7 @@ textarea:focus {
 
 .original-price {
   font-size: 0.85rem;
-  color: #9ca3af;
+  color: #72727b;
   text-decoration: line-through;
   margin-left: 6px;
   font-weight: 400;
@@ -2207,7 +2211,7 @@ textarea:focus {
 
 .stock-indicator {
   font-size: 0.8rem;
-  color: #6b7280;
+  color: #55555e;
   margin-bottom: 6px;
   font-family: var(--font-body);
 }
@@ -2215,14 +2219,14 @@ textarea:focus {
 .stock-progress {
   width: 100%;
   height: 6px;
-  background: #e5e7eb;
+  background: #e6e6ea;
   border-radius: 3px;
   overflow: hidden;
 }
 
 .stock-progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%);
+  background: linear-gradient(90deg, #111116 0%, #c2a15a 100%);
   border-radius: 3px;
   transition: width 0.3s ease;
 }
@@ -2319,7 +2323,7 @@ textarea:focus {
   font-size: 14px;
   font-weight: 700;
   margin-bottom: 12px;
-  color: #111827;
+  color: #111116;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -2339,7 +2343,7 @@ textarea:focus {
   align-items: center;
   padding: 10px 12px;
   border-radius: 10px;
-  color: #1f2937;
+  color: #111116;
   font-size: 13px;
   font-weight: 600;
   transition:
@@ -2348,8 +2352,8 @@ textarea:focus {
 }
 
 .category-nav-link:hover {
-  background: #f3f4f6;
-  color: #ff6600;
+  background: #f1f1f4;
+  color: #111116;
   opacity: 1;
 }
 
@@ -2388,19 +2392,19 @@ textarea:focus {
   margin: 0 0 4px;
   font-size: 18px;
   font-weight: 700;
-  color: #111827;
+  color: #111116;
 }
 
 .category-section-header p {
   margin: 0;
   font-size: 12px;
-  color: #6b7280;
+  color: #55555e;
 }
 
 .category-see-all {
   font-size: 12px;
   font-weight: 700;
-  color: #ff6600;
+  color: #111116;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -2459,7 +2463,7 @@ textarea:focus {
 }
 
 .category-product-badge.sold-out {
-  background: #dc2626;
+  background: #b42318;
 }
 
 .category-product-info {
@@ -2469,7 +2473,7 @@ textarea:focus {
 .category-product-title {
   font-size: 11px;
   font-weight: 600;
-  color: #111827;
+  color: #111116;
   margin-bottom: 4px;
   line-height: 1.3;
   min-height: 28px;
@@ -2478,7 +2482,7 @@ textarea:focus {
 .category-product-price {
   font-size: 12px;
   font-weight: 700;
-  color: #ff6600;
+  color: #111116;
 }
 
 .category-loading,
@@ -2487,16 +2491,16 @@ textarea:focus {
   text-align: center;
   background: #ffffff;
   border-radius: 16px;
-  border: 1px dashed #e5e7eb;
-  color: #6b7280;
+  border: 1px dashed #e6e6ea;
+  color: #55555e;
 }
 
 .category-loading .spinner {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 3px solid #e5e7eb;
-  border-top-color: #ff6600;
+  border: 3px solid #e6e6ea;
+  border-top-color: #111116;
   display: inline-block;
   margin-right: 8px;
   animation: spin 0.8s linear infinite;
@@ -2640,7 +2644,7 @@ textarea:focus {
   top: 6px;
   right: 6px;
   background: #fff3df;
-  color: #f68b1e;
+  color: #111116;
   font-size: 9px;
   font-weight: 700;
   padding: 2px 4px;
@@ -2733,14 +2737,14 @@ textarea:focus {
 }
 
 .jumia-rating span {
-  color: #666;
+  color: #55555e;
   font-size: 9px;
 }
 
 .jumia-express {
   font-size: 10px;
   font-weight: 800;
-  color: #f68b1e;
+  color: #111116;
   letter-spacing: 0.03em;
   margin-bottom: 4px;
 }
@@ -2752,8 +2756,8 @@ textarea:focus {
   padding: 6px 8px;
   font-size: 10px;
   font-family: "Patrick Hand", cursive;
-  background: #f68b1e;
-  border-color: #f68b1e;
+  background: #111116;
+  border-color: #111116;
   color: #fff !important;
 }
 
@@ -2812,7 +2816,7 @@ textarea:focus {
 }
 
 /* Keep product block clean like the reference */
-.jumia-page section[style*="background: #f4f7f6"] {
+.jumia-page section[style*="background: #ffffff"] {
   background: #f3f3f3 !important;
 }
 
@@ -2871,7 +2875,7 @@ textarea:focus {
 /* ===== EKOAST BRAND THEME OVERRIDES ===== */
 :root {
   --color-text: #101a2a;
-  --color-text-light: #4a5568;
+  --color-text-light: #33333b;
   --color-bg: #eef2f8;
   --color-bg-alt: #e7edf7;
   --color-accent: #f6b73c;
@@ -2896,28 +2900,6 @@ body {
   background:
     radial-gradient(circle at top right, rgba(246, 183, 60, 0.18), transparent 36%),
     #102341;
-}
-
-.logo {
-  position: relative;
-  min-height: 46px;
-  min-width: 170px;
-}
-
-.logo::before {
-  content: "";
-  display: block;
-  width: 170px;
-  height: 46px;
-  background-image: url("logo.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  filter: drop-shadow(0 0 8px rgba(246, 183, 60, 0.35));
-}
-
-.logo::after {
-  content: "";
 }
 
 .btn,

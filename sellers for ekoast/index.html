@@ -4,25 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Seller Portal</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap");
-      :root {
-        --bg-1: #f8f3ea;
-        --bg-2: #e8dcc8;
-        --ink: #2f2a24;
-        --ink-soft: #6e6355;
-        --panel-dark-1: #1f1b17;
-        --panel-dark-2: #32281f;
-        --gold: #b9925a;
-        --gold-deep: #8f6f3f;
-        --line: #d9ccb9;
-        --primary: #8f6f3f;
-        --text-light: #6e6355;
-        --secondary: #1b7a3a;
+:root {
+        --bg-1: #ffffff;
+        --bg-2: #f8f8fa;
+        --ink: #111116;
+        --ink-soft: #55555e;
+        --panel-dark-1: #111116;
+        --panel-dark-2: #24242c;
+        --gold: #111116;
+        --gold-deep: #000000;
+        --line: #e6e6ea;
+        --primary: #000000;
+        --text-light: #55555e;
+        --secondary: #111116;
       }
       * {
         box-sizing: border-box;
@@ -30,7 +26,7 @@
         padding: 0;
       }
       body {
-        font-family: "Manrope", -apple-system, sans-serif;
+        font-family: "Inter", -apple-system, sans-serif;
         min-height: 100vh;
         display: flex;
         align-items: center;
@@ -64,7 +60,7 @@
         color: #efe6d8;
       }
       .logo {
-        font-family: "Cormorant Garamond", serif;
+        font-family: "Fraunces", serif;
         font-size: 2.7rem;
         font-weight: 700;
         margin-bottom: 0.4rem;
@@ -86,7 +82,7 @@
         margin-bottom: 1.6rem;
       }
       .welcome-msg h1 {
-        font-family: "Cormorant Garamond", serif;
+        font-family: "Fraunces", serif;
         font-size: 2rem;
         font-weight: 700;
         margin-bottom: 0.3rem;
@@ -132,7 +128,7 @@
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        background: linear-gradient(135deg, #b9925a, #8f6f3f);
+        background: linear-gradient(135deg, #111116, #000000);
         color: #fffdf8;
         padding: 0.84rem 2rem;
         border-radius: 0.75rem;
@@ -201,6 +197,13 @@
         }
       }
     </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="EKOAST â€” shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
   </head>
   <body>
     <div class="portal-card">
@@ -216,7 +219,7 @@
       <!-- Portal View -->
       <div id="portal-view" class="hidden">
         <div class="header">
-          <div class="logo"><i class="fas fa-store"></i> Seller Portal</div>
+          
           <p>Seller Portal</p>
         </div>
 
@@ -250,7 +253,7 @@
           </a>
 
           <div style="margin-top: 1rem">
-            <a href="https://.com" class="btn-outline">
+            <a href="../EKOAST/index.html" class="btn-outline">
               <i class="fas fa-shopping-bag"></i> Switch to Buyer View
             </a>
           </div>
@@ -444,6 +447,7 @@
         upgradeBtn.onclick = () => location.reload();
       }
     </script>
+      <script src="compliance.js" defer></script>
   </body>
 </html>
 

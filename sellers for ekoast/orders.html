@@ -4,13 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Orders — Seller Center</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
-      *,
+*,
       *::before,
       *::after {
         box-sizing: border-box;
@@ -19,15 +15,15 @@
       }
       body {
         font-family: "Inter", sans-serif;
-        background: #f0f0f0;
-        color: #1f2937;
+        background: #e6e6ea;
+        color: #111116;
         min-height: 100vh;
         padding-bottom: 72px;
       }
       /* ── TOP BAR ── */
       .topbar {
         background: #fff;
-        border-bottom: 1px solid #e5e7eb;
+        border-bottom: 1px solid #e6e6ea;
         padding: 0.75rem 1rem;
         display: flex;
         align-items: center;
@@ -44,7 +40,7 @@
       .topbar-logo {
         width: 32px;
         height: 32px;
-        background: #ff6600;
+        background: #111116;
         border-radius: 7px;
         display: flex;
         align-items: center;
@@ -61,7 +57,7 @@
         align-items: center;
         gap: 0.3rem;
         font-size: 0.82rem;
-        color: #ff6600;
+        color: #111116;
         font-weight: 600;
         border: none;
         background: none;
@@ -89,20 +85,20 @@
       .tab-btn {
         padding: 0.4rem 0.85rem;
         border-radius: 20px;
-        border: 1.5px solid #e5e7eb;
+        border: 1.5px solid #e6e6ea;
         font-size: 0.8rem;
         font-weight: 600;
         cursor: pointer;
         background: #fff;
         white-space: nowrap;
         transition: all 0.15s;
-        color: #374151;
+        color: #33333b;
         font-family: inherit;
       }
       .tab-btn.active {
-        border-color: #ff6600;
+        border-color: #111116;
         background: #fff7ed;
-        color: #ff6600;
+        color: #111116;
       }
       /* Filter bar */
       .filter-card {
@@ -123,7 +119,7 @@
         margin-bottom: 0;
       }
       .badge-orange {
-        background: #ff6600;
+        background: #111116;
         color: #fff;
         border-radius: 6px;
         padding: 0.3rem 0.75rem;
@@ -151,20 +147,20 @@
         right: 10px;
         top: 50%;
         transform: translateY(-50%);
-        color: #ff6600;
+        color: #111116;
         font-size: 0.82rem;
       }
       .search-wrap input {
         width: 100%;
         padding: 0.5rem 2rem 0.5rem 0.7rem;
-        border: 1.5px solid #e5e7eb;
+        border: 1.5px solid #e6e6ea;
         border-radius: 8px;
         font-family: inherit;
         font-size: 0.83rem;
         outline: none;
       }
       .search-wrap input:focus {
-        border-color: #ff6600;
+        border-color: #111116;
       }
       /* Order actions row */
       .actions-row {
@@ -177,7 +173,7 @@
         flex: 1;
         max-width: 200px;
         padding: 0.5rem 0.75rem;
-        border: 1.5px solid #e5e7eb;
+        border: 1.5px solid #e6e6ea;
         border-radius: 8px;
         font-family: inherit;
         font-size: 0.83rem;
@@ -185,7 +181,7 @@
       }
       .btn-arrow {
         padding: 0.5rem 0.9rem;
-        border: 1.5px solid #e5e7eb;
+        border: 1.5px solid #e6e6ea;
         border-radius: 8px;
         background: #f9fafb;
         cursor: pointer;
@@ -199,7 +195,7 @@
         text-align: center;
       }
       .empty-card p {
-        color: #9ca3af;
+        color: #72727b;
         font-size: 0.9rem;
       }
       .orders-table-wrap {
@@ -218,14 +214,14 @@
         padding: 0.65rem 1rem;
         text-align: left;
         font-weight: 600;
-        color: #374151;
-        border-bottom: 1px solid #e5e7eb;
+        color: #33333b;
+        border-bottom: 1px solid #e6e6ea;
         white-space: nowrap;
       }
       .orders-table td {
         padding: 0.65rem 1rem;
-        border-bottom: 1px solid #f3f4f6;
-        color: #374151;
+        border-bottom: 1px solid #f1f1f4;
+        color: #33333b;
       }
       .orders-table tr:last-child td {
         border-bottom: none;
@@ -238,7 +234,7 @@
       }
       .badge-pending {
         background: #fef3c7;
-        color: #d97706;
+        color: #2a2a32;
       }
       .badge-shipped {
         background: #d1fae5;
@@ -246,7 +242,7 @@
       }
       .badge-cancelled {
         background: #fee2e2;
-        color: #dc2626;
+        color: #b42318;
       }
       /* Pagination */
       .pagination-bar {
@@ -259,7 +255,7 @@
       }
       .page-count {
         font-size: 0.83rem;
-        color: #6b7280;
+        color: #55555e;
       }
       .page-nav {
         display: flex;
@@ -268,7 +264,7 @@
       .page-nav button {
         width: 30px;
         height: 30px;
-        border: 1.5px solid #e5e7eb;
+        border: 1.5px solid #e6e6ea;
         border-radius: 6px;
         background: #fff;
         cursor: pointer;
@@ -283,11 +279,11 @@
         align-items: center;
         gap: 0.35rem;
         font-size: 0.8rem;
-        color: #6b7280;
+        color: #55555e;
       }
       .per-page select {
         padding: 0.2rem 0.4rem;
-        border: 1px solid #e5e7eb;
+        border: 1px solid #e6e6ea;
         border-radius: 6px;
       }
       /* Export bar */
@@ -301,7 +297,7 @@
         padding: 0.8rem;
         border-radius: 8px;
         border: none;
-        background: #ff6600;
+        background: #111116;
         color: #fff;
         font-weight: 700;
         font-size: 0.9rem;
@@ -319,9 +315,9 @@
       .btn-filter {
         padding: 0.8rem 1rem;
         border-radius: 8px;
-        border: 2px solid #ff6600;
+        border: 2px solid #111116;
         background: #fff;
-        color: #ff6600;
+        color: #111116;
         cursor: pointer;
         font-size: 1rem;
       }
@@ -336,7 +332,7 @@
         justify-content: center;
         gap: 1rem;
         z-index: 9999;
-        color: #ff6600;
+        color: #111116;
         font-weight: 600;
       }
       .spinner {
@@ -344,7 +340,7 @@
         height: 36px;
         border-radius: 50%;
         border: 3px solid #fed7aa;
-        border-top-color: #ff6600;
+        border-top-color: #111116;
         animation: spin 0.8s linear infinite;
       }
       @keyframes spin {
@@ -362,7 +358,7 @@
         left: 0;
         right: 0;
         background: #fff;
-        border-top: 1px solid #e5e7eb;
+        border-top: 1px solid #e6e6ea;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         z-index: 100;
@@ -374,7 +370,7 @@
         gap: 3px;
         padding: 0.6rem 0 0.75rem;
         font-size: 0.68rem;
-        color: #6b7280;
+        color: #55555e;
         text-decoration: none;
         transition: color 0.15s;
         border: none;
@@ -386,12 +382,12 @@
         font-size: 1.2rem;
       }
       .nav-item.active {
-        color: #ff6600;
+        color: #111116;
       }
       .nav-vc {
         width: 26px;
         height: 26px;
-        background: #ff6600;
+        background: #111116;
         border-radius: 6px;
         display: flex;
         align-items: center;
@@ -401,6 +397,13 @@
         font-weight: 800;
       }
     </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="EKOAST â€” shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
   </head>
   <body>
     <div id="loading">
@@ -414,7 +417,7 @@
         class="topbar-left"
         style="text-decoration: none; color: inherit"
       >
-        <div class="topbar-logo"><i class="fas fa-store"></i></div>
+        
         <span class="topbar-title">Orders</span>
       </a>
       <button class="lang-btn">
@@ -480,7 +483,7 @@
           <i class="fas fa-chevron-right"></i>
         </button>
       </div>
-      <div style="font-size: 0.78rem; color: #6b7280; margin-bottom: 0.75rem">
+      <div style="font-size: 0.78rem; color: #55555e; margin-bottom: 0.75rem">
         Order status and escrow changes are now managed by admins only.
       </div>
 
@@ -491,7 +494,7 @@
             class="fas fa-box-open"
             style="
               font-size: 2rem;
-              color: #d1d5db;
+              color: #d4d4da;
               display: block;
               margin-bottom: 0.75rem;
             "
@@ -665,7 +668,7 @@
           <td>₦${(o.amount || 0).toLocaleString()}</td>
           <td><span class="status-badge ${statusClass(o.status)}">${capitalize(o.status || "pending")}</span></td>
           <td>
-            <select disabled title="Admin only" onchange="updateStatus('${o.id}', this.value)" style="padding:.25rem .4rem;border:1px solid #e5e7eb;border-radius:6px;font-size:.78rem;cursor:not-allowed;opacity:0.7;">
+            <select disabled title="Admin only" onchange="updateStatus('${o.id}', this.value)" style="padding:.25rem .4rem;border:1px solid #e6e6ea;border-radius:6px;font-size:.78rem;cursor:not-allowed;opacity:0.7;">
               <option value="">Action</option>
               <option value="ready">Ready to Ship</option>
               <option value="shipped">Mark Shipped</option>
@@ -810,6 +813,7 @@
       document.getElementById("order-action").disabled = true;
       document.getElementById("apply-action").disabled = true;
     </script>
+      <script src="compliance.js" defer></script>
   </body>
 </html>
 

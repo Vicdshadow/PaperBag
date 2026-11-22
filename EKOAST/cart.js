@@ -74,7 +74,7 @@ function renderCart(items) {
     const div = document.createElement("div");
     div.className = "cart-item";
     div.innerHTML = `
-       <img src="${item.image || ""}" class="cart-img" alt="${item.name}" onerror="this.src='https://via.placeholder.com/100x120?text=Item'">
+       <img src="${item.image || ""}" class="cart-img" alt="${item.name}" onerror="this.src='assets/images/placeholder.svg'">
        <div class="cart-details">
          <div class="cart-name">${item.name}</div>
          <div class="cart-price">₦${item.price.toLocaleString()}</div>

@@ -5,26 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>New Arrivals — </title>
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="EKOAST â€” shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
   </head>
   <body>
     <header class="site-header">
       <div class="container header-inner">
         <nav class="nav-links mobile-hidden">
           <a href="index.html">Shop</a>
-          <a href="-autos.html">Autos</a>
-          <a href="-real-estate.html">Real Estate</a>
-          <a href="-stay.html">Stay</a>
+          <a href="ekoast-autos.html">Autos</a>
+          <a href="ekoast-real-estate.html">Real Estate</a>
+          <a href="ekoast-stay.html">Stay</a>
           <a href="new-arrivals.html" class="active">New Arrivals</a>
           <a href="catalogue.html">Catalogue</a>
         </nav>
 
-        <a href="index.html" class="logo">
-          <!-- Logo removed -->
-        </a>
+        
 
         <div class="nav-icons">
           <div class="search-container" id="searchContainer">
@@ -99,7 +101,7 @@
           <span class="footer-bottom-tagline"
             >✨ Smart choices. Quality products. Trusted service.</span
           >
-        <div class="creator-credit" style="font-size: 10px; color: #718096; margin-top: 5px;">this was made by opedemowo olaoluwa victor</div> <br />
+        <div class="creator-credit" style="font-size: 10px; color: #55555e; margin-top: 5px;">this was made by opedemowo olaoluwa victor</div> <br />
           <span class="footer-bottom-tagline"
             >✨ Smart choices. Quality products. Trusted service.</span
           >
@@ -155,9 +157,9 @@
           div.innerHTML = `
                     <a href="product.html?id=${p.id}">
                         <div class="product-image">
-                            <img src="${p.image || "https://via.placeholder.com/400?text="}" 
+                            <img loading="lazy" decoding="async" src="${p.image || "assets/images/placeholder.svg"}" 
                                  alt="${p.name}"
-                                 onerror="this.onerror=null;this.src='https://via.placeholder.com/400?text=No+Image';">
+                                 onerror="this.onerror=null;this.src='assets/images/placeholder.svg';">
                         </div>
                         <div class="product-info">
                             <h3 class="product-title">${p.name}</h3>
@@ -189,7 +191,7 @@
     </script>
     <script type="module" src="index.js"></script>
     <script type="module" src="auth-state.js"></script>
-  </body>
+      <script src="compliance.js" defer></script></body>
 </html>
 
 

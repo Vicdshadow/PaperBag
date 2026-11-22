@@ -65,7 +65,7 @@ function createCard(vertical, item) {
   if (vertical === "autos") {
     div.className = "car-card";
     div.innerHTML = `
-      <img src="${item.imageUrl}" alt="${item.title}" class="car-img" onerror="this.src='https://via.placeholder.com/800x600?text=No+Image'" />
+      <img src="${item.imageUrl}" alt="${item.title}" class="car-img" onerror="this.src='assets/images/placeholder.svg'" />
       <div class="car-details">
         <h3 class="car-title">${item.title}</h3>
         <div class="car-price">₦${Number(item.price).toLocaleString()}</div>
@@ -82,7 +82,7 @@ function createCard(vertical, item) {
   } else if (vertical === "realestate") {
     div.className = "prop-card";
     div.innerHTML = `
-      <img src="${item.imageUrl}" alt="${item.title}" class="prop-img" onerror="this.src='https://via.placeholder.com/800x600?text=No+Image'" />
+      <img src="${item.imageUrl}" alt="${item.title}" class="prop-img" onerror="this.src='assets/images/placeholder.svg'" />
       <div class="prop-details">
         <span class="prop-type">${item.meta.type}</span>
         <h3 class="prop-title">${item.title}</h3>
@@ -99,7 +99,7 @@ function createCard(vertical, item) {
   } else if (vertical === "stay") {
     div.className = "stay-card";
     div.innerHTML = `
-      <img src="${item.imageUrl}" alt="${item.title}" class="stay-img" onerror="this.src='https://via.placeholder.com/800x600?text=No+Image'" />
+      <img src="${item.imageUrl}" alt="${item.title}" class="stay-img" onerror="this.src='assets/images/placeholder.svg'" />
       <div class="stay-info">
         <div style="display: flex; justify-content: space-between">
           <h3 class="stay-title">${item.title}</h3>

@@ -41,7 +41,10 @@ import {
   uploadBytes,
   getDownloadURL,
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+import {
+  getAnalytics,
+  setAnalyticsCollectionEnabled,
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
 import {
   getFunctions,
   httpsCallable,
@@ -74,10 +77,29 @@ enableNetwork(db).catch((err) => {
   console.warn("Could not enable network:", err);
 });
 
+// Analytics stays off until the visitor grants optional analytics consent.
+// This avoids setting analytics identifiers/cookies before consent (GDPR / ePrivacy).
+function analyticsAllowed() {
+  try {
+    const consent = JSON.parse(localStorage.getItem("ekoast_cookie_consent_v1") || "null");
+    return !!(consent && consent.version === 1 && consent.analytics);
+  } catch (e) {
+    return false;
+  }
+}
+
 let analytics;
-if (location.hostname !== "localhost") {
+if (location.hostname !== "localhost" && analyticsAllowed()) {
   analytics = getAnalytics(app);
 }
+
+window.addEventListener("ekoast:consentchange", (event) => {
+  const allowed = !!(event.detail && event.detail.analytics);
+  if (allowed && !analytics && location.hostname !== "localhost") {
+    analytics = getAnalytics(app);
+  }
+  if (analytics) setAnalyticsCollectionEnabled(analytics, allowed);
+});
 
 // Check for file:// protocol
 // Payment Configs (Placeholders)

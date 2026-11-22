@@ -22,8 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ── Show initial loading state ──
   container.innerHTML = `
-    <div style="grid-column:1/-1; text-align:center; padding:3rem; color:#6b7280;">
-      <i class="fas fa-spinner fa-spin" style="font-size:2.5rem; color:#ff6600; display:block; margin-bottom:1rem;"></i>
+    <div style="grid-column:1/-1; text-align:center; padding:3rem; color:#55555e;">
+      <i class="fas fa-spinner fa-spin" style="font-size:2.5rem; color:#111116; display:block; margin-bottom:1rem;"></i>
       <p style="font-size:1rem; margin:0;">Loading latest products...</p>
     </div>
   `;
@@ -38,10 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (snapshot.empty) {
         container.innerHTML = `
-          <div style="grid-column:1/-1; text-align:center; padding:3rem; background:#fff; border-radius:0.75rem; border:1px dashed #d1d5db;">
-            <i class="fas fa-store-slash" style="font-size:3rem; color:#9ca3af; display:block; margin-bottom:1rem;"></i>
-            <p style="color:#6b7280; font-size:1.1rem; margin:0;">No products available right now.</p>
-            <p style="color:#9ca3af; margin:0.5rem 0 0; font-size:0.85rem;">Check back soon — sellers are adding products!</p>
+          <div style="grid-column:1/-1; text-align:center; padding:3rem; background:#fff; border-radius:0.75rem; border:1px dashed #d4d4da;">
+            <i class="fas fa-store-slash" style="font-size:3rem; color:#72727b; display:block; margin-bottom:1rem;"></i>
+            <p style="color:#55555e; font-size:1.1rem; margin:0;">No products available right now.</p>
+            <p style="color:#72727b; margin:0.5rem 0 0; font-size:0.85rem;">Check back soon — sellers are adding products!</p>
           </div>
         `;
         return;
@@ -92,8 +92,8 @@ document.addEventListener("DOMContentLoaded", () => {
             <img
               src="${imgSrc}"
               alt="${escapeHtml(product.name)}"
-              style="width:100%; height:220px; object-fit:cover; border-bottom:1px solid #f3f4f6; display:block;"
-              onerror="this.src='https://via.placeholder.com/400x300?text=No+Image'"
+              style="width:100%; height:220px; object-fit:cover; border-bottom:1px solid #f1f1f4; display:block;"
+              onerror="this.src='assets/images/placeholder.svg'"
             >
             ${
               product.category
@@ -102,17 +102,17 @@ document.addEventListener("DOMContentLoaded", () => {
             }
           </div>
           <div style="padding:1.1rem; flex-grow:1; display:flex; flex-direction:column;">
-            <h3 style="margin:0 0 0.4rem; font-size:1rem; color:#111827; font-weight:600; line-height:1.3;">${escapeHtml(product.name)}</h3>
-            <p style="margin:0 0 0.8rem; color:#6b7280; font-size:0.85rem; flex-grow:1; line-height:1.5;">${escapeHtml(shortDesc)}</p>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:0.75rem; border-top:1px solid #f3f4f6;">
-              <span style="font-weight:700; font-size:1.2rem; color:#ff6600;">₦${priceFormatted}</span>
+            <h3 style="margin:0 0 0.4rem; font-size:1rem; color:#111116; font-weight:600; line-height:1.3;">${escapeHtml(product.name)}</h3>
+            <p style="margin:0 0 0.8rem; color:#55555e; font-size:0.85rem; flex-grow:1; line-height:1.5;">${escapeHtml(shortDesc)}</p>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:0.75rem; border-top:1px solid #f1f1f4;">
+              <span style="font-weight:700; font-size:1.2rem; color:#111116;">₦${priceFormatted}</span>
               <button
                 class="buy-btn"
                 data-id="${id}"
                 data-name="${escapeHtml(product.name)}"
                 data-price="${product.price}"
                 style="
-                  background:#ff6600;
+                  background:#111116;
                   color:#fff;
                   border:none;
                   padding:0.55rem 1.1rem;
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   transition:background 0.2s;
                 "
                 onmouseover="this.style.background='#e55a00'"
-                onmouseout="this.style.background='#ff6600'"
+                onmouseout="this.style.background='#111116'"
               >
                 <i class="fas fa-shopping-cart"></i> Buy Now
               </button>
@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
     (error) => {
       console.error("shop.js onSnapshot error:", error);
       container.innerHTML = `
-        <div style="grid-column:1/-1; text-align:center; padding:2rem; background:#fee2e2; border-radius:0.75rem; border:1px solid #fecaca; color:#dc2626;">
+        <div style="grid-column:1/-1; text-align:center; padding:2rem; background:#fee2e2; border-radius:0.75rem; border:1px solid #fecaca; color:#b42318;">
           <i class="fas fa-exclamation-triangle" style="font-size:2rem; display:block; margin-bottom:0.5rem;"></i>
           <p style="margin:0; font-weight:500;">Error loading products. Please refresh the page or try again later.</p>
         </div>

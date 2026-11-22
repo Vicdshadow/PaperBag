@@ -3,13 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Login —</title>
+    <title>Login</title>
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script src="assets/js/confetti.browser.min.js"></script>
     <style>
       #welcomeOverlay {
         position: fixed;
@@ -39,7 +36,7 @@
         font-size: 32px;
         font-weight: 800;
         margin-bottom: 16px;
-        background: linear-gradient(45deg, #f59e0b, #fbbf24, #f59e0b);
+        background: linear-gradient(45deg, #ffffff, #c2a15a, #ffffff);
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -49,36 +46,33 @@
       @keyframes glow {
         0%,
         100% {
-          filter: drop-shadow(0 0 5px rgba(245, 124, 0, 0.3));
+          filter: drop-shadow(0 0 5px rgba(194, 161, 90, 0.3));
         }
         50% {
-          filter: drop-shadow(0 0 15px rgba(245, 124, 0, 0.6));
+          filter: drop-shadow(0 0 15px rgba(194, 161, 90, 0.6));
         }
       }
-      .continue-btn {
-        background: var(--color-accent);
-        color: white;
-        padding: 14px 40px;
-        border-radius: 12px;
-        border: none;
-        font-weight: 700;
-        cursor: pointer;
-        margin-top: 24px;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      }
+      .continue-btn { background: linear-gradient(90deg, #c2a15a, #e3cda0); color: #111116; padding: 14px 40px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; margin-top: 24px; transition: all 0.3s ease; }
       .continue-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 20px -5px rgba(245, 124, 0, 0.4);
+        box-shadow: 0 10px 20px -5px rgba(194, 161, 90, 0.4);
       }
     </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="EKOAST â€” shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
   </head>
   <body class="signup-page">
     <div id="welcomeOverlay">
-      <h1 class="firework-text">WELCOME TO !</h1>
+      <h1 class="firework-text">WELCOME!</h1>
       <p
         style="
           font-size: 16px;
-          color: #94a3b8;
+          color: #e0e0e5;
           max-width: 320px;
           line-height: 1.6;
         "
@@ -101,9 +95,7 @@
           class="brand-container"
           style="text-align: center; margin-bottom: 20px"
         >
-          <a href="index.html" class="brand">
-            <img src="logo.png" alt="" style="height: 40px; width: auto" />
-          </a>
+          
         </div>
         <h2>Welcome Back</h2>
         <p>Sign in to your profile</p>
@@ -112,16 +104,16 @@
       <div
         id="roleHint"
         style="
-          background: rgba(245, 124, 0, 0.1);
+          background: rgba(194, 161, 90, 0.1);
           padding: 12px;
           border-radius: 12px;
           margin-bottom: 24px;
-          border: 1px solid rgba(245, 124, 0, 0.2);
+          border: 1px solid rgba(194, 161, 90, 0.2);
           display: none;
         "
       >
         <p
-          style="font-size: 11px; color: #fbbf24; margin: 0; text-align: center"
+          style="font-size: 11px; color: #c2a15a; margin: 0; text-align: center"
         >
           <strong>Seller/Host Login:</strong> Enter your credentials and we'll
           take you straight to your dashboard.
@@ -158,7 +150,7 @@
                 top: 50%;
                 transform: translateY(-50%);
                 cursor: pointer;
-                color: #94a3b8;
+                color: #72727b;
               "
             ></i>
           </div>
@@ -170,13 +162,13 @@
             id="forgotPasswordBtn"
             style="
               font-size: 12px;
-              color: #94a3b8;
+              color: #72727b;
               text-decoration: none;
               font-weight: 500;
               transition: color 0.3s ease;
             "
-            onmouseover="this.style.color = '#f59e0b'"
-            onmouseout="this.style.color = '#94a3b8'"
+            onmouseover="this.style.color = '#111116'"
+            onmouseout="this.style.color = '#72727b'"
             >Forgot Password?</a
           >
         </div>
@@ -188,10 +180,8 @@
         </div>
 
         <button type="button" id="googleBtn" class="btn-premium-outline">
-          <img
-            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-            width="20"
-            alt="G"
+          <img loading="lazy" decoding="async"
+            src="assets/images/google.svg" width="20" alt="Google"
           />
           Continue with Google
         </button>
@@ -212,7 +202,7 @@
           margin-top: 24px;
           font-size: 13px;
           text-align: center;
-          color: #94a3b8;
+          color: #72727b;
         "
       >
         New here?
@@ -274,5 +264,5 @@
       }
     </script>
     <script type="module" src="auth-state.js?v=20260305-1"></script>
-  </body>
+      <script src="compliance.js" defer></script></body>
 </html>

@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Track Order</title>
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    
     <style>
       .track-page {
         padding: 60px 0;
@@ -36,7 +33,7 @@
       .form-group input {
         width: 100%;
         padding: 12px;
-        border: 1px solid #ddd;
+        border: 1px solid #e6e6ea;
         border-radius: 6px;
         font-size: 16px;
       }
@@ -54,7 +51,7 @@
         width: 100%;
         margin-top: 20px;
         border-radius: 8px;
-        background: #eee;
+        background: #f8f8fa;
         display: none;
       }
       .tracking-steps {
@@ -70,28 +67,31 @@
         font-size: 14px;
       }
       .step i {
-        color: #ddd;
+        color: #e6e6ea;
         font-size: 18px;
       }
       .step.active i {
         color: var(--color-accent);
       }
     </style>
+      <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="theme-refinement.css" />
+    <link rel="stylesheet" href="compliance.css" />
+    <meta name="description" content="EKOAST â€” shop electronics, fashion, home goods and more with secure checkout, trusted sellers and nationwide delivery." />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="light" />
   </head>
   <body>
-    <!-- Google Maps API (Placeholder Key) -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE"></script>
 
     <header class="site-header glass">
       <div class="container header-inner">
         <nav class="nav-links mobile-hidden">
           <a href="index.html">Shop</a>
-          <a href="-autos.html">Autos</a>
-          <a href="-real-estate.html">Real Estate</a>
+          <a href="ekoast-autos.html">Autos</a>
+          <a href="ekoast-real-estate.html">Real Estate</a>
         </nav>
-        <a href="index.html" class="logo">
-          <!-- Logo removed -->
-        </a>
+        
         <div class="nav-icons">
           <a href="account.html"><i class="far fa-user"></i></a>
           <a href="cart.html" class="cart-link">
@@ -153,7 +153,7 @@
                 border-radius: 8px;
                 margin-top: 15px;
                 font-size: 13px;
-                color: #666;
+                color: #55555e;
               "
             >
               <i
@@ -192,7 +192,7 @@
       <div class="container text-center">
         <div class="footer-bottom">
           &copy; 2024. All rights reserved.
-        <div class="creator-credit" style="font-size: 10px; color: #718096; margin-top: 5px;">this was made by opedemowo olaoluwa victor</div>
+        <div class="creator-credit" style="font-size: 10px; color: #55555e; margin-top: 5px;">this was made by opedemowo olaoluwa victor</div>
         </div>
       </div>
     </footer>
@@ -232,7 +232,7 @@
           marker = new google.maps.Marker({
             position: coords,
             map: map,
-            icon: "https://maps.google.com/mapfiles/kml/pal2/icon47.png", // Delivery icon
+            icon: "assets/images/placeholder.svg", // Delivery icon
             title: "Your Package",
           });
         } else {
@@ -368,7 +368,7 @@
       </a>
     </nav>
     <script type="module" src="auth-state.js"></script>
-  </body>
+      <script src="compliance.js" defer></script></body>
 </html>
 
 

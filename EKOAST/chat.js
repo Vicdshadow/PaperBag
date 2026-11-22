@@ -172,7 +172,6 @@ function showNotification(message) {
           : message.text;
     new Notification(`New message from ${message.senderName}`, {
       body: text,
-      icon: "logo.png",
     });
   }
 }
@@ -742,7 +741,7 @@ function createMessageHTML(message) {
         ${messageContent}
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
           <div class="message-time">${time}</div>
-          <button class="btn-react" onclick="toggleReactionPicker('${message.id}')" style="background:none; border:none; color:#a0aec0; cursor:pointer; font-size:14px; padding: 0 4px; opacity: 0.5; transition: opacity 0.2s;">
+          <button class="btn-react" onclick="toggleReactionPicker('${message.id}')" style="background:none; border:none; color:#9a9aa2; cursor:pointer; font-size:14px; padding: 0 4px; opacity: 0.5; transition: opacity 0.2s;">
             <i class="far fa-smile"></i>
           </button>
         </div>

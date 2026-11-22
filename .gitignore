@@ -6,3 +6,14 @@ sellers.for.ekoast.git.bak/
 !EKOAST/
 !.vscode/
 !"sellers for ekoast/"
+
+# Secrets and junk test files — never commit these
+EKOAST/backend/serviceAccountKey.json
+**/serviceAccountKey.json
+**/*serviceAccount*.json
+EKOAST/_tmp_test.txt
+
+# Local tooling / deploy caches
+.agent/
+.firebase/
+**/.firebase/
