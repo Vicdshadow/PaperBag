@@ -184,20 +184,70 @@ async function mergeGuestIntoAccount(user) {
   }
 }
 
-function injectHeaderHeart() {
-  if (document.querySelector(".wishlist-link")) return;
-  const nav =
-    document.querySelector(".site-header .nav-icons") ||
-    document.querySelector(".nav-icons") ||
-    document.querySelector(".header-inner .header-actions");
-  if (!nav) return;
+const HEART_HOSTS = [
+  ".site-header .nav-icons",
+  ".nav-icons",
+  ".header-inner .header-actions",
+  ".header-actions",
+  ".market-topbar-row",
+  ".market-topbar",
+  ".jumia-header",
+  ".account-header .header-content",
+  ".header-content",
+  ".site-header .header-inner",
+  ".site-header",
+  ".admin-topbar",
+  "header",
+];
+
+function makeHeartLink() {
   const link = document.createElement("a");
-  link.href = "wishlist.html";
+  // The seller folder is a sibling of the storefront folder; its wishlist
+  // page lives one level up in PaperBag/.
+  let path = location.pathname || "";
+  try {
+    path = decodeURIComponent(path);
+  } catch (err) {
+    /* ignore malformed encoding and use the raw path */
+  }
+  link.href = path.includes("/sellers for PaperBag/")
+    ? "../PaperBag/wishlist.html"
+    : "wishlist.html";
   link.className = "wishlist-link";
   link.setAttribute("aria-label", "Wishlist");
+  link.title = "Wishlist";
   link.innerHTML =
-    '<i class="far fa-heart"></i><span id="wishlistCount" class="wishlist-count">0</span>';
-  nav.insertBefore(link, nav.querySelector(".cart-link") || null);
+    '<i class="far fa-heart"></i><span id="wishlistCount" class="wishlist-count" aria-live="polite">0</span>';
+  return link;
+}
+
+//Pages use many different header layouts. Put the heart in the first matching
+//header action area; if none exists yet, keep a floating heart so the wishlist
+//is always visible and clickable. Move it into the header once one appears.
+function injectHeaderHeart() {
+  if (document.querySelector(".wishlist-link:not(.pb-wishlist-fab)")) return true;
+
+  let host = null;
+  for (let i = 0; i < HEART_HOSTS.length; i++) {
+    host = document.querySelector(HEART_HOSTS[i]);
+    if (host) break;
+  }
+
+  let link = document.querySelector(".pb-wishlist-fab") ||
+    document.querySelector(".wishlist-link");
+  if (!link) link = makeHeartLink();
+
+  if (host) {
+    link.classList.remove("pb-wishlist-fab");
+    host.insertBefore(link, host.querySelector(".cart-link") || null);
+    return true;
+  }
+
+  if (document.body) {
+    link.classList.add("pb-wishlist-fab");
+    document.body.appendChild(link);
+  }
+  return false;
 }
 
 function bindEvents() {
@@ -233,7 +283,15 @@ function bindEvents() {
 
 function init() {
   bindEvents();
-  injectHeaderHeart();
+  const inHeader = injectHeaderHeart();
+  // Some pages build their header after DOMContentLoaded. Until then the
+  // floating heart keeps the wishlist visible; move it into the header later.
+  if (!inHeader && typeof MutationObserver !== "undefined") {
+    const observer = new MutationObserver(() => {
+      if (injectHeaderHeart()) observer.disconnect();
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+  }
   renderPage();
   onAuthStateChanged(auth, async (user) => {
     currentUser = user || null;

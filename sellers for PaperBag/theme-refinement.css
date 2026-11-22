@@ -350,3 +350,60 @@ main[id="main-content"] { scroll-margin-top: 88px; }
 .flash-gift-badge { background: #c2a15a; color: #111116; }
 .flash-product-info { display: flex; flex-direction: column; flex: 1 1 auto; gap: 3px; }
 .flash-product-old-price { font-size: 11px; color: #9a9aa2; text-decoration: line-through; }
+
+/* ---------- PaperBag wishlist ---------- */
+.wishlist-link { position: relative; display: inline-flex; align-items: center; color: inherit; }
+.wishlist-count {
+  position: absolute; top: -7px; right: -9px;
+  min-width: 17px; height: 17px; padding: 0 4px;
+  border-radius: 9px; background: #c2a15a; color: #111116;
+  font-size: 10px; font-weight: 800; line-height: 17px; text-align: center;
+  opacity: 0; transform: scale(0.7); transition: opacity .18s ease, transform .18s ease;
+}
+.wishlist-count.has-items { opacity: 1; transform: scale(1); }
+.wishlist-link.is-active i { color: #b8860b; }
+.jumia-wishlist.is-active i,
+.mini-icon-btn.is-active i { color: #b8860b; }
+.wishlist-item {
+  display: flex; gap: 14px; padding: 14px;
+  background: #fff; border: 1px solid #e6e6ea; border-radius: 14px;
+  margin-bottom: 12px;
+}
+.wishlist-item-image {
+  flex: 0 0 96px; width: 96px; height: 96px;
+  border-radius: 10px; overflow: hidden; background: #f6f6f8;
+}
+.wishlist-item-image img { width: 100%; height: 100%; object-fit: cover; }
+.wishlist-item-info { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.wishlist-item-title { font-weight: 600; color: #111116; text-decoration: none; line-height: 1.35; }
+.wishlist-item-price { font-weight: 800; color: #111116; }
+.wishlist-item-actions { margin-top: auto; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.wishlist-remove {
+  border: 0; background: transparent; color: #9a9aa2;
+  font-size: 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
+}
+.wishlist-remove:hover { color: #b3261e; }
+@media (max-width: 520px) {
+  .wishlist-item-image { flex-basis: 76px; width: 76px; height: 76px; }
+  .wishlist-item { padding: 10px; }
+}
+/* Floating fallback: guarantees a visible, clickable wishlist on every page. */
+.pb-wishlist-fab {
+  position: fixed; top: 76px; right: 16px; z-index: 1400;
+  width: 42px; height: 42px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #ffffff; color: #111116;
+  border: 1px solid #e2d4ad;
+  box-shadow: 0 6px 20px rgba(17, 17, 22, .14);
+  transition: transform .16s ease, box-shadow .16s ease;
+}
+.pb-wishlist-fab:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(17, 17, 22, .2); }
+.pb-wishlist-fab:focus-visible { outline: 2px solid #c2a15a; outline-offset: 2px; }
+.pb-wishlist-fab .wishlist-count { top: -4px; right: -4px; }
+html[data-theme="dark"] .pb-wishlist-fab {
+  background: #1c1c22; color: #f4f4f6; border-color: #5b4a2c;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .45);
+}
+html[data-theme="dark"] .wishlist-item { background: #1c1c22; border-color: #33333b; }
+html[data-theme="dark"] .wishlist-item-title,
+html[data-theme="dark"] .wishlist-item-price { color: #f4f4f6; }

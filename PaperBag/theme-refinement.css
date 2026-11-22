@@ -387,3 +387,20 @@ main[id="main-content"] { scroll-margin-top: 88px; }
   .wishlist-item-image { flex-basis: 76px; width: 76px; height: 76px; }
   .wishlist-item { padding: 10px; }
 }
+/* Floating fallback: guarantees a visible, clickable wishlist on every page. */
+.pb-wishlist-fab {
+  position: fixed; top: 76px; right: 16px; z-index: 1400;
+  width: 42px; height: 42px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #ffffff; color: #111116;
+  border: 1px solid #e2d4ad;
+  box-shadow: 0 6px 20px rgba(17, 17, 22, .14);
+  transition: transform .16s ease, box-shadow .16s ease;
+}
+.pb-wishlist-fab:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(17, 17, 22, .2); }
+.pb-wishlist-fab:focus-visible { outline: 2px solid #c2a15a; outline-offset: 2px; }
+.pb-wishlist-fab .wishlist-count { top: -4px; right: -4px; }
+html[data-theme="dark"] .pb-wishlist-fab {
+  background: #1c1c22; color: #f4f4f6; border-color: #5b4a2c;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .45);
+}
